@@ -11,18 +11,10 @@
 		C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEBA1B8DAD5A0068268F /* main.m */; };
 		C5BEBEBD1B8DAD5A0068268F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */; };
 		C5BEBEC01B8DAD5A0068268F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBE1B8DAD5A0068268F /* MainMenu.xib */; };
-		C5BEBECC1B8DAD5A0068268F /* MJ2048Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBECB1B8DAD5A0068268F /* MJ2048Tests.m */; };
+		C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
+		C5BEBEDD1B8DADB40068268F /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDC1B8DADB40068268F /* GameView.m */; };
+		C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDE1B8E94650068268F /* InterfaceControl.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		C5BEBEC61B8DAD5A0068268F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C5BEBEAA1B8DAD5A0068268F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C5BEBEB11B8DAD5A0068268F;
-			remoteInfo = MJ2048;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C5BEBEB21B8DAD5A0068268F /* MJ2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJ2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,20 +24,16 @@
 		C5BEBEBA1B8DAD5A0068268F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C5BEBEBF1B8DAD5A0068268F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		C5BEBEC51B8DAD5A0068268F /* MJ2048Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MJ2048Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5BEBECA1B8DAD5A0068268F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C5BEBECB1B8DAD5A0068268F /* MJ2048Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJ2048Tests.m; sourceTree = "<group>"; };
+		C5BEBED51B8DAD8F0068268F /* InterfaceControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceControl.h; sourceTree = "<group>"; };
+		C5BEBED81B8DADA00068268F /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
+		C5BEBED91B8DADA00068268F /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
+		C5BEBEDB1B8DADB40068268F /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		C5BEBEDC1B8DADB40068268F /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		C5BEBEDE1B8E94650068268F /* InterfaceControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C5BEBEAF1B8DAD5A0068268F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5BEBEC21B8DAD5A0068268F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -59,7 +47,6 @@
 			isa = PBXGroup;
 			children = (
 				C5BEBEB41B8DAD5A0068268F /* MJ2048 */,
-				C5BEBEC81B8DAD5A0068268F /* MJ2048Tests */,
 				C5BEBEB31B8DAD5A0068268F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				C5BEBEB21B8DAD5A0068268F /* MJ2048.app */,
-				C5BEBEC51B8DAD5A0068268F /* MJ2048Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +64,12 @@
 			children = (
 				C5BEBEB71B8DAD5A0068268F /* AppDelegate.h */,
 				C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */,
+				C5BEBED51B8DAD8F0068268F /* InterfaceControl.h */,
+				C5BEBEDE1B8E94650068268F /* InterfaceControl.m */,
+				C5BEBEDB1B8DADB40068268F /* GameView.h */,
+				C5BEBEDC1B8DADB40068268F /* GameView.m */,
+				C5BEBED81B8DADA00068268F /* GameData.h */,
+				C5BEBED91B8DADA00068268F /* GameData.m */,
 				C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */,
 				C5BEBEBE1B8DAD5A0068268F /* MainMenu.xib */,
 				C5BEBEB51B8DAD5A0068268F /* Supporting Files */,
@@ -90,23 +82,6 @@
 			children = (
 				C5BEBEB61B8DAD5A0068268F /* Info.plist */,
 				C5BEBEBA1B8DAD5A0068268F /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C5BEBEC81B8DAD5A0068268F /* MJ2048Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C5BEBECB1B8DAD5A0068268F /* MJ2048Tests.m */,
-				C5BEBEC91B8DAD5A0068268F /* Supporting Files */,
-			);
-			path = MJ2048Tests;
-			sourceTree = "<group>";
-		};
-		C5BEBEC91B8DAD5A0068268F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C5BEBECA1B8DAD5A0068268F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -131,24 +106,6 @@
 			productReference = C5BEBEB21B8DAD5A0068268F /* MJ2048.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C5BEBEC41B8DAD5A0068268F /* MJ2048Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C5BEBED21B8DAD5A0068268F /* Build configuration list for PBXNativeTarget "MJ2048Tests" */;
-			buildPhases = (
-				C5BEBEC11B8DAD5A0068268F /* Sources */,
-				C5BEBEC21B8DAD5A0068268F /* Frameworks */,
-				C5BEBEC31B8DAD5A0068268F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C5BEBEC71B8DAD5A0068268F /* PBXTargetDependency */,
-			);
-			name = MJ2048Tests;
-			productName = MJ2048Tests;
-			productReference = C5BEBEC51B8DAD5A0068268F /* MJ2048Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,10 +117,6 @@
 				TargetAttributes = {
 					C5BEBEB11B8DAD5A0068268F = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					C5BEBEC41B8DAD5A0068268F = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = C5BEBEB11B8DAD5A0068268F;
 					};
 				};
 			};
@@ -181,7 +134,6 @@
 			projectRoot = "";
 			targets = (
 				C5BEBEB11B8DAD5A0068268F /* MJ2048 */,
-				C5BEBEC41B8DAD5A0068268F /* MJ2048Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -196,13 +148,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5BEBEC31B8DAD5A0068268F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -211,27 +156,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */,
+				C5BEBEDD1B8DADB40068268F /* GameView.m in Sources */,
+				C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */,
+				C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */,
 				C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5BEBEC11B8DAD5A0068268F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5BEBECC1B8DAD5A0068268F /* MJ2048Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C5BEBEC71B8DAD5A0068268F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C5BEBEB11B8DAD5A0068268F /* MJ2048 */;
-			targetProxy = C5BEBEC61B8DAD5A0068268F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C5BEBEBE1B8DAD5A0068268F /* MainMenu.xib */ = {
@@ -346,42 +278,6 @@
 			};
 			name = Release;
 		};
-		C5BEBED31B8DAD5A0068268F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = MJ2048Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MJ2048.app/Contents/MacOS/MJ2048";
-			};
-			name = Debug;
-		};
-		C5BEBED41B8DAD5A0068268F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = MJ2048Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MJ2048.app/Contents/MacOS/MJ2048";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,14 +295,6 @@
 			buildConfigurations = (
 				C5BEBED01B8DAD5A0068268F /* Debug */,
 				C5BEBED11B8DAD5A0068268F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		C5BEBED21B8DAD5A0068268F /* Build configuration list for PBXNativeTarget "MJ2048Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C5BEBED31B8DAD5A0068268F /* Debug */,
-				C5BEBED41B8DAD5A0068268F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
