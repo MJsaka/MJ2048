@@ -15,6 +15,7 @@
     NSColor *colorOfData[21];
     NSMutableDictionary *attrTitle;
     NSMutableDictionary *attrContent;
+    NSMutableDictionary *attrGameOver;
     NSRect recordArea;
     NSRect recordAreaUp;
     NSRect recordAreaDown;
@@ -25,6 +26,8 @@
     NSRect numberAreaUp;
     NSRect numberAreaDown;
     NSRect gameArea;
+    NSRect gameAreaUp;
+    NSRect gameAreaDown;
 
 }
 - (void)drawStringAtCenter:(NSString*)string withAttr:(NSDictionary*)attr inArea:(NSRect)rect{
@@ -34,6 +37,7 @@
     point.y = rect.origin.y + (rect.size.height - size.height)/2;
     [string drawAtPoint:point withAttributes:attr];
 }
+
 - (void)drawRect:(NSRect)dirtyRect {
     // Fill the view
     NSRect bounds = [self bounds];
@@ -45,19 +49,19 @@
     [[NSColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0] set];
     [NSBezierPath fillRect: scoreArea];
     str = [NSString stringWithFormat:@"%ld",[gameData currentScore]];
-    [self drawStringAtCenter:str withAttr:attrContent inArea:scoreAreaDown];
+    [self drawStringAtCenter:str withAttr:attrTitle inArea:scoreAreaDown];
     [self drawStringAtCenter:@"当前分数" withAttr:attrTitle inArea:scoreAreaUp];
     
     [[NSColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0] set];
     [NSBezierPath fillRect: recordArea];
     str = [NSString stringWithFormat:@"%ld",[gameData highScore]];
-    [self drawStringAtCenter:str withAttr:attrContent inArea:recordAreaDown];
+    [self drawStringAtCenter:str withAttr:attrTitle inArea:recordAreaDown];
     [self drawStringAtCenter:@"最高分数" withAttr:attrTitle inArea:recordAreaUp];
     
     [colorOfData[[gameData topPower]] set];
     [NSBezierPath fillRect: numberArea];
     str = [NSString stringWithFormat:@"%.0f",pow(2,[gameData topPower])];
-    [self drawStringAtCenter:str withAttr:attrContent inArea:numberAreaDown];
+    [self drawStringAtCenter:str withAttr:attrTitle inArea:numberAreaDown];
     [self drawStringAtCenter:@"最大数字" withAttr:attrTitle inArea:numberAreaUp];
     
     //Draw GameArea;
@@ -74,8 +78,18 @@
             NSInteger data = [gameData dataAtRow:i col:j];
             if (data != 0) {
                 NSString *dataString = [NSString stringWithFormat:@"%ld",data];
-                [self drawStringAtCenter:dataString withAttr:attrTitle inArea:rect];
+                [self drawStringAtCenter:dataString withAttr:attrContent inArea:rect];
             }
+        }
+    }
+    if ([gameData isDeath]) {
+        [[NSColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0] set];
+        [NSBezierPath fillRect: gameArea];
+        if ([[interface gameOverString] isEqualTo:@""]) {
+            [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameArea];
+        }else{
+            [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameAreaUp];
+            [self drawStringAtCenter:[interface gameOverString] withAttr:attrTitle inArea:gameAreaDown];
         }
     }
 }
@@ -156,10 +170,18 @@
     numberAreaUp = NSMakeRect(20, 507, 192, 75);
     
     gameArea = NSMakeRect(232,20,562,562);
-    attrTitle = [NSMutableDictionary dictionary];
-    [attrTitle setObject:[NSFont userFontOfSize:30] forKey:NSFontAttributeName];
+    gameAreaDown = NSMakeRect(232,20,562,400);
+    gameAreaUp = NSMakeRect(232,220,562,262);;
+    
     attrContent = [NSMutableDictionary dictionary];
-    [attrContent setObject:[NSFont userFontOfSize:30] forKey:NSFontAttributeName];
+    [attrContent setObject:[NSFont fontWithName:@"SimHei" size:50] forKey:NSFontAttributeName];
+    
+    attrTitle = [NSMutableDictionary dictionary];
+    [attrTitle setObject:[NSFont fontWithName:@"SimHei" size:40] forKey:NSFontAttributeName];
+    
+    attrGameOver = [NSMutableDictionary dictionary];
+    [attrGameOver setObject:[NSFont fontWithName:@"SimHei" size:100] forKey:NSFontAttributeName];
+    [attrGameOver setObject:[NSColor colorWithRed:0.149 green:0.325 blue:0.137 alpha:1.0] forKey:NSForegroundColorAttributeName];
 }
 
 @end

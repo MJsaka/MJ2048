@@ -11,16 +11,10 @@
 @interface InterfaceControl : NSObject{
     IBOutlet id gameData;
     IBOutlet id gameView;
-    
-    IBOutlet id theMainWindow;
-    IBOutlet id theWinSheet;
-    IBOutlet id theLabel;
 }
 
 - (IBAction)newGame:(id)sender;
 - (void)keyboardControl:(dirEnumType)dir;
+- (NSString*)gameOverString;
 
-- (void)openWinSheet;
-- (IBAction)continueClick:(id)sender;
-- (IBAction)okClick:(id)sender;
 @end

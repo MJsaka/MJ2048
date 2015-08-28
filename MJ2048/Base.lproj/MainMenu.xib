@@ -22,9 +22,6 @@
             <connections>
                 <outlet property="gameData" destination="SGl-Nc-X0F" id="fPO-Su-Dbq"/>
                 <outlet property="gameView" destination="xvl-EK-qdH" id="PbF-85-OS8"/>
-                <outlet property="theLabel" destination="MUW-5P-rmo" id="Sd1-Yn-NTv"/>
-                <outlet property="theMainWindow" destination="QvC-M9-y7g" id="aJY-2z-BP2"/>
-                <outlet property="theWinSheet" destination="VX3-GI-yw0" id="0Kz-Ns-TIl"/>
             </connections>
         </customObject>
         <customObject id="SGl-Nc-X0F" customClass="GameData"/>
@@ -719,47 +716,6 @@
                 </subviews>
             </view>
             <point key="canvasLocation" x="340" y="-385"/>
-        </window>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="VX3-GI-yw0" customClass="NSPanel">
-            <windowStyleMask key="styleMask" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="139" y="81" width="270" height="150"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-            <view key="contentView" id="0hQ-5M-3e4">
-                <rect key="frame" x="0.0" y="0.0" width="270" height="150"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rvf-tQ-VDv">
-                        <rect key="frame" x="30" y="20" width="90" height="32"/>
-                        <buttonCell key="cell" type="push" title="重新开始" bezelStyle="rounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RV3-qy-Cpr">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="continueClick:" target="Qvf-SB-yQx" id="VsA-wp-JIe"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4aa-Md-eWw">
-                        <rect key="frame" x="150" y="20" width="90" height="32"/>
-                        <buttonCell key="cell" type="push" title="确定" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mCd-Ov-aRw">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="okClick:" target="Qvf-SB-yQx" id="d5q-CY-QsI"/>
-                        </connections>
-                    </button>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MUW-5P-rmo">
-                        <rect key="frame" x="30" y="72" width="210" height="50"/>
-                        <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="Multiline Label" id="fGy-Kd-oVI">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                </subviews>
-            </view>
-            <point key="canvasLocation" x="3" y="65"/>
         </window>
     </objects>
     <resources>

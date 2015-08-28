@@ -10,8 +10,8 @@
 #import "GameData.h"
 
 @interface AppDelegate ()
-@property (weak) IBOutlet NSWindow *window;
 
+@property (weak) IBOutlet NSWindow *window;
 @end
 
 @implementation AppDelegate{

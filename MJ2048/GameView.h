@@ -11,5 +11,4 @@
     IBOutlet id interface;
     IBOutlet id gameData;
 }
-- (void)drawStringAtCenter:(NSString*)string withAttr:(NSDictionary*)attr inArea:(NSRect)rect;
 @end

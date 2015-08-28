@@ -126,6 +126,9 @@
     if (_numTotal < 16) {
         return false;
     }
+    if (!_isPlaying) {
+        return true;
+    }
     for (int dir = 0; dir <=1 ; ++dir) {//从左到右，从下到上各遍历一次
         int redir = 3 - dir;
         for (int i = 0; i < 4; ++i) {
@@ -148,7 +151,6 @@
 - (Boolean)isNewScoreRecord{
     if (_score > _highScore){
         _highScore = _score;
-        [self saveNSUserDefaults];
         return true;
     }else {
         return false;
@@ -163,9 +165,6 @@
                 b = true;
             }
         }
-    }
-    if (b) {
-        [self saveNSUserDefaults];
     }
     return b;
 }
