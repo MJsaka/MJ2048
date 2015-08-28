@@ -38,6 +38,8 @@
     Node *sider[4][4];
     Node *inner[4][4];
     
+    Boolean _isPlaying;
+    
     NSInteger _score;
     NSInteger _numTotal;
     
@@ -47,12 +49,11 @@
 
 - (id)init{
     if (self = [super init]) {
+        _isPlaying = false;
         _score = 0;
         _numTotal = 0;
         _highScore = 0;
         _topPower = 0;
-        
-        [self readNSUserDefaults];
         
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
@@ -83,6 +84,8 @@
             sider[DIR_UP][k] = inner[k][3];
             sider[DIR_DOWN][k] = inner[k][0];
         }//建立sider链接
+        //读取存档
+        [self readNSUserDefaults];
     }
     return self;
 }
@@ -117,6 +120,7 @@
     inner[i][j].power = k;
     _numTotal = 1;
     _score = 0;
+    _isPlaying = true;
 }
 - (Boolean)isDeath{
     if (_numTotal < 16) {
@@ -137,6 +141,7 @@
             } while (t != nil);
         }
     }
+    _isPlaying = false;
     return true;
 }
 
@@ -166,6 +171,9 @@
 }
 - (Boolean)move:(dirEnumType)dir
 {
+    if (!_isPlaying) {
+        return false;
+    }
     Boolean _isMoved = false;
     int redir = 3 - dir;
     //先做好运算
@@ -246,13 +254,45 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:_highScore forKey:@"highScore"];
     [userDefaults setInteger:_topPower forKey:@"topPower"];
+    if (_isPlaying) {
+        [userDefaults setInteger:1 forKey:@"dataSaved"];
+        [userDefaults setInteger:_score forKey:@"score"];
+        [userDefaults setInteger:_numTotal forKey:@"numTotal"];
+        [userDefaults setBool:_isPlaying forKey:@"isPlaying"];
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
+                NSString *powerString = [NSString stringWithFormat:@"p%d%d",i,j];
+                [userDefaults setInteger:inner[i][j].data forKey:dataString];
+                [userDefaults setInteger:inner[i][j].power forKey:powerString];
+            }
+        }
+
+    }else {
+        [userDefaults setInteger:0 forKey:@"dataSaved"];
+    }
     [userDefaults synchronize];
 }
 -(void)readNSUserDefaults
 {
-    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-    _highScore = [userDefaultes integerForKey:@"highScore"];
-    _topPower = [userDefaultes integerForKey:@"topPower"];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    _highScore = [userDefaults integerForKey:@"highScore"];
+    _topPower = [userDefaults integerForKey:@"topPower"];
+    NSInteger dataSaved = [userDefaults integerForKey:@"dataSaved"];
+    if (dataSaved) {
+        _score = [userDefaults integerForKey:@"score"];
+        _numTotal = [userDefaults integerForKey:@"numTotal"];
+        _isPlaying = [userDefaults boolForKey:@"isPlaying"];
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
+                NSString *powerString = [NSString stringWithFormat:@"p%d%d",i,j];
+                inner[i][j].data = [userDefaults integerForKey:dataString];
+                inner[i][j].power = [userDefaults integerForKey:powerString];
+            }
+        }
+    }
+    
 
 }
 @end

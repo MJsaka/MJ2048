@@ -13,14 +13,13 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="gameData" destination="SGl-Nc-X0F" id="pKg-nb-PMD"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="Qvf-SB-yQx" customClass="InterfaceControl">
             <connections>
-                <outlet property="buttonQuit" destination="dE5-Pl-yk9" id="5Xx-qd-85E"/>
-                <outlet property="buttonRestart" destination="bbh-uH-rRs" id="fzO-MC-U1I"/>
                 <outlet property="gameData" destination="SGl-Nc-X0F" id="fPO-Su-Dbq"/>
                 <outlet property="gameView" destination="xvl-EK-qdH" id="PbF-85-OS8"/>
                 <outlet property="theLabel" destination="MUW-5P-rmo" id="Sd1-Yn-NTv"/>

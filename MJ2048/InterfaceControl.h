@@ -11,8 +11,6 @@
 @interface InterfaceControl : NSObject{
     IBOutlet id gameData;
     IBOutlet id gameView;
-    IBOutlet NSButtonCell *buttonQuit;
-    IBOutlet NSButtonCell *buttonRestart;
     
     IBOutlet id theMainWindow;
     IBOutlet id theWinSheet;
