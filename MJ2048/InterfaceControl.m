@@ -46,5 +46,7 @@
     [theWinSheet orderOut:nil];
     [NSApp endSheet:theWinSheet];
 }
-
+- (void)awakeFromNib{
+    labelString =  [NSMutableString stringWithString:@"Game Over\n"];
+}
 @end
