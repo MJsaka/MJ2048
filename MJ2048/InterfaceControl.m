@@ -26,7 +26,6 @@
 
 - (void)keyboardControl:(dirEnumType)dir{
     if([gameData move:dir]){
-        [gameView setNeedsDisplay:YES];
         if([gameData isDeath]){
             if ([gameData isNewScoreRecord]) {
                 [gameOverString appendString:[NSString stringWithFormat:@"NEW SCORE: %ld\n",[gameData highScore]]];
@@ -35,6 +34,7 @@
                 [gameOverString appendString:[NSString stringWithFormat:@"NEW BLOCK: %.0f",pow(2,[gameData topPower])]];
             }
         }
+        [gameView setNeedsDisplay:YES];
     }
 }
 

@@ -85,7 +85,7 @@
             sider[DIR_DOWN][k] = inner[k][0];
         }//建立sider链接
         //读取存档
-        [self readNSUserDefaults];
+//        [self readNSUserDefaults];
     }
     return self;
 }
