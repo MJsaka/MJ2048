@@ -170,8 +170,8 @@
     numberAreaUp = NSMakeRect(20, 507, 192, 75);
     
     gameArea = NSMakeRect(232,20,562,562);
-    gameAreaDown = NSMakeRect(232,20,562,400);
-    gameAreaUp = NSMakeRect(232,220,562,262);;
+    gameAreaDown = NSMakeRect(232,140,562,160);
+    gameAreaUp = NSMakeRect(232,300,562,160);;
     
     attrContent = [NSMutableDictionary dictionary];
     [attrContent setObject:[NSFont fontWithName:@"SimHei" size:50] forKey:NSFontAttributeName];
