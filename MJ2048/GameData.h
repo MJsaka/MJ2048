@@ -19,11 +19,11 @@ typedef enum moveDir{
 {
     Node *nodeOnDir[4];//上下左右格子的指针
 }
-@property (assign) NSInteger data;//格子内的数字
-@property (assign) NSInteger power;//直接记录幂次，以简化输出对应颜色的计算。
+@property (assign,nonatomic) NSInteger data;//格子内的数字
+@property (assign,nonatomic) NSInteger power;//直接记录幂次，以简化输出对应颜色的计算。
 
--(void)setNodeOnDir:(dirEnumType)DIR withNode:(Node *)node;
--(Node *)nodeOnDir:(dirEnumType)DIR;
+-(void)setNodeOnDir:(dirEnumType)dir withNode:(Node *)node;
+-(Node *)nodeOnDir:(dirEnumType)dir;
 @end
 
 @interface GameData : NSObject
