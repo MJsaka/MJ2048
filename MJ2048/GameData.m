@@ -7,10 +7,13 @@
 //
 
 #import "GameData.h"
+#import "InterfaceControl.h"
 @implementation Node : NSObject
 
 @synthesize data;
 @synthesize power;
+@synthesize posi;
+@synthesize posj;
 
 - (id)init{
     if (self = [super init]) {
@@ -18,6 +21,8 @@
             nodeOnDir[i] = nil;
             data = 0;
             power = 0;
+            posi = 0;
+            posj = 0;
         }
     }
     return self;
@@ -60,6 +65,8 @@
                 inner[i][j] = [[Node alloc]init];
                 inner[i][j].data = pow(2, 4*i+j);
                 inner[i][j].power = 4*i+j;
+                inner[i][j].posi = i;
+                inner[i][j].posj = j;
             }
         }//创建inner节点
         for (int i = 0; i < 4; ++i) {//横向
@@ -266,7 +273,7 @@
                 [userDefaults setInteger:inner[i][j].power forKey:powerString];
             }
         }
-
+        
     }else {
         [userDefaults setInteger:0 forKey:@"dataSaved"];
     }
@@ -292,6 +299,6 @@
         }
     }
     
-
+    
 }
 @end

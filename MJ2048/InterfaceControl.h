@@ -18,4 +18,8 @@
 - (IBAction)newGame:(id)sender;
 - (void)keyboardControl:(dirEnumType)dir;
 
+- (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ;
+- (void)addMergeAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ;
+- (void)addGenerateAnimationForI:(NSInteger)i forj:(NSInteger)j;
+
 @end

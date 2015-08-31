@@ -10,11 +10,11 @@
 @interface GameView : NSView{
     IBOutlet id interface;
 }
-@property (assign) NSInteger currentScore;
-@property (assign) NSInteger highScore;
-@property (assign) NSInteger topPower;
-@property (assign) Boolean isDeath;
-@property (assign) Boolean isNewScore;
-@property (assign) Boolean isNewPower;
+@property (assign,nonatomic) NSInteger currentScore;
+@property (assign,nonatomic) NSInteger highScore;
+@property (assign,nonatomic) NSInteger topPower;
+@property (assign,nonatomic) Boolean isDeath;
+@property (assign,nonatomic) Boolean isNewScore;
+@property (assign,nonatomic) Boolean isNewPower;
 
 @end

@@ -12,6 +12,8 @@
 @interface BlockView : NSView
 
 @property (strong,nonatomic) BlockAttribute *blockAttr;
+@property (assign,nonatomic) NSInteger i;
+@property (assign,nonatomic) NSInteger j;
 @property (assign,nonatomic) NSInteger data;
 @property (assign,nonatomic) NSInteger power;
 @end
