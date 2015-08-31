@@ -9,15 +9,15 @@
 #import "GameData.h"
 @implementation Node : NSObject
 
-@synthesize data = _data;
-@synthesize power = _power;
+@synthesize data;
+@synthesize power;
 
 - (id)init{
     if (self = [super init]) {
         for (int i = 0; i < 4; ++i) {
             nodeOnDir[i] = nil;
-            _data = 0;
-            _power = 0;
+            data = 0;
+            power = 0;
         }
     }
     return self;
@@ -168,7 +168,7 @@
     }
     return b;
 }
-- (Boolean)move:(dirEnumType)dir
+- (Boolean)move:(dirEnumType)dir sender:(id)sender
 {
     if (!_isPlaying) {
         return false;

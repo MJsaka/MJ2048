@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5732D8A1B91FE13004A10FC /* BlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* BlockView.m */; };
+		C5732D8D1B9461E2004A10FC /* BlockAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D8C1B9461E2004A10FC /* BlockAttribute.m */; };
 		C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */; };
 		C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEBA1B8DAD5A0068268F /* main.m */; };
 		C5BEBEBD1B8DAD5A0068268F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */; };
@@ -17,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C5732D881B91FE13004A10FC /* BlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockView.h; sourceTree = "<group>"; };
+		C5732D891B91FE13004A10FC /* BlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockView.m; sourceTree = "<group>"; };
+		C5732D8B1B9461E2004A10FC /* BlockAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAttribute.h; sourceTree = "<group>"; };
+		C5732D8C1B9461E2004A10FC /* BlockAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAttribute.m; sourceTree = "<group>"; };
 		C5BEBEB21B8DAD5A0068268F /* MJ2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJ2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BEBEB61B8DAD5A0068268F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5BEBEB71B8DAD5A0068268F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,6 +74,10 @@
 				C5BEBEDE1B8E94650068268F /* InterfaceControl.m */,
 				C5BEBEDB1B8DADB40068268F /* GameView.h */,
 				C5BEBEDC1B8DADB40068268F /* GameView.m */,
+				C5732D881B91FE13004A10FC /* BlockView.h */,
+				C5732D891B91FE13004A10FC /* BlockView.m */,
+				C5732D8B1B9461E2004A10FC /* BlockAttribute.h */,
+				C5732D8C1B9461E2004A10FC /* BlockAttribute.m */,
 				C5BEBED81B8DADA00068268F /* GameData.h */,
 				C5BEBED91B8DADA00068268F /* GameData.m */,
 				C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */,
@@ -155,7 +165,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5732D8A1B91FE13004A10FC /* BlockView.m in Sources */,
 				C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */,
+				C5732D8D1B9461E2004A10FC /* BlockAttribute.m in Sources */,
 				C5BEBEDD1B8DADB40068268F /* GameView.m in Sources */,
 				C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */,
 				C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */,

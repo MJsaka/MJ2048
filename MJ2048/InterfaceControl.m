@@ -7,31 +7,55 @@
 //
 
 #import "InterfaceControl.h"
-#import "GameView.h"
+#import "BlockView.h"
+#import "BlockAttribute.h"
 
 @implementation InterfaceControl{
-    NSMutableString *gameOverString;
-}
-
-- (NSString*)gameOverString{
-    return gameOverString;
+    BlockView *block[4][4];
 }
 
 
 - (IBAction)newGame:(id)sender{
     [gameData newGame];
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            block[i][j].data = [gameData dataAtRow:i col:j];
+            block[i][j].power = [gameData powerAtRow:i col:j];
+            block[i][j].alphaValue = 1.0 ;
+            [block[i][j] setNeedsDisplay:YES];
+        }
+    }
+    gameView.currentScore = [gameData currentScore];
+    gameView.highScore = [gameData highScore];
+    gameView.topPower = [gameData topPower];
+    gameView.isDeath = [gameData isDeath];
     [gameView setNeedsDisplay:YES];
-    gameOverString = [NSMutableString stringWithString:@""];
 }
 
 - (void)keyboardControl:(dirEnumType)dir{
-    if([gameData move:dir]){
-        if([gameData isDeath]){
-            if ([gameData isNewScoreRecord]) {
-                [gameOverString appendString:[NSString stringWithFormat:@"NEW SCORE: %ld\n",[gameData highScore]]];
+    if([gameData move:dir sender:self]){
+        //绘制Block
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                block[i][j].data = [gameData dataAtRow:i col:j];
+                block[i][j].power = [gameData powerAtRow:i col:j];
+                [block[i][j] setNeedsDisplay:YES];
             }
-            if ([gameData isNewPowerRecord]) {
-                [gameOverString appendString:[NSString stringWithFormat:@"NEW BLOCK: %.0f",pow(2,[gameData topPower])]];
+        }
+        gameView.currentScore = [gameData currentScore];
+        if ([gameData isDeath]) {
+            gameView.highScore = [gameData highScore];
+            gameView.topPower = [gameData topPower];
+            gameView.isDeath = [gameData isDeath];
+            gameView.isNewScore = [gameData isNewScoreRecord];
+            gameView.isNewPower = [gameData isNewPowerRecord];
+            //隐藏Block
+            for (int i = 0; i < 4; ++i) {
+                for (int j = 0; j < 4; ++j) {
+                    block[i][j].data = [gameData dataAtRow:i col:j];
+                    block[i][j].power = [gameData powerAtRow:i col:j];
+                    block[i][j].alphaValue = 0 ;
+                }
             }
         }
         [gameView setNeedsDisplay:YES];
@@ -39,6 +63,20 @@
 }
 
 - (void)awakeFromNib{
-    gameOverString = [NSMutableString stringWithString:@""];
+    gameView.currentScore = [gameData currentScore];
+    gameView.highScore = [gameData highScore];
+    gameView.topPower = [gameData topPower];
+    gameView.isDeath = [gameData isDeath];
+    BlockAttribute *attr = [[BlockAttribute alloc]init];
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            block[i][j] = [[BlockView alloc] init];
+            [gameView addSubview:block[i][j]];
+            [block[i][j] setFrame:NSMakeRect(242 + i * 138, 30 + j * 138, 128, 128)];
+            block[i][j].data = [gameData dataAtRow:i col:j];
+            block[i][j].power = [gameData powerAtRow:i col:j];
+            block[i][j].blockAttr = attr;
+        }
+    }
 }
 @end

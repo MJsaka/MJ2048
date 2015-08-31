@@ -8,13 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "GameData.h"
+#import "GameView.h"
+
 @interface InterfaceControl : NSObject{
-    IBOutlet id gameData;
-    IBOutlet id gameView;
+    IBOutlet GameData *gameData;
+    IBOutlet GameView *gameView;
 }
 
 - (IBAction)newGame:(id)sender;
 - (void)keyboardControl:(dirEnumType)dir;
-- (NSString*)gameOverString;
 
 @end

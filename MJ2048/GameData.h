@@ -35,13 +35,11 @@ typedef enum moveDir{
 - (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col;
 - (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col;
 
-- (Boolean)move:(dirEnumType)DIR;
-
+- (Boolean)move:(dirEnumType)dir sender:(id)sender;
 - (Boolean)isDeath;
 - (Boolean)isNewScoreRecord;
 - (Boolean)isNewPowerRecord;
 
 - (void)newGame;
 - (void)saveNSUserDefaults;
-- (void)readNSUserDefaults;
 @end

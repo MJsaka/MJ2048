@@ -20,8 +20,8 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="Qvf-SB-yQx" customClass="InterfaceControl">
             <connections>
-                <outlet property="gameData" destination="SGl-Nc-X0F" id="fPO-Su-Dbq"/>
-                <outlet property="gameView" destination="xvl-EK-qdH" id="PbF-85-OS8"/>
+                <outlet property="gameData" destination="SGl-Nc-X0F" id="UKZ-Fw-DmE"/>
+                <outlet property="gameView" destination="xvl-EK-qdH" id="IOg-fZ-TLJ"/>
             </connections>
         </customObject>
         <customObject id="SGl-Nc-X0F" customClass="GameData"/>
@@ -684,7 +684,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="814" height="602"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-EK-qdH" customClass="GameView">
+                    <customView autoresizesSubviews="NO" wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xvl-EK-qdH" customClass="GameView">
                         <rect key="frame" x="0.0" y="0.0" width="814" height="602"/>
                         <subviews>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e0r-HO-WJc">
@@ -709,7 +709,6 @@
                             </button>
                         </subviews>
                         <connections>
-                            <outlet property="gameData" destination="SGl-Nc-X0F" id="3J3-lB-eVB"/>
                             <outlet property="interface" destination="Qvf-SB-yQx" id="L7b-t4-8zG"/>
                         </connections>
                     </customView>

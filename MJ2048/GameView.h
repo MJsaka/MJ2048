@@ -9,6 +9,12 @@
 #import <Cocoa/Cocoa.h>
 @interface GameView : NSView{
     IBOutlet id interface;
-    IBOutlet id gameData;
 }
+@property (assign) NSInteger currentScore;
+@property (assign) NSInteger highScore;
+@property (assign) NSInteger topPower;
+@property (assign) Boolean isDeath;
+@property (assign) Boolean isNewScore;
+@property (assign) Boolean isNewPower;
+
 @end
