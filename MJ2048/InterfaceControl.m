@@ -25,10 +25,10 @@
             [block[i][j] setNeedsDisplay:YES];
         }
     }
+    gameView.isDeath = [gameData isDeath];
     gameView.currentScore = [gameData currentScore];
     gameView.highScore = [gameData highScore];
     gameView.topPower = [gameData topPower];
-    gameView.isDeath = [gameData isDeath];
     [gameView setNeedsDisplay:YES];
 }
 
@@ -63,10 +63,10 @@
 }
 
 - (void)awakeFromNib{
+    gameView.isDeath = [gameData isDeath];
     gameView.currentScore = [gameData currentScore];
     gameView.highScore = [gameData highScore];
     gameView.topPower = [gameData topPower];
-    gameView.isDeath = [gameData isDeath];
     BlockAttribute *attr = [[BlockAttribute alloc]init];
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
