@@ -44,11 +44,11 @@
         }
         gameView.currentScore = [gameData currentScore];
         if ([gameData isDeath]) {
-            gameView.highScore = [gameData highScore];
-            gameView.topPower = [gameData topPower];
             gameView.isDeath = [gameData isDeath];
             gameView.isNewScore = [gameData isNewScoreRecord];
             gameView.isNewPower = [gameData isNewPowerRecord];
+            gameView.highScore = [gameData highScore];
+            gameView.topPower = [gameData topPower];
             //隐藏Block
             for (int i = 0; i < 4; ++i) {
                 for (int j = 0; j < 4; ++j) {
