@@ -1,5 +1,5 @@
 //
-//  BlockView.h
+//  BlockLayer.h
 //  MJ2048
 //
 //  Created by MJsaka on 8/29/15.
@@ -9,11 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "BlockAttribute.h"
 
-@interface BlockView : NSView
+@interface BlockLayer : CALayer
 
 @property (strong,nonatomic) BlockAttribute *blockAttr;
-@property (assign,nonatomic) NSInteger i;
-@property (assign,nonatomic) NSInteger j;
+@property (assign,nonatomic) NSInteger posI;
+@property (assign,nonatomic) NSInteger posJ;
 @property (assign,nonatomic) NSInteger data;
 @property (assign,nonatomic) NSInteger power;
+
 @end

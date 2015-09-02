@@ -1,4 +1,4 @@
-//
+    //
 //  InterfaceControl.m
 //  MJ2048
 //
@@ -7,15 +7,16 @@
 //
 
 #import "InterfaceControl.h"
-#import "BlockView.h"
+#import "BlockLayer.h"
 #import "BlockAttribute.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation InterfaceControl{
-    NSMutableArray *moveAnimationArray;
-    NSMutableArray *mergeAnimationArray;
-    NSMutableArray *generateAnimationArray;
-    BlockView *block[4][4];
+    BlockLayer *block[4][4];
+    NSInteger moveRelativeI[4][4];
+    NSInteger moveRelativeJ[4][4];
+    Boolean mergeBlock[4][4];
+    Boolean generateBlock[4][4];
 }
 
 
@@ -23,10 +24,14 @@
     [gameData newGame];
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
+            moveRelativeI[i][j] = 0;
+            moveRelativeJ[i][j] = 0;
+            mergeBlock[i][j] = false;
+            generateBlock[i][j] = false;
             block[i][j].data = [gameData dataAtRow:i col:j];
             block[i][j].power = [gameData powerAtRow:i col:j];
-            block[i][j].alphaValue = 1.0 ;
-            [block[i][j] setNeedsDisplay:YES];
+            [block[i][j] setNeedsDisplay];
+            [block[i][j] setHidden:NO];
         }
     }
     gameView.currentScore = [gameData currentScore];
@@ -38,14 +43,6 @@
 
 - (void)keyboardControl:(dirEnumType)dir{
     if([gameData move:dir sender:self]){
-        //绘制Block
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                block[i][j].data = [gameData dataAtRow:i col:j];
-                block[i][j].power = [gameData powerAtRow:i col:j];
-                [block[i][j] setNeedsDisplay:YES];
-            }
-        }
         gameView.currentScore = [gameData currentScore];
         if ([gameData isDeath]) {
             gameView.highScore = [gameData highScore];
@@ -56,9 +53,7 @@
             //隐藏Block
             for (int i = 0; i < 4; ++i) {
                 for (int j = 0; j < 4; ++j) {
-                    block[i][j].data = [gameData dataAtRow:i col:j];
-                    block[i][j].power = [gameData powerAtRow:i col:j];
-                    block[i][j].alphaValue = 0 ;
+                    [block[i][j] setHidden:YES];
                 }
             }
         }
@@ -66,106 +61,133 @@
     }
 }
 
-- (void)startAnimation{
-    NSViewAnimation *mergeAnimation = [[NSViewAnimation alloc] initWithViewAnimations:mergeAnimationArray];
-    mergeAnimation.delegate = nil;
-    mergeAnimation.duration = 1;
-    [mergeAnimation setAnimationBlockingMode:NSAnimationNonblocking];
-    [mergeAnimation startAnimation];
-    mergeAnimationArray = [NSMutableArray array];
-    
-    double delayInSeconds = mergeAnimation.duration ;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [gameView setNeedsDisplay:YES];
-        //        for (int i = 0; i < 4; ++i) {
-        //            for (int j = 0; j < 4; ++j) {
-        //                block[i][j].data = [gameData dataAtRow:i col:j];
-        //                block[i][j].power = [gameData powerAtRow:i col:j];
-        //                [block[i][j] setNeedsDisplay:YES];
-        //            }
-        //        }
-        NSViewAnimation *moveAnimation = [[NSViewAnimation alloc] initWithViewAnimations:moveAnimationArray];
-        moveAnimation.delegate = nil;
-        moveAnimation.duration = 1;
-        [moveAnimation setAnimationBlockingMode:NSAnimationNonblocking];
-        [moveAnimation startAnimation];
-        moveAnimationArray = [NSMutableArray array];
-        
-        double delayInSeconds = moveAnimation.duration ;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            
-            [gameView setNeedsDisplay:YES];
-            for (int i = 0; i < 4; ++i) {
-                for (int j = 0; j < 4; ++j) {
-                    block[i][j].data = [gameData dataAtRow:i col:j];
-                    block[i][j].power = [gameData powerAtRow:i col:j];
-                    [block[i][j] setNeedsDisplay:YES];
-                }
+- (void)startMoveAnimation{
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (moveRelativeI[i][j] != 0 || moveRelativeJ[i][j] != 0) {
+                CABasicAnimation *moveAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+                moveAnimation.duration = 0.25;
+                moveAnimation.autoreverses = NO;
+                moveAnimation.repeatCount = 0;
+                moveAnimation.removedOnCompletion = NO;
+                moveAnimation.fillMode = kCAFillModeForwards;
+                moveAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+                moveAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DTranslate(CATransform3DIdentity, moveRelativeI[i][j]*138 , moveRelativeJ[i][j] * 138, 0)];
+                [block[i][j] addAnimation:moveAnimation forKey:@"transform"];
             }
-        });
-        
-    });
+        }
+    }
+    [NSTimer scheduledTimerWithTimeInterval:0.24 target:self selector:@selector(blockRefresh) userInfo:nil repeats:NO];
+}
     
-    
+- (void)startMoveAnimationAfterMerge{
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (moveRelativeI[i][j] != 0 || moveRelativeJ[i][j] != 0) {
+                CABasicAnimation *moveAnimationAfterMerge = [CABasicAnimation animationWithKeyPath:@"transform"];
+                moveAnimationAfterMerge.duration = 0.25;
+                moveAnimationAfterMerge.autoreverses = NO;
+                moveAnimationAfterMerge.repeatCount = 0;
+                moveAnimationAfterMerge.removedOnCompletion = NO;
+                moveAnimationAfterMerge.fillMode = kCAFillModeForwards;
+                moveAnimationAfterMerge.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+                moveAnimationAfterMerge.toValue = [NSValue valueWithCATransform3D:CATransform3DTranslate(CATransform3DIdentity, moveRelativeI[i][j]*138 , moveRelativeJ[i][j] * 138, 0)];
+                [block[i][j] addAnimation:moveAnimationAfterMerge forKey:@"transform"];
+            }
+        }
+    }
+    [NSTimer scheduledTimerWithTimeInterval:0.24 target:self selector:@selector(blockRefresh) userInfo:nil repeats:NO];
+}
+- (void)startMergeAnimation{
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (mergeBlock[i][j]) {
+                CABasicAnimation *mergeAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+                mergeAnimation.duration = 0.2;
+                mergeAnimation.autoreverses = NO;
+                mergeAnimation.repeatCount = 0;
+                mergeAnimation.removedOnCompletion = NO;
+                mergeAnimation.fillMode = kCAFillModeBackwards;
+                mergeAnimation.fromValue = [NSNumber numberWithFloat:1.0];
+                mergeAnimation.toValue = [NSNumber numberWithFloat:1.2];
+                [block[i][j] addAnimation:mergeAnimation forKey:@"transform"];
+                mergeBlock[i][j] = false;
+            }
+            if (generateBlock[i][j]) {
+                CABasicAnimation *generateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+                generateAnimation.duration = 0.2;
+                generateAnimation.autoreverses = NO;
+                generateAnimation.repeatCount = 0;
+                generateAnimation.removedOnCompletion = NO;
+                generateAnimation.fillMode = kCAFillModeBackwards;
+                generateAnimation.fromValue = [NSNumber numberWithFloat:0.5];
+                generateAnimation.toValue = [NSNumber numberWithFloat:1.0];
+                [block[i][j] addAnimation:generateAnimation forKey:@"transform"];
+                generateBlock[i][j] = false;
+            }
+        }
+    }
+//    [NSTimer scheduledTimerWithTimeInterval:0.24 target:self selector:@selector(blockRefresh) userInfo:nil repeats:NO];
+}
+-(void)blockRefresh{
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            moveRelativeI[i][j] = 0;
+            moveRelativeJ[i][j] = 0;
+            block[i][j].data = [gameData dataAtRow:i col:j];
+            block[i][j].power = [gameData powerAtRow:i col:j];
+            [block[i][j] setNeedsDisplay];
+            [block[i][j] removeAllAnimations];
+        }
+    }
 }
 - (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
-    
-    id animationTarget = block[fromI][fromJ];
-    id toTarget = block[toI][toJ];
-    
-    NSRect startFrame = [animationTarget frame];
-    NSRect endFrame = [toTarget frame];
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                animationTarget,NSViewAnimationTargetKey,
-                                NSViewAnimationFadeInEffect,NSViewAnimationEffectKey,
-                                [NSValue valueWithRect:startFrame],NSViewAnimationStartFrameKey,
-                                [NSValue valueWithRect:endFrame],NSViewAnimationEndFrameKey, nil];
-    [moveAnimationArray addObject:dictionary];
+    moveRelativeI[fromI][fromJ] = toI - fromI;
+    moveRelativeJ[fromI][fromJ] = toJ -fromJ;
 }
 
-- (void)addMergeAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
-    
-    id animationTarget = block[fromI][fromJ];
-    id toTarget = block[toI][toJ];
-    
-    NSRect startFrame = [animationTarget frame];
-    NSRect endFrame = [toTarget frame];
-    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                animationTarget,NSViewAnimationTargetKey,
-                                NSViewAnimationFadeInEffect,NSViewAnimationEffectKey,
-                                [NSValue valueWithRect:startFrame],NSViewAnimationStartFrameKey,
-                                [NSValue valueWithRect:endFrame],NSViewAnimationEndFrameKey, nil];
-    [mergeAnimationArray addObject:dictionary];
+- (void)addMoveAnimationAfterMergeFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
+    moveRelativeI[fromI][fromJ] = toI - fromI;
+    moveRelativeJ[fromI][fromJ] = toJ -fromJ;
 }
-- (void)addGenerateAnimationForI:(NSInteger)i forj:(NSInteger)j{
-    
+
+- (void)addMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
+    mergeBlock[forI][forJ] = true;
+}
+- (void)addGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
+    generateBlock[forI][forJ] = true;
 }
 - (void)awakeFromNib{
-    
-    moveAnimationArray = [NSMutableArray array];
-    mergeAnimationArray = [NSMutableArray array];
-    generateAnimationArray = [NSMutableArray array];
-    
 
     gameView.currentScore = [gameData currentScore];
     gameView.highScore = [gameData highScore];
     gameView.topPower = [gameData topPower];
     gameView.isDeath = [gameData isDeath];
+    
     BlockAttribute *attr = [[BlockAttribute alloc]init];
+    
+    [gameView setWantsLayer:YES];
     
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            block[i][j] = [[BlockView alloc] init];
-            [gameView addSubview:block[i][j]];
-            [block[i][j] setFrame:NSMakeRect(242 + i * 138, 30 + j * 138, 128, 128)];
+            block[i][j] = [BlockLayer layer];
+            [[gameView layer] addSublayer:block[i][j]];
+            
             block[i][j].data = [gameData dataAtRow:i col:j];
             block[i][j].power = [gameData powerAtRow:i col:j];
-            block[i][j].i = i;
-            block[i][j].j = j;
+            block[i][j].posI = i;
+            block[i][j].posJ = j;
             block[i][j].blockAttr = attr;
-            [block[i][j].layer setAnchorPoint:NSMakePoint(0, 0)];
+            
+            [block[i][j] setBounds:NSMakeRect(0, 0, 128, 128)];
+            [block[i][j] setPosition:CGPointMake(306 + i * 138, 94 + j * 138)];
+            [block[i][j] setAnchorPoint:NSMakePoint(0.5, 0.5)];
+            [block[i][j] setNeedsDisplay];
+            
+            moveRelativeI[i][j] = 0;
+            moveRelativeJ[i][j] = 0;
+            mergeBlock[i][j] = false;
+            generateBlock[i][j] = false;
         }
     }
 }
