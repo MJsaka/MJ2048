@@ -19,12 +19,7 @@
 - (void)keyboardControl:(dirEnumType)dir;
 
 - (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ;
-- (void)addMoveAnimationAfterMergeFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ;
-- (void)addMergeAnimationForI:(NSInteger)fromI forJ:(NSInteger)fromJ;
+- (void)addMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ;
 - (void)addGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ;
-
-- (void)startMoveAnimation;
-- (void)startMoveAnimationAfterMerge;
-- (void)startMergeAnimation;
-
+- (void)blockRefreshForI:(NSInteger)forI forJ:(NSInteger)forJ;
 @end

@@ -8,6 +8,7 @@
 
 #import "GameData.h"
 #import "InterfaceControl.h"
+
 @implementation Node : NSObject
 
 @synthesize data;
@@ -19,10 +20,6 @@
     if (self = [super init]) {
         for (int i = 0; i < 4; ++i) {
             nodeOnDir[i] = nil;
-            data = 0;
-            power = 0;
-            posi = 0;
-            posj = 0;
         }
     }
     return self;
@@ -50,10 +47,6 @@
     
     NSInteger _highScore;
     NSInteger _topPower;
-    
-    dirEnumType _dir;
-    id _sender;
-    Boolean _isMoved;
 }
 
 - (id)init{
@@ -132,7 +125,6 @@
     _numTotal = 1;
     _score = 0;
     _isPlaying = true;
-    _isMoved = false;
 }
 - (Boolean)isDeath{
     if (_numTotal < 16) {
@@ -185,18 +177,49 @@
     if (!_isPlaying) {
         return false;
     }
-    _dir = dir;
-    _sender = sender;
-    int redir = 3 - _dir;
-    //先移位
+    Boolean _isMoved = false;
+    int redir = 3 - dir;
+    //先做好运算
     for (int i = 0; i < 4; ++i) {
-        Node *n = sider[_dir][i];
+        Node *n = sider[dir][i];
+        Node *t = [n nodeOnDir:redir];
+        do{
+            while (t != nil && n.data == 0) {
+                n = t;
+                t = [n nodeOnDir:redir];
+            }//找到第一个不为0的格子
+            while (t != nil && t.data == 0){
+                t = [t nodeOnDir:redir];
+            }//找到下一个不为0的格子
+            if (t != nil && n.data == t.data) {
+                n.data *= 2;
+                n.power += 1;
+                t.data = 0;
+                t.power = 0;
+                _score += n.data;
+                _numTotal -= 1;
+                _isMoved = true;
+                [sender addMergeAnimationForI:n.posi forJ:n.posj];
+                [sender blockRefreshForI:t.posi forJ:t.posj];
+                [sender blockRefreshForI:n.posi forJ:n.posj];
+                n = [t nodeOnDir:redir];
+                if (n != nil) {
+                    t = [n nodeOnDir:redir];
+                }
+            }else if(t != nil) {
+                n = t;
+                t = [n nodeOnDir:redir];
+            }
+        }while (n != nil && t != nil);
+    }//再做移位
+    for (int i = 0; i < 4; ++i) {
+        Node *n = sider[dir][i];
         Node *t = [n nodeOnDir:redir];
         do{
             while (t != nil && n.data != 0) {
                 n = t;
                 t = [n nodeOnDir:redir];
-            }//找到下一个为0的格子
+            }//找到第一个为0的格子
             while (t != nil && t.data == 0) {
                 t = [t nodeOnDir:redir];
             }//找到下一个不为0的格子
@@ -210,79 +233,30 @@
                 n = [n nodeOnDir:redir];
                 t = [t nodeOnDir:redir];
                 _isMoved = true;
+                
             }
-        }while (t != nil);
+        }while (n != nil && t != nil);
     }
-    [sender startMoveAnimation];
-    //再运算
-    [NSTimer scheduledTimerWithTimeInterval:0.26 target:self selector:@selector(merge) userInfo:nil repeats:NO];
-    if(_isMoved){
-        [NSTimer scheduledTimerWithTimeInterval:0.52 target:self selector:@selector(generate) userInfo:nil repeats:NO];
-        _isMoved = false;
+    if (_isMoved) {//有移动，则从移动方向的后方新添一个格子。
+        Node *n;
+        do {//找到移动方向最后的一个为0的节点方可添加
+            NSInteger i = random() % 4;
+            n = sider[redir][i];
+        }while (n.data != 0);
+        NSInteger j = random() % 4;
+        while ([n nodeOnDir:dir].data == 0 && j != 0){
+            n = [n nodeOnDir:dir];
+            --j;
+        }
+        NSInteger k = random() % 2 + 1;
+        n.data = k*2;
+        n.power = k;
+        _numTotal += 1;
+        [sender addGenerateAnimationForI:n.posi forJ:n.posj];
         return true;
-    }else {
+    }else{
         return false;
     }
-}
-- (void)merge
-{
-    int redir = 3 - _dir;
-    for (int i = 0; i < 4; ++i) {
-        Node *n = sider[_dir][i];
-        Node *t = [n nodeOnDir:redir];
-        while (t != nil && t.data != 0){
-            if (n.data == t.data) {
-                n.data *= 2;
-                n.power += 1;
-                t.data = 0;
-                t.power = 0;
-                _score += n.data;
-                _numTotal -= 1;
-                [_sender addMergeAnimationForI:n.posi forJ:n.posj];
-                _isMoved = true;
-                //把后面的往前移
-                Node *p = t;
-                n = [t nodeOnDir:redir];
-                while (n != nil && n.data != 0){
-                    t.data = n.data;
-                    t.power = n.power;
-                    n.data = 0;
-                    n.power = 0;
-                    t = n;
-                    n = [n nodeOnDir:redir];
-//                    [_sender addMoveAnimationAfterMergeFromI:n.posi fromJ:n.posj toI:t.posi toJ:t.posj];
-                }
-                n = p;
-                t = [n nodeOnDir:redir];
-            }else{
-                n = t;
-                t = [n nodeOnDir:redir];
-            }
-        }
-    }
-    [_sender startMoveAnimationAfterMerge];
-}
-
--(void)generate
-{
-    int redir = 3 - _dir;
-    //有移动，则从移动方向的后方新添一个格子。
-    Node *n;
-    do {//找到移动方向最后的一个为0的节点方可添加
-        NSInteger i = random() % 4;
-        n = sider[redir][i];
-    }while (n.data != 0);
-    NSInteger j = random() % 4;
-    while ([n nodeOnDir:_dir].data == 0 && j != 0){
-        n = [n nodeOnDir:_dir];
-        --j;
-    }
-    NSInteger k = random() % 2 + 1;
-    n.data = k*2;
-    n.power = k;
-    _numTotal += 1;
-    [_sender addGenerateAnimationForI:n.posi forJ:n.posj];
-    [_sender startMergeAnimation];
 }
 -(void)saveNSUserDefaults
 {

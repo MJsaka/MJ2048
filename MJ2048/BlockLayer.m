@@ -13,26 +13,15 @@
 @synthesize blockAttr;
 @synthesize data;
 @synthesize power;
-@synthesize posI;
-@synthesize posJ;
-//
-//- (void)drawStringAtCenter:(NSString*)string withAttr:(NSDictionary*)attr inArea:(NSRect)rect{
-//    NSSize size = [string sizeWithAttributes:attr];
-//    NSPoint point;
-//    point.x = rect.origin.x + (rect.size.width - size.width)/2;
-//    point.y = rect.origin.y + (rect.size.height - size.height)/2;
-//    [string drawAtPoint:point withAttributes:attr];
-//}
-
 - (void)drawInContext:(CGContextRef)ctx {
-    CGPoint position = CGPointMake(306 + posI * 138, 94 + posJ * 138);
-    [self setPosition:position];
+    
     CGRect bounds = [self bounds];
     NSColor *color = [blockAttr colorOfPower:power];
     CGContextSetRGBFillColor(ctx, color.redComponent, color.greenComponent, color.blueComponent, color.alphaComponent);
     CGContextFillRect(ctx,bounds);
     //Draw Number;
     if (data != 0) {
+        [self setOpacity:1.0];
         
         CFStringRef string = CFStringCreateWithFormat ( kCFAllocatorDefault, nil, CFSTR("%ld") , (long)data );
         CTFontRef font = CTFontCreateWithName ( CFSTR("SimHei"), 50, NULL);
@@ -55,6 +44,8 @@
         CGContextSetTextPosition(ctx, point.x , point.y);
         CTLineDraw(line, ctx);
         CFRelease(line);
+    }else{
+        [self setOpacity:0];
     }
     
 }
@@ -62,4 +53,5 @@
 - (BOOL)isOpaque{
     return YES;
 }
+
 @end

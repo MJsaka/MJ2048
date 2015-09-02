@@ -12,8 +12,6 @@
 @interface BlockLayer : CALayer
 
 @property (strong,nonatomic) BlockAttribute *blockAttr;
-@property (assign,nonatomic) NSInteger posI;
-@property (assign,nonatomic) NSInteger posJ;
 @property (assign,nonatomic) NSInteger data;
 @property (assign,nonatomic) NSInteger power;
 
