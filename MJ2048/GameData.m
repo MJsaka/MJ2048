@@ -192,14 +192,14 @@
                 t = [t nodeOnDir:redir];
             }//找到下一个不为0的格子
             if (t != nil && n.data == t.data) {
-                n.data *= 2;
-                n.power += 1;
-                t.data = 0;
-                t.power = 0;
-                _score += n.data;
+                t.data *= 2;
+                t.power += 1;
+                n.data = 0;
+                n.power = 0;
+                _score += t.data;
                 _numTotal -= 1;
                 _isMoved = true;
-                [sender addMergeAnimationForI:n.posi forJ:n.posj];
+                [sender addMergeAnimationForI:t.posi forJ:t.posj];
                 [sender blockRefreshForI:t.posi forJ:t.posj];
                 [sender blockRefreshForI:n.posi forJ:n.posj];
                 n = [t nodeOnDir:redir];

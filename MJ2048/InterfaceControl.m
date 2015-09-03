@@ -49,6 +49,7 @@ typedef struct move{
             block[i][j].data = [gameData dataAtRow:i col:j];
             block[i][j].power = [gameData powerAtRow:i col:j];
             [block[i][j] setNeedsDisplay];
+            [[gameView layer] addSublayer:block[i][j]];
             [block[i][j] setHidden:NO];
         }
     }
@@ -56,6 +57,7 @@ typedef struct move{
 
 - (void)keyboardControl:(dirEnumType)dir{
     if([gameData move:dir sender:self]){
+        [self startMoveAnimation];
         gameView.currentScore = [gameData currentScore];
         if ([gameData isDeath]) {
             gameView.highScore = [gameData highScore];
@@ -66,12 +68,11 @@ typedef struct move{
             //隐藏Block
             for (int i = 0; i < 4; ++i) {
                 for (int j = 0; j < 4; ++j) {
-                    [block[i][j] setOpacity:0];
+                    [block[i][j] removeFromSuperlayer];
                 }
             }
         }
         [gameView setNeedsDisplay:YES];
-        [self startMoveAnimation];
     }
 }
 
@@ -98,39 +99,6 @@ typedef struct move{
         [self startMergeAnimation];
     }
     
-}
-- (void)adjustBlock{
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            moveType *c = moveTable[i][j];
-            if (c->toI == -1 && c->fromI != -1) {
-                //找到没有出，只有进的block
-                //f指向当前block的进入block
-                //c指向当前block
-                moveType *f;
-                do{
-                    f = moveTable[c->fromI][c->fromJ];
-                    CGPoint fromPoint = CGPointMake(306 + f->i * 138, 94 + f->j * 138);
-                    
-                    [CATransaction begin];
-                    [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
-                    [block[c->i][c->j] setPosition:fromPoint];
-                    [CATransaction commit];
-                    
-                    BlockLayer * bl = block[c->i][c->j];
-                    block[c->i][c->j] = block[f->i][f->j];
-                    block[f->i][f->j] = bl;
-                    
-                    
-                    c->fromI = -1;
-                    c->fromJ = -1;
-                    f->toI = -1;
-                    f->toJ = -1;
-                    c = f;
-                }while (c->fromI != -1);
-            }
-        }
-    }
 }
 
 - (void)startMergeAnimation{
@@ -163,7 +131,6 @@ typedef struct move{
             }
         }
     }
-    
 }
 
 - (void)blockRefreshForI:(NSInteger)forI forJ:(NSInteger)forJ{
@@ -187,6 +154,40 @@ typedef struct move{
 - (void)addGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
     generateBlock[forI][forJ] = true;
 }
+
+- (void)adjustBlock{
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            moveType *c = moveTable[i][j];
+            if (c->toI == -1 && c->fromI != -1) {
+                //找到没有出，只有进的block
+                //f指向当前block的进入block，c指向当前block
+                moveType *f;
+                do{
+                    f = moveTable[c->fromI][c->fromJ];
+                    CGPoint fromPoint = CGPointMake(306 + f->i * 138, 94 + f->j * 138);
+                    
+                    [CATransaction begin];
+                    [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
+                    [block[c->i][c->j] setPosition:fromPoint];
+                    [CATransaction commit];
+                    
+                    BlockLayer * bl = block[c->i][c->j];
+                    block[c->i][c->j] = block[f->i][f->j];
+                    block[f->i][f->j] = bl;
+                    
+                    c->fromI = -1;
+                    c->fromJ = -1;
+                    f->toI = -1;
+                    f->toJ = -1;
+                    c = f;
+                }while (c->fromI != -1);
+            }
+        }
+    }
+}
+
+
 - (void)awakeFromNib{
 
     gameView.currentScore = [gameData currentScore];
