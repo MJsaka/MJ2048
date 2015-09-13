@@ -198,7 +198,6 @@
                 n.power = 0;
                 _score += t.data;
                 _numTotal -= 1;
-                _isMoved = true;
                 [sender addMergeAnimationForI:t.posi forJ:t.posj];
                 [sender blockRefreshForI:t.posi forJ:t.posj];
                 [sender blockRefreshForI:n.posi forJ:n.posj];
@@ -233,7 +232,6 @@
                 n = [n nodeOnDir:redir];
                 t = [t nodeOnDir:redir];
                 _isMoved = true;
-                
             }
         }while (n != nil && t != nil);
     }

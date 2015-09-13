@@ -77,7 +77,6 @@ typedef struct move{
 }
 
 - (void)startMoveAnimation{
-    Boolean hasMove = false;
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             NSInteger toI = moveTable[i][j]->toI;
@@ -88,17 +87,11 @@ typedef struct move{
                 [CATransaction setValue:[NSNumber numberWithFloat:0.3f] forKey: kCATransactionAnimationDuration];
                 [block[i][j] setPosition:toPoint];
                 [CATransaction commit];
-                hasMove = true;
             }
         }
     }
-    if (hasMove) {
-        [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startMergeAnimation) userInfo:nil repeats:NO];
-        [self adjustBlock];
-    } else {
-        [self startMergeAnimation];
-    }
-    
+    [self adjustBlock];
+    [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startMergeAnimation) userInfo:nil repeats:NO];
 }
 
 - (void)startMergeAnimation{
@@ -110,9 +103,10 @@ typedef struct move{
                 mergeAnimation.autoreverses = NO;
                 mergeAnimation.repeatCount = 0;
                 mergeAnimation.removedOnCompletion = NO;
+                mergeAnimation.timingFunction =[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
                 mergeAnimation.fillMode = kCAFillModeBackwards;
                 mergeAnimation.fromValue = [NSNumber numberWithFloat:1.0];
-                mergeAnimation.toValue = [NSNumber numberWithFloat:1.05];
+                mergeAnimation.toValue = [NSNumber numberWithFloat:1.15];
                 [block[i][j] addAnimation:mergeAnimation forKey:@"transform"];
                 mergeBlock[i][j] = false;
             }
@@ -123,8 +117,9 @@ typedef struct move{
                 generateAnimation.autoreverses = NO;
                 generateAnimation.repeatCount = 0;
                 generateAnimation.removedOnCompletion = NO;
+                generateAnimation.timingFunction =[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
                 generateAnimation.fillMode = kCAFillModeBackwards;
-                generateAnimation.fromValue = [NSNumber numberWithFloat:0.4];
+                generateAnimation.fromValue = [NSNumber numberWithFloat:0];
                 generateAnimation.toValue = [NSNumber numberWithFloat:1.0];
                 [block[i][j] addAnimation:generateAnimation forKey:@"transform"];
                 generateBlock[i][j] = false;
@@ -146,6 +141,10 @@ typedef struct move{
     if (mergeBlock[fromI][fromJ]) {
         mergeBlock[toI][toJ] = true;
         mergeBlock[fromI][fromJ] = false;
+    }
+    if (generateBlock[fromI][fromJ]) {
+        generateBlock[toI][toJ] = true;
+        generateBlock[fromI][fromJ] = false;
     }
 }
 - (void)addMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
