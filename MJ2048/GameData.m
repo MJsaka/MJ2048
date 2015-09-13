@@ -7,17 +7,19 @@
 //
 
 #import "GameData.h"
+#import "InterfaceControl.h"
+
 @implementation Node : NSObject
 
 @synthesize data;
 @synthesize power;
+@synthesize posi;
+@synthesize posj;
 
 - (id)init{
     if (self = [super init]) {
         for (int i = 0; i < 4; ++i) {
             nodeOnDir[i] = nil;
-            data = 0;
-            power = 0;
         }
     }
     return self;
@@ -60,6 +62,8 @@
                 inner[i][j] = [[Node alloc]init];
                 inner[i][j].data = pow(2, 4*i+j);
                 inner[i][j].power = 4*i+j;
+                inner[i][j].posi = i;
+                inner[i][j].posj = j;
             }
         }//创建inner节点
         for (int i = 0; i < 4; ++i) {//横向
@@ -188,13 +192,15 @@
                 t = [t nodeOnDir:redir];
             }//找到下一个不为0的格子
             if (t != nil && n.data == t.data) {
-                n.data *= 2;
-                n.power += 1;
-                t.data = 0;
-                t.power = 0;
-                _score += n.data;
+                t.data *= 2;
+                t.power += 1;
+                n.data = 0;
+                n.power = 0;
+                _score += t.data;
                 _numTotal -= 1;
-                _isMoved = true;
+                [sender addMergeAnimationForI:t.posi forJ:t.posj];
+                [sender blockRefreshForI:t.posi forJ:t.posj];
+                [sender blockRefreshForI:n.posi forJ:n.posj];
                 n = [t nodeOnDir:redir];
                 if (n != nil) {
                     t = [n nodeOnDir:redir];
@@ -221,6 +227,7 @@
                 n.power = t.power;
                 t.data = 0;
                 t.power = 0;
+                [sender addMoveAnimationFromI:t.posi fromJ:t.posj toI:n.posi toJ:n.posj];
                 //n下一个必为0，n到t之间皆为0，t直接指向t的下一个
                 n = [n nodeOnDir:redir];
                 t = [t nodeOnDir:redir];
@@ -243,6 +250,7 @@
         n.data = k*2;
         n.power = k;
         _numTotal += 1;
+        [sender addGenerateAnimationForI:n.posi forJ:n.posj];
         return true;
     }else{
         return false;
@@ -266,7 +274,7 @@
                 [userDefaults setInteger:inner[i][j].power forKey:powerString];
             }
         }
-
+        
     }else {
         [userDefaults setInteger:0 forKey:@"dataSaved"];
     }
@@ -292,6 +300,6 @@
         }
     }
     
-
+    
 }
 @end
