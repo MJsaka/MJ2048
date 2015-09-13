@@ -9,7 +9,9 @@
 #import "GameData.h"
 #import "InterfaceControl.h"
 
-@implementation Node : NSObject
+@implementation Node{
+    Node *nodeOnDir[4];//上下左右格子的指针
+}
 
 @synthesize data;
 @synthesize power;

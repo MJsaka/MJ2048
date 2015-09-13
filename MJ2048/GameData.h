@@ -16,9 +16,9 @@ typedef enum moveDir{
 } dirEnumType;
 
 @interface Node : NSObject
-{
-    Node *nodeOnDir[4];//上下左右格子的指针
-}
+
+@property (assign,nonatomic) NSInteger posi;
+@property (assign,nonatomic) NSInteger posj;
 @property (assign,nonatomic) NSInteger data;//格子内的数字
 @property (assign,nonatomic) NSInteger power;//直接记录幂次，以简化输出对应颜色的计算。
 
