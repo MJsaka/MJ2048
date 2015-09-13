@@ -197,6 +197,9 @@ typedef struct move{
     gameView.currentScore = [gameData currentScore];
     gameView.highScore = [gameData highScore];
     gameView.topPower = [gameData topPower];
+    gameView.isDeath = [gameData isDeath];
+    [gameView setWantsLayer:YES];
+
     BlockAttribute *attr = [[BlockAttribute alloc]init];
     
     for (int i = 0; i < 4; ++i) {
