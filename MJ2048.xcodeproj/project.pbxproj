@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		C5732D8A1B91FE13004A10FC /* BlockLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* BlockLayer.m */; };
 		C5732D8D1B9461E2004A10FC /* BlockAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D8C1B9461E2004A10FC /* BlockAttribute.m */; };
+		C58517351BA81A6800361CDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517341BA81A6800361CDD /* main.m */; };
+		C58517381BA81A6800361CDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517371BA81A6800361CDD /* AppDelegate.m */; };
+		C585173B1BA81A6800361CDD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C585173A1BA81A6800361CDD /* ViewController.m */; };
+		C585173E1BA81A6800361CDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C585173C1BA81A6800361CDD /* Main.storyboard */; };
+		C58517401BA81A6800361CDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C585173F1BA81A6800361CDD /* Images.xcassets */; };
+		C58517431BA81A6800361CDD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C58517411BA81A6800361CDD /* LaunchScreen.xib */; };
+		C585174F1BA81A6800361CDD /* MJ2048_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */; };
+		C58517571BA81A7900361CDD /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
+		C585175B1BA822A000361CDD /* BlockAttribute-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175A1BA822A000361CDD /* BlockAttribute-iOS.m */; };
 		C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */; };
 		C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEBA1B8DAD5A0068268F /* main.m */; };
 		C5BEBEBD1B8DAD5A0068268F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */; };
@@ -18,11 +27,36 @@
 		C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDE1B8E94650068268F /* InterfaceControl.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C58517491BA81A6800361CDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C5BEBEAA1B8DAD5A0068268F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C585172F1BA81A6800361CDD;
+			remoteInfo = "MJ2048-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		C5732D881B91FE13004A10FC /* BlockLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockLayer.h; sourceTree = "<group>"; };
 		C5732D891B91FE13004A10FC /* BlockLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockLayer.m; sourceTree = "<group>"; };
 		C5732D8B1B9461E2004A10FC /* BlockAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAttribute.h; sourceTree = "<group>"; };
 		C5732D8C1B9461E2004A10FC /* BlockAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAttribute.m; sourceTree = "<group>"; };
+		C58517301BA81A6800361CDD /* MJ2048-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MJ2048-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C58517331BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C58517341BA81A6800361CDD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C58517361BA81A6800361CDD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C58517371BA81A6800361CDD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C58517391BA81A6800361CDD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C585173A1BA81A6800361CDD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C585173D1BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C585173F1BA81A6800361CDD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C58517421BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		C58517481BA81A6800361CDD /* MJ2048-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MJ2048-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C585174D1BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJ2048_iOSTests.m; sourceTree = "<group>"; };
+		C58517591BA822A000361CDD /* BlockAttribute-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockAttribute-iOS.h"; sourceTree = "<group>"; };
+		C585175A1BA822A000361CDD /* BlockAttribute-iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BlockAttribute-iOS.m"; sourceTree = "<group>"; };
 		C5BEBEB21B8DAD5A0068268F /* MJ2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJ2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BEBEB61B8DAD5A0068268F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5BEBEB71B8DAD5A0068268F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +73,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C585172D1BA81A6800361CDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C58517451BA81A6800361CDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5BEBEAF1B8DAD5A0068268F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,10 +97,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C58517311BA81A6800361CDD /* MJ2048-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C58517361BA81A6800361CDD /* AppDelegate.h */,
+				C58517371BA81A6800361CDD /* AppDelegate.m */,
+				C58517591BA822A000361CDD /* BlockAttribute-iOS.h */,
+				C585175A1BA822A000361CDD /* BlockAttribute-iOS.m */,
+				C58517391BA81A6800361CDD /* ViewController.h */,
+				C585173A1BA81A6800361CDD /* ViewController.m */,
+				C585173C1BA81A6800361CDD /* Main.storyboard */,
+				C585173F1BA81A6800361CDD /* Images.xcassets */,
+				C58517411BA81A6800361CDD /* LaunchScreen.xib */,
+				C58517321BA81A6800361CDD /* Supporting Files */,
+			);
+			path = "MJ2048-iOS";
+			sourceTree = "<group>";
+		};
+		C58517321BA81A6800361CDD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C58517331BA81A6800361CDD /* Info.plist */,
+				C58517341BA81A6800361CDD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C585174B1BA81A6800361CDD /* MJ2048-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */,
+				C585174C1BA81A6800361CDD /* Supporting Files */,
+			);
+			path = "MJ2048-iOSTests";
+			sourceTree = "<group>";
+		};
+		C585174C1BA81A6800361CDD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C585174D1BA81A6800361CDD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		C5BEBEA91B8DAD5A0068268F = {
 			isa = PBXGroup;
 			children = (
 				C5BEBEB41B8DAD5A0068268F /* MJ2048 */,
+				C58517311BA81A6800361CDD /* MJ2048-iOS */,
+				C585174B1BA81A6800361CDD /* MJ2048-iOSTests */,
 				C5BEBEB31B8DAD5A0068268F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				C5BEBEB21B8DAD5A0068268F /* MJ2048.app */,
+				C58517301BA81A6800361CDD /* MJ2048-iOS.app */,
+				C58517481BA81A6800361CDD /* MJ2048-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,6 +194,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C585172F1BA81A6800361CDD /* MJ2048-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C58517541BA81A6800361CDD /* Build configuration list for PBXNativeTarget "MJ2048-iOS" */;
+			buildPhases = (
+				C585172C1BA81A6800361CDD /* Sources */,
+				C585172D1BA81A6800361CDD /* Frameworks */,
+				C585172E1BA81A6800361CDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MJ2048-iOS";
+			productName = "MJ2048-iOS";
+			productReference = C58517301BA81A6800361CDD /* MJ2048-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C58517471BA81A6800361CDD /* MJ2048-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C58517551BA81A6800361CDD /* Build configuration list for PBXNativeTarget "MJ2048-iOSTests" */;
+			buildPhases = (
+				C58517441BA81A6800361CDD /* Sources */,
+				C58517451BA81A6800361CDD /* Frameworks */,
+				C58517461BA81A6800361CDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C585174A1BA81A6800361CDD /* PBXTargetDependency */,
+			);
+			name = "MJ2048-iOSTests";
+			productName = "MJ2048-iOSTests";
+			productReference = C58517481BA81A6800361CDD /* MJ2048-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		C5BEBEB11B8DAD5A0068268F /* MJ2048 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C5BEBECF1B8DAD5A0068268F /* Build configuration list for PBXNativeTarget "MJ2048" */;
@@ -125,6 +255,13 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = MJsaka;
 				TargetAttributes = {
+					C585172F1BA81A6800361CDD = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					C58517471BA81A6800361CDD = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = C585172F1BA81A6800361CDD;
+					};
 					C5BEBEB11B8DAD5A0068268F = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -144,11 +281,30 @@
 			projectRoot = "";
 			targets = (
 				C5BEBEB11B8DAD5A0068268F /* MJ2048 */,
+				C585172F1BA81A6800361CDD /* MJ2048-iOS */,
+				C58517471BA81A6800361CDD /* MJ2048-iOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C585172E1BA81A6800361CDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C585173E1BA81A6800361CDD /* Main.storyboard in Resources */,
+				C58517431BA81A6800361CDD /* LaunchScreen.xib in Resources */,
+				C58517401BA81A6800361CDD /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C58517461BA81A6800361CDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5BEBEB01B8DAD5A0068268F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,6 +317,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C585172C1BA81A6800361CDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C585173B1BA81A6800361CDD /* ViewController.m in Sources */,
+				C58517571BA81A7900361CDD /* GameData.m in Sources */,
+				C58517381BA81A6800361CDD /* AppDelegate.m in Sources */,
+				C58517351BA81A6800361CDD /* main.m in Sources */,
+				C585175B1BA822A000361CDD /* BlockAttribute-iOS.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C58517441BA81A6800361CDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C585174F1BA81A6800361CDD /* MJ2048_iOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C5BEBEAE1B8DAD5A0068268F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,7 +353,31 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C585174A1BA81A6800361CDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C585172F1BA81A6800361CDD /* MJ2048-iOS */;
+			targetProxy = C58517491BA81A6800361CDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		C585173C1BA81A6800361CDD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C585173D1BA81A6800361CDD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C58517411BA81A6800361CDD /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C58517421BA81A6800361CDD /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		C5BEBEBE1B8DAD5A0068268F /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -189,6 +389,78 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C58517501BA81A6800361CDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C58517511BA81A6800361CDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C58517521BA81A6800361CDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MJ2048-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MJ2048-iOS.app/MJ2048-iOS";
+			};
+			name = Debug;
+		};
+		C58517531BA81A6800361CDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MJ2048-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MJ2048-iOS.app/MJ2048-iOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		C5BEBECD1B8DAD5A0068268F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -293,6 +565,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C58517541BA81A6800361CDD /* Build configuration list for PBXNativeTarget "MJ2048-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C58517501BA81A6800361CDD /* Debug */,
+				C58517511BA81A6800361CDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C58517551BA81A6800361CDD /* Build configuration list for PBXNativeTarget "MJ2048-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C58517521BA81A6800361CDD /* Debug */,
+				C58517531BA81A6800361CDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		C5BEBEAD1B8DAD5A0068268F /* Build configuration list for PBXProject "MJ2048" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

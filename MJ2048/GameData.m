@@ -7,7 +7,6 @@
 //
 
 #import "GameData.h"
-#import "InterfaceControl.h"
 
 @implementation Node{
     Node *nodeOnDir[4];//上下左右格子的指针
@@ -37,10 +36,15 @@
 @end
 
 
-
 @implementation GameData{
     Node *sider[4][4];
     Node *inner[4][4];
+//    moveTableType *moveTable[4][4];
+    moveTableArray moveTable;
+    boolTable refreshTable;
+    boolTable mergeTable;
+    boolTable generateTable;
+    animationStatusType animationStatus;
     
     Boolean _isPlaying;
     
@@ -59,6 +63,11 @@
         _highScore = 0;
         _topPower = 0;
         
+        animationStatus.aRefreshTable = &refreshTable;
+        animationStatus.aMergeTable = &mergeTable;
+        animationStatus.aGenerateTable = &generateTable;
+        animationStatus.aMoveTable = &moveTable;
+        
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 inner[i][j] = [[Node alloc]init];
@@ -66,6 +75,16 @@
                 inner[i][j].power = 4*i+j;
                 inner[i][j].posi = i;
                 inner[i][j].posj = j;
+                
+                moveTable[i][j].fromI = -1;
+                moveTable[i][j].fromJ = -1;
+                moveTable[i][j].toI = -1;
+                moveTable[i][j].toJ = -1;
+                moveTable[i][j].i = i;
+                moveTable[i][j].j = j;
+                mergeTable[i][j] = false;
+                generateTable[i][j] = false;
+                refreshTable[i][j] = false;
             }
         }//创建inner节点
         for (int i = 0; i < 4; ++i) {//横向
@@ -117,6 +136,14 @@
         for (int j = 0; j < 4; ++j) {
             inner[i][j].data = 0;
             inner[i][j].power = 0;
+            
+            moveTable[i][j].fromI = -1;
+            moveTable[i][j].fromJ = -1;
+            moveTable[i][j].toI = -1;
+            moveTable[i][j].toJ = -1;
+            mergeTable[i][j] = false;
+            generateTable[i][j] = false;
+            refreshTable[i][j] = false;
         }
     }
     NSInteger i = random() % 4;
@@ -174,7 +201,7 @@
     }
     return b;
 }
-- (Boolean)move:(dirEnumType)dir sender:(id)sender
+- (Boolean)merge:(dirEnumType)dir
 {
     if (!_isPlaying) {
         return false;
@@ -200,10 +227,12 @@
                 n.power = 0;
                 _score += t.data;
                 _numTotal -= 1;
-                [sender addMergeAnimationForI:t.posi forJ:t.posj];
-                [sender blockRefreshForI:t.posi forJ:t.posj];
-                [sender blockRefreshForI:n.posi forJ:n.posj];
+//                [self addMergeAnimationForI:t.posi forJ:t.posj];
+                mergeTable[t.posi][t.posj] = true;
+                [self setNeedRefreshForI:t.posi forJ:t.posj];
+                [self setNeedRefreshForI:n.posi forJ:n.posj];
                 n = [t nodeOnDir:redir];
+                _isMoved = true;
                 if (n != nil) {
                     t = [n nodeOnDir:redir];
                 }
@@ -213,6 +242,11 @@
             }
         }while (n != nil && t != nil);
     }//再做移位
+    return _isMoved;
+}
+- (Boolean)move:(dirEnumType)dir{
+    Boolean _isMoved = false;
+    int redir = 3 - dir;
     for (int i = 0; i < 4; ++i) {
         Node *n = sider[dir][i];
         Node *t = [n nodeOnDir:redir];
@@ -229,7 +263,7 @@
                 n.power = t.power;
                 t.data = 0;
                 t.power = 0;
-                [sender addMoveAnimationFromI:t.posi fromJ:t.posj toI:n.posi toJ:n.posj];
+                [self addMoveAnimationFromI:t.posi fromJ:t.posj toI:n.posi toJ:n.posj];
                 //n下一个必为0，n到t之间皆为0，t直接指向t的下一个
                 n = [n nodeOnDir:redir];
                 t = [t nodeOnDir:redir];
@@ -237,27 +271,79 @@
             }
         }while (n != nil && t != nil);
     }
-    if (_isMoved) {//有移动，则从移动方向的后方新添一个格子。
-        Node *n;
-        do {//找到移动方向最后的一个为0的节点方可添加
-            NSInteger i = random() % 4;
-            n = sider[redir][i];
-        }while (n.data != 0);
-        NSInteger j = random() % 4;
-        while ([n nodeOnDir:dir].data == 0 && j != 0){
-            n = [n nodeOnDir:dir];
-            --j;
-        }
-        NSInteger k = random() % 2 + 1;
-        n.data = k*2;
-        n.power = k;
-        _numTotal += 1;
-        [sender addGenerateAnimationForI:n.posi forJ:n.posj];
-        return true;
-    }else{
-        return false;
+    return _isMoved;
+}
+- (void)generate:(dirEnumType)dir{
+    int redir = 3 - dir;
+    //有移动，则从移动方向的后方新添一个格子。
+    Node *n;
+    do {//找到移动方向最后的一个为0的节点方可添加
+        NSInteger i = random() % 4;
+        n = sider[redir][i];
+    }while (n.data != 0);
+    NSInteger j = random() % 4;
+    while ([n nodeOnDir:dir].data == 0 && j != 0){
+        n = [n nodeOnDir:dir];
+        --j;
+    }
+    NSInteger k = random() % 2 + 1;
+    n.data = k*2;
+    n.power = k;
+    _numTotal += 1;
+//    [self addGenerateAnimationForI:n.posi forJ:n.posj];
+    generateTable[n.posi][n.posj] = true;
+}
+
+- (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
+    moveTable[fromI][fromJ].toI = toI;
+    moveTable[fromI][fromJ].toJ = toJ;
+    moveTable[toI][toJ].fromI = fromI;
+    moveTable[toI][toJ].fromJ = fromJ;
+    if (mergeTable[fromI][fromJ]) {
+        mergeTable[toI][toJ] = true;
+        mergeTable[fromI][fromJ] = false;
+    }
+    if (generateTable[fromI][fromJ]) {
+        generateTable[toI][toJ] = true;
+        generateTable[fromI][fromJ] = false;
     }
 }
+- (animationStatusType*)animationStatus{
+    return &animationStatus;
+}
+
+//- (NSInteger)ToIMovedFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ{
+//    return moveTable[fromI][fromJ].toI;
+//}
+//- (NSInteger)ToJMovedFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ{
+//    return moveTable[fromI][fromJ].toJ;
+//}
+
+//- (void)addMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
+//    mergeTable[forI][forJ] = true;
+//}
+//- (Boolean)hasMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
+//    return mergeTable[forI][forJ];
+//}
+//- (void)resetMergeStatusForI:(NSInteger)forI forJ:(NSInteger)forJ{
+//    mergeTable[forI][forJ] = false;
+//}
+
+//- (void)addGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
+//    generateTable[forI][forJ] = true;
+//}
+//- (Boolean)hasGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
+//    return generateTable[forI][forJ];
+//}
+//-(void)resetGenerateStatusForI:(NSInteger)forI forJ:(NSInteger)forJ{
+//    generateTable[forI][forJ] = false;
+//}
+
+
+- (void)setNeedRefreshForI:(NSInteger)forI forJ:(NSInteger)forJ{
+    refreshTable[forI][forJ] = true;
+}
+
 -(void)saveNSUserDefaults
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

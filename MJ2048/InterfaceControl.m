@@ -11,20 +11,12 @@
 #import "BlockAttribute.h"
 #import <QuartzCore/QuartzCore.h>
 
-typedef struct move{
-    NSInteger fromI;
-    NSInteger fromJ;
-    NSInteger toI;
-    NSInteger toJ;
-    NSInteger i;
-    NSInteger j;
-}moveType;
-
 @implementation InterfaceControl{
     BlockLayer *block[4][4];
-    moveType *moveTable[4][4];
-    Boolean mergeBlock[4][4];
-    Boolean generateBlock[4][4];
+    moveTableArray *moveTable;
+    boolTable *refreshTable;
+    boolTable *mergeTable;
+    boolTable *generateTable;
 }
 
 
@@ -37,15 +29,6 @@ typedef struct move{
     [gameView setNeedsDisplay:YES];
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            moveTable[i][j]->fromI = -1;
-            moveTable[i][j]->fromJ = -1;
-            moveTable[i][j]->toI = -1;
-            moveTable[i][j]->toJ = -1;
-            moveTable[i][j]->i = i;
-            moveTable[i][j]->j = j;
-            mergeBlock[i][j] = false;
-            generateBlock[i][j] = false;
-            
             block[i][j].data = [gameData dataAtRow:i col:j];
             block[i][j].power = [gameData powerAtRow:i col:j];
             [block[i][j] setNeedsDisplay];
@@ -61,8 +44,21 @@ typedef struct move{
 }
 
 - (void)keyboardControl:(dirEnumType)dir{
-    if([gameData move:dir sender:self]){
+    if([gameData merge:dir]){
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                if ((*refreshTable)[i][j]) {
+                    block[i][j].data = [gameData dataAtRow:i col:j];
+                    block[i][j].power = [gameData powerAtRow:i col:j];
+                    (*refreshTable)[i][j] = false;
+                    [block[i][j] setNeedsDisplay];
+                }
+            }
+        }
+    }
+    if([gameData move:dir]){
         [self startMoveAnimation];
+        [gameData generate:dir];
         gameView.currentScore = [gameData currentScore];
         if ([gameData isDeath]) {
             gameView.isDeath = [gameData isDeath];
@@ -84,8 +80,8 @@ typedef struct move{
 - (void)startMoveAnimation{
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            NSInteger toI = moveTable[i][j]->toI;
-            NSInteger toJ = moveTable[i][j]->toJ;
+            NSInteger toI = (*moveTable)[i][j].toI;
+            NSInteger toJ = (*moveTable)[i][j].toJ;
             if (toI != -1 || toJ != -1) {
                 CGPoint toPoint = CGPointMake(306 + toI * 138, 94 + toJ * 138);
                 [CATransaction begin];
@@ -100,23 +96,27 @@ typedef struct move{
 }
 
 - (void)startMergeAnimation{
+    
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            if (mergeBlock[i][j]) {
+            if ((*mergeTable)[i][j]) {
                 CABasicAnimation *mergeAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-                mergeAnimation.duration = 0.25;
+                mergeAnimation.duration = 0.3;
                 mergeAnimation.autoreverses = NO;
                 mergeAnimation.repeatCount = 0;
                 mergeAnimation.removedOnCompletion = NO;
-                mergeAnimation.timingFunction =[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+                mergeAnimation.timingFunction =[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
                 mergeAnimation.fillMode = kCAFillModeBackwards;
                 mergeAnimation.fromValue = [NSNumber numberWithFloat:1.0];
                 mergeAnimation.toValue = [NSNumber numberWithFloat:1.15];
                 [block[i][j] addAnimation:mergeAnimation forKey:@"transform"];
-                mergeBlock[i][j] = false;
+                (*mergeTable)[i][j] = false;
             }
-            if (generateBlock[i][j]) {
-                [self blockRefreshForI:i forJ:j];
+            if ((*generateTable)[i][j]) {
+                block[i][j].data = [gameData dataAtRow:i col:j];
+                block[i][j].power = [gameData powerAtRow:i col:j];
+                [block[i][j] setNeedsDisplay];
+                
                 CABasicAnimation *generateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
                 generateAnimation.duration = 0.3;
                 generateAnimation.autoreverses = NO;
@@ -127,48 +127,23 @@ typedef struct move{
                 generateAnimation.fromValue = [NSNumber numberWithFloat:0];
                 generateAnimation.toValue = [NSNumber numberWithFloat:1.0];
                 [block[i][j] addAnimation:generateAnimation forKey:@"transform"];
-                generateBlock[i][j] = false;
+                (*generateTable)[i][j] = false;
             }
         }
     }
 }
 
-- (void)blockRefreshForI:(NSInteger)forI forJ:(NSInteger)forJ{
-    block[forI][forJ].data = [gameData dataAtRow:forI col:forJ];
-    block[forI][forJ].power = [gameData powerAtRow:forI col:forJ];
-    [block[forI][forJ] setNeedsDisplay];
-}
-- (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
-    moveTable[fromI][fromJ]->toI = toI;
-    moveTable[fromI][fromJ]->toJ = toJ;
-    moveTable[toI][toJ]->fromI = fromI;
-    moveTable[toI][toJ]->fromJ = fromJ;
-    if (mergeBlock[fromI][fromJ]) {
-        mergeBlock[toI][toJ] = true;
-        mergeBlock[fromI][fromJ] = false;
-    }
-    if (generateBlock[fromI][fromJ]) {
-        generateBlock[toI][toJ] = true;
-        generateBlock[fromI][fromJ] = false;
-    }
-}
-- (void)addMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
-    mergeBlock[forI][forJ] = true;
-}
-- (void)addGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
-    generateBlock[forI][forJ] = true;
-}
 
 - (void)adjustBlock{
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            moveType *c = moveTable[i][j];
+            moveElementType *c = &((*moveTable)[i][j]);
             if (c->toI == -1 && c->fromI != -1) {
                 //找到没有出，只有进的block
                 //f指向当前block的进入block，c指向当前block
-                moveType *f;
+                moveElementType *f;
                 do{
-                    f = moveTable[c->fromI][c->fromJ];
+                    f = &((*moveTable)[c->fromI][c->fromJ]);
                     CGPoint fromPoint = CGPointMake(306 + f->i * 138, 94 + f->j * 138);
                     
                     [CATransaction begin];
@@ -176,7 +151,7 @@ typedef struct move{
                     [block[c->i][c->j] setPosition:fromPoint];
                     [CATransaction commit];
                     
-                    BlockLayer * bl = block[c->i][c->j];
+                    BlockLayer* bl = block[c->i][c->j];
                     block[c->i][c->j] = block[f->i][f->j];
                     block[f->i][f->j] = bl;
                     
@@ -202,6 +177,12 @@ typedef struct move{
 
     BlockAttribute *attr = [[BlockAttribute alloc]init];
     
+    animationStatusType* aST = [gameData animationStatus];
+    moveTable = aST->aMoveTable;
+    refreshTable = aST->aRefreshTable;
+    mergeTable = aST->aMergeTable;
+    generateTable = aST->aGenerateTable;
+    
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             block[i][j] = [BlockLayer layer];
@@ -215,16 +196,6 @@ typedef struct move{
             [block[i][j] setPosition:CGPointMake(306 + i * 138, 94 + j * 138)];
             [block[i][j] setAnchorPoint:CGPointMake(0.5, 0.5)];
             [block[i][j] setNeedsDisplay];
-            
-            moveTable[i][j] = malloc(sizeof(moveType));
-            moveTable[i][j]->fromI = -1;
-            moveTable[i][j]->fromJ = -1;
-            moveTable[i][j]->toI = -1;
-            moveTable[i][j]->toJ = -1;
-            moveTable[i][j]->i = i;
-            moveTable[i][j]->j = j;
-            mergeBlock[i][j] = false;
-            generateBlock[i][j] = false;
         }
     }
 }
