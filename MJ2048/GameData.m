@@ -312,33 +312,6 @@
     return &animationStatus;
 }
 
-//- (NSInteger)ToIMovedFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ{
-//    return moveTable[fromI][fromJ].toI;
-//}
-//- (NSInteger)ToJMovedFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ{
-//    return moveTable[fromI][fromJ].toJ;
-//}
-
-//- (void)addMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
-//    mergeTable[forI][forJ] = true;
-//}
-//- (Boolean)hasMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
-//    return mergeTable[forI][forJ];
-//}
-//- (void)resetMergeStatusForI:(NSInteger)forI forJ:(NSInteger)forJ{
-//    mergeTable[forI][forJ] = false;
-//}
-
-//- (void)addGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
-//    generateTable[forI][forJ] = true;
-//}
-//- (Boolean)hasGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ{
-//    return generateTable[forI][forJ];
-//}
-//-(void)resetGenerateStatusForI:(NSInteger)forI forJ:(NSInteger)forJ{
-//    generateTable[forI][forJ] = false;
-//}
-
 
 - (void)setNeedRefreshForI:(NSInteger)forI forJ:(NSInteger)forJ{
     refreshTable[forI][forJ] = true;

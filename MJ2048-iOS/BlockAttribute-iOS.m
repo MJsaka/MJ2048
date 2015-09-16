@@ -10,7 +10,6 @@
 
 @implementation BlockAttribute {
     UIColor *colorOfPower[21];
-    NSMutableDictionary *attrContent;
 }
 - (id)init{
     if (self = [super init]) {
@@ -39,16 +38,11 @@
         colorOfPower[18] =  [UIColor colorWithRed:0.271 green:0.196 blue:0.396 alpha:1.0];
         colorOfPower[19] =  [UIColor colorWithRed:0.425 green:0.249 blue:0.249 alpha:1.0];
         colorOfPower[20] = [UIColor colorWithRed:0.149 green:0.325 blue:0.137 alpha:1.0];
-        attrContent = [NSMutableDictionary dictionary];
-        [attrContent setObject:[UIFont fontWithName:@"SimHei" size:50] forKey:NSFontAttributeName];
     }
     return self;
 }
 - (UIColor*)colorOfPower:(NSInteger)power{
     return colorOfPower[power];
-}
-- (NSDictionary*)stringAttr{
-    return attrContent;
 }
 
 @end

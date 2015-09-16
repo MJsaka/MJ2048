@@ -54,17 +54,7 @@ typedef struct animationStatus{
 - (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col;
 - (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col;
 - (animationStatusType*)animationStatus;
-//
-//
-//- (Boolean)needRefreshBeforeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ;
-//- (void)resetRefreshStatus;
-//- (NSInteger)ToIMovedFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ;
-//- (NSInteger)ToJMovedFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ;
-//- (Boolean)hasMergeAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ;
-//- (void)resetMergeStatusForI:(NSInteger)forI forJ:(NSInteger)forJ;
-//- (Boolean)hasGenerateAnimationForI:(NSInteger)forI forJ:(NSInteger)forJ;
-//- (void)resetGenerateStatusForI:(NSInteger)forI forJ:(NSInteger)forJ;
-//
+
 
 - (Boolean)merge:(dirEnumType)dir;
 - (Boolean)move:(dirEnumType)dir;
