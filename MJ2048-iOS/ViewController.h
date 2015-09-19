@@ -7,9 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GameData.h"
-#import "GameAreaView.h"
-
 
 @interface ViewController : UIViewController
 

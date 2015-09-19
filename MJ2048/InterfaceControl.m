@@ -8,7 +8,6 @@
 
 #import "InterfaceControl.h"
 #import "BlockLayer.h"
-#import "BlockAttribute.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation InterfaceControl{
@@ -22,11 +21,6 @@
 
 - (IBAction)newGame:(id)sender{
     [gameData newGame];
-    gameView.currentScore = [gameData currentScore];
-    gameView.highScore = [gameData highScore];
-    gameView.topPower = [gameData topPower];
-    gameView.isDeath = [gameData isDeath];
-    [gameView setNeedsDisplay:YES];
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             block[i][j].data = [gameData dataAtRow:i col:j];
@@ -62,8 +56,6 @@
         gameView.currentScore = [gameData currentScore];
         if ([gameData isDeath]) {
             gameView.isDeath = [gameData isDeath];
-            gameView.isNewScore = [gameData isNewScoreRecord];
-            gameView.isNewPower = [gameData isNewPowerRecord];
             gameView.highScore = [gameData highScore];
             gameView.topPower = [gameData topPower];
             //隐藏Block
@@ -172,8 +164,8 @@
     gameView.currentScore = [gameData currentScore];
     gameView.highScore = [gameData highScore];
     gameView.topPower = [gameData topPower];
-    gameView.isDeath = [gameData isDeath];
     [gameView setWantsLayer:YES];
+    [gameView setNeedsDisplay:YES];
 
     BlockAttribute *attr = [[BlockAttribute alloc]init];
     

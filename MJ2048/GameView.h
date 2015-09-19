@@ -14,7 +14,7 @@
 @property (assign,nonatomic) NSInteger highScore;
 @property (assign,nonatomic) NSInteger topPower;
 @property (assign,nonatomic) Boolean isDeath;
-@property (assign,nonatomic) Boolean isNewScore;
-@property (assign,nonatomic) Boolean isNewPower;
+//@property (assign,nonatomic) Boolean isNewScore;
+//@property (assign,nonatomic) Boolean isNewPower;
 
 @end

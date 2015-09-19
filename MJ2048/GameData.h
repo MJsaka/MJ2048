@@ -60,8 +60,6 @@ typedef struct animationStatus{
 - (Boolean)move:(dirEnumType)dir;
 - (void)generate:(dirEnumType)dir;
 - (Boolean)isDeath;
-- (Boolean)isNewScoreRecord;
-- (Boolean)isNewPowerRecord;
 
 - (void)newGame;
 - (void)saveNSUserDefaults;

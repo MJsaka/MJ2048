@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C5732D8A1B91FE13004A10FC /* BlockLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* BlockLayer.m */; };
-		C5732D8D1B9461E2004A10FC /* BlockAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D8C1B9461E2004A10FC /* BlockAttribute.m */; };
 		C58517351BA81A6800361CDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517341BA81A6800361CDD /* main.m */; };
 		C58517381BA81A6800361CDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517371BA81A6800361CDD /* AppDelegate.m */; };
 		C585173B1BA81A6800361CDD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C585173A1BA81A6800361CDD /* ViewController.m */; };
@@ -17,9 +16,8 @@
 		C58517431BA81A6800361CDD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C58517411BA81A6800361CDD /* LaunchScreen.xib */; };
 		C585174F1BA81A6800361CDD /* MJ2048_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */; };
 		C58517571BA81A7900361CDD /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
-		C585175B1BA822A000361CDD /* BlockAttribute-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175A1BA822A000361CDD /* BlockAttribute-iOS.m */; };
 		C585175E1BA85ACA00361CDD /* BlockLayer-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175D1BA85ACA00361CDD /* BlockLayer-iOS.m */; };
-		C58517611BA86CCD00361CDD /* GameAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517601BA86CCD00361CDD /* GameAreaView.m */; };
+		C58517611BA86CCD00361CDD /* BlockAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517601BA86CCD00361CDD /* BlockAreaView.m */; };
 		C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */; };
 		C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEBA1B8DAD5A0068268F /* main.m */; };
 		C5BEBEBD1B8DAD5A0068268F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */; };
@@ -42,8 +40,6 @@
 /* Begin PBXFileReference section */
 		C5732D881B91FE13004A10FC /* BlockLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockLayer.h; sourceTree = "<group>"; };
 		C5732D891B91FE13004A10FC /* BlockLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockLayer.m; sourceTree = "<group>"; };
-		C5732D8B1B9461E2004A10FC /* BlockAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAttribute.h; sourceTree = "<group>"; };
-		C5732D8C1B9461E2004A10FC /* BlockAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAttribute.m; sourceTree = "<group>"; };
 		C58517301BA81A6800361CDD /* MJ2048-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MJ2048-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58517331BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C58517341BA81A6800361CDD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -57,12 +53,10 @@
 		C58517481BA81A6800361CDD /* MJ2048-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MJ2048-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C585174D1BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJ2048_iOSTests.m; sourceTree = "<group>"; };
-		C58517591BA822A000361CDD /* BlockAttribute-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockAttribute-iOS.h"; sourceTree = "<group>"; };
-		C585175A1BA822A000361CDD /* BlockAttribute-iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BlockAttribute-iOS.m"; sourceTree = "<group>"; };
 		C585175C1BA85ACA00361CDD /* BlockLayer-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockLayer-iOS.h"; sourceTree = "<group>"; };
 		C585175D1BA85ACA00361CDD /* BlockLayer-iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BlockLayer-iOS.m"; sourceTree = "<group>"; };
-		C585175F1BA86CCD00361CDD /* GameAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameAreaView.h; sourceTree = "<group>"; };
-		C58517601BA86CCD00361CDD /* GameAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameAreaView.m; sourceTree = "<group>"; };
+		C585175F1BA86CCD00361CDD /* BlockAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAreaView.h; sourceTree = "<group>"; };
+		C58517601BA86CCD00361CDD /* BlockAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAreaView.m; sourceTree = "<group>"; };
 		C5BEBEB21B8DAD5A0068268F /* MJ2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJ2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BEBEB61B8DAD5A0068268F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5BEBEB71B8DAD5A0068268F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,12 +104,10 @@
 				C58517371BA81A6800361CDD /* AppDelegate.m */,
 				C58517391BA81A6800361CDD /* ViewController.h */,
 				C585173A1BA81A6800361CDD /* ViewController.m */,
-				C58517591BA822A000361CDD /* BlockAttribute-iOS.h */,
-				C585175A1BA822A000361CDD /* BlockAttribute-iOS.m */,
 				C585175C1BA85ACA00361CDD /* BlockLayer-iOS.h */,
 				C585175D1BA85ACA00361CDD /* BlockLayer-iOS.m */,
-				C585175F1BA86CCD00361CDD /* GameAreaView.h */,
-				C58517601BA86CCD00361CDD /* GameAreaView.m */,
+				C585175F1BA86CCD00361CDD /* BlockAreaView.h */,
+				C58517601BA86CCD00361CDD /* BlockAreaView.m */,
 				C585173C1BA81A6800361CDD /* Main.storyboard */,
 				C585173F1BA81A6800361CDD /* Images.xcassets */,
 				C58517411BA81A6800361CDD /* LaunchScreen.xib */,
@@ -181,8 +173,6 @@
 				C5BEBEDC1B8DADB40068268F /* GameView.m */,
 				C5732D881B91FE13004A10FC /* BlockLayer.h */,
 				C5732D891B91FE13004A10FC /* BlockLayer.m */,
-				C5732D8B1B9461E2004A10FC /* BlockAttribute.h */,
-				C5732D8C1B9461E2004A10FC /* BlockAttribute.m */,
 				C5BEBED81B8DADA00068268F /* GameData.h */,
 				C5BEBED91B8DADA00068268F /* GameData.m */,
 				C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */,
@@ -262,11 +252,12 @@
 		C5BEBEAA1B8DAD5A0068268F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = MJsaka;
 				TargetAttributes = {
 					C585172F1BA81A6800361CDD = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = B2M63JGV3N;
 					};
 					C58517471BA81A6800361CDD = {
 						CreatedOnToolsVersion = 6.4;
@@ -336,8 +327,7 @@
 				C58517571BA81A7900361CDD /* GameData.m in Sources */,
 				C58517381BA81A6800361CDD /* AppDelegate.m in Sources */,
 				C58517351BA81A6800361CDD /* main.m in Sources */,
-				C585175B1BA822A000361CDD /* BlockAttribute-iOS.m in Sources */,
-				C58517611BA86CCD00361CDD /* GameAreaView.m in Sources */,
+				C58517611BA86CCD00361CDD /* BlockAreaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +345,6 @@
 			files = (
 				C5732D8A1B91FE13004A10FC /* BlockLayer.m in Sources */,
 				C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */,
-				C5732D8D1B9461E2004A10FC /* BlockAttribute.m in Sources */,
 				C5BEBEDD1B8DADB40068268F /* GameView.m in Sources */,
 				C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */,
 				C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */,
@@ -405,7 +394,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -414,7 +404,9 @@
 				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "MJsaka.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -423,11 +415,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
 				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "MJsaka.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -449,6 +444,7 @@
 				INFOPLIST_FILE = "MJ2048-iOSTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "MJsaka.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MJ2048-iOS.app/MJ2048-iOS";
@@ -466,6 +462,7 @@
 				INFOPLIST_FILE = "MJ2048-iOSTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "MJsaka.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MJ2048-iOS.app/MJ2048-iOS";
@@ -490,10 +487,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -509,6 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -533,7 +532,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -546,6 +545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -559,6 +559,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MJ2048/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "MJsaka.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -570,6 +571,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MJ2048/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "MJsaka.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -584,6 +586,7 @@
 				C58517511BA81A6800361CDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C58517551BA81A6800361CDD /* Build configuration list for PBXNativeTarget "MJ2048-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -592,6 +595,7 @@
 				C58517531BA81A6800361CDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C5BEBEAD1B8DAD5A0068268F /* Build configuration list for PBXProject "MJ2048" */ = {
 			isa = XCConfigurationList;

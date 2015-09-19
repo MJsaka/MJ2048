@@ -39,14 +39,13 @@
 @implementation GameData{
     Node *sider[4][4];
     Node *inner[4][4];
-//    moveTableType *moveTable[4][4];
     moveTableArray moveTable;
     boolTable refreshTable;
     boolTable mergeTable;
     boolTable generateTable;
     animationStatusType animationStatus;
     
-    Boolean _isPlaying;
+    Boolean _isDeath;
     
     NSInteger _score;
     NSInteger _numTotal;
@@ -57,7 +56,7 @@
 
 - (id)init{
     if (self = [super init]) {
-        _isPlaying = false;
+        _isDeath = true;
         _score = 0;
         _numTotal = 0;
         _highScore = 0;
@@ -112,6 +111,9 @@
         //读取存档
         [self readNSUserDefaults];
     }
+    if (_isDeath){
+        [self newGame];
+    }
     return self;
 }
 - (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col{
@@ -153,57 +155,45 @@
     inner[i][j].power = k;
     _numTotal = 1;
     _score = 0;
-    _isPlaying = true;
+    _isDeath = false;
 }
 - (Boolean)isDeath{
-    if (_numTotal < 16) {
-        return false;
-    }
-    if (!_isPlaying) {
-        return true;
-    }
-    for (int dir = 0; dir <=1 ; ++dir) {//从左到右，从下到上各遍历一次
-        int redir = 3 - dir;
-        for (int i = 0; i < 4; ++i) {
-            Node *n = sider[dir][i];
-            Node *t = [n nodeOnDir:redir];
-            do {
-                if (n.data == t.data) {
-                    return false;
-                }else{
-                    n = t;
-                    t = [n nodeOnDir:redir];
-                }
-            } while (t != nil);
-        }
-    }
-    _isPlaying = false;
-    return true;
+    return _isDeath;
 }
-
-- (Boolean)isNewScoreRecord{
-    if (_score > _highScore){
-        _highScore = _score;
-        return true;
-    }else {
-        return false;
-    }
-}
-- (Boolean)isNewPowerRecord{
-    Boolean b = false;
+- (void)checkGameStatus{
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             if (inner[i][j].power > _topPower){
                 _topPower = inner[i][j].power;
-                b = true;
             }
         }
     }
-    return b;
+    if (_score > _highScore){
+        _highScore = _score;
+    }
+    if (_numTotal == 16){//检查游戏是否结束
+        for (int dir = 0; dir <=1 ; ++dir) {//从左到右，从下到上各遍历一次
+            int redir = 3 - dir;
+            for (int i = 0; i < 4; ++i) {
+                Node *n = sider[dir][i];
+                Node *t = [n nodeOnDir:redir];
+                do {
+                    if (n.data == t.data) {
+                        return;
+                    }else{
+                        n = t;
+                        t = [n nodeOnDir:redir];
+                    }
+                } while (t != nil);
+            }
+        }
+        _isDeath = true;
+    }
 }
+
 - (Boolean)merge:(dirEnumType)dir
 {
-    if (!_isPlaying) {
+    if (_isDeath) {
         return false;
     }
     Boolean _isMoved = false;
@@ -292,6 +282,7 @@
     _numTotal += 1;
 //    [self addGenerateAnimationForI:n.posi forJ:n.posj];
     generateTable[n.posi][n.posj] = true;
+    [self checkGameStatus];
 }
 
 - (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
@@ -322,11 +313,11 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:_highScore forKey:@"highScore"];
     [userDefaults setInteger:_topPower forKey:@"topPower"];
-    if (_isPlaying) {
+    if (!_isDeath) {
         [userDefaults setInteger:1 forKey:@"dataSaved"];
         [userDefaults setInteger:_score forKey:@"score"];
         [userDefaults setInteger:_numTotal forKey:@"numTotal"];
-        [userDefaults setBool:_isPlaying forKey:@"isPlaying"];
+        [userDefaults setBool:_isDeath forKey:@"isDeath"];
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
@@ -350,7 +341,7 @@
     if (dataSaved) {
         _score = [userDefaults integerForKey:@"score"];
         _numTotal = [userDefaults integerForKey:@"numTotal"];
-        _isPlaying = [userDefaults boolForKey:@"isPlaying"];
+        _isDeath = [userDefaults boolForKey:@"isDeath"];
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];

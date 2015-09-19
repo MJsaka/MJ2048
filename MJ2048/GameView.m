@@ -31,8 +31,8 @@
 @synthesize highScore;
 @synthesize topPower;
 @synthesize isDeath;
-@synthesize isNewPower;
-@synthesize isNewScore;
+//@synthesize isNewPower;
+//@synthesize isNewScore;
 
 - (void)drawStringAtCenter:(NSString*)string withAttr:(NSDictionary*)attr inArea:(NSRect)rect{
     NSSize size = [string sizeWithAttributes:attr];
@@ -80,19 +80,19 @@
     if (isDeath) {
         [[NSColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0] set];
         [NSBezierPath fillRect: gameArea];
-        NSMutableString *gameOverString = [NSMutableString string];
-        if (isNewScore) {
-            [gameOverString appendString:[NSString stringWithFormat:@"NEW SCORE: %ld\n",highScore]];
-        }
-        if (isNewPower) {
-            [gameOverString appendString:[NSString stringWithFormat:@"NEW BLOCK: %.0f",pow(2,topPower)]];
-        }
-        if ([gameOverString isEqualTo:@""]) {
+//        NSMutableString *gameOverString = [NSMutableString string];
+//        if (isNewScore) {
+//            [gameOverString appendString:[NSString stringWithFormat:@"NEW SCORE: %ld\n",highScore]];
+//        }
+//        if (isNewPower) {
+//            [gameOverString appendString:[NSString stringWithFormat:@"NEW BLOCK: %.0f",pow(2,topPower)]];
+//        }
+//        if ([gameOverString isEqualTo:@""]) {
             [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameArea];
-        }else{
-            [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameAreaUp];
-            [self drawStringAtCenter:gameOverString withAttr:attrTitle inArea:gameAreaDown];
-        }
+//        }else{
+//            [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameAreaUp];
+//            [self drawStringAtCenter:gameOverString withAttr:attrTitle inArea:gameAreaDown];
+//        }
     }
 }
 

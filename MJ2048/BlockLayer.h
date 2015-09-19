@@ -7,7 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BlockAttribute.h"
+
+@interface BlockAttribute : NSObject
+
+- (NSColor*)colorOfPower:(NSInteger)power;
+- (NSDictionary*)stringAttr;
+@end
 
 @interface BlockLayer : CALayer
 

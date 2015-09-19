@@ -1,5 +1,5 @@
 //
-//  GameAreaView.h
+//  BlockAreaView.h
 //  MJ2048
 //
 //  Created by MJsaka on 9/15/15.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GameAreaView : UIView
+@interface BlockAreaView : UIView
+
+@property (assign,nonatomic) Boolean isDeath;
 
 @end
