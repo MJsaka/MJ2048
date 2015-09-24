@@ -217,7 +217,6 @@
                 n.power = 0;
                 _score += t.data;
                 _numTotal -= 1;
-//                [self addMergeAnimationForI:t.posi forJ:t.posj];
                 mergeTable[t.posi][t.posj] = true;
                 [self setNeedRefreshForI:t.posi forJ:t.posj];
                 [self setNeedRefreshForI:n.posi forJ:n.posj];
@@ -280,7 +279,6 @@
     n.data = k*2;
     n.power = k;
     _numTotal += 1;
-//    [self addGenerateAnimationForI:n.posi forJ:n.posj];
     generateTable[n.posi][n.posj] = true;
     [self checkGameStatus];
 }
@@ -350,8 +348,6 @@
                 inner[i][j].power = [userDefaults integerForKey:powerString];
             }
         }
-    }
-    
-    
+    }    
 }
 @end

@@ -10,6 +10,5 @@
 
 @interface ViewController : UIViewController
 
-- (IBAction)newGame:(id)sender;
 @end
 

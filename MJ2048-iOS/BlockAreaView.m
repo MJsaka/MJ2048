@@ -46,6 +46,11 @@
         CGPoint point;
         point.x = (rect.size.width - lrect.size.width)/2;
         point.y = (rect.size.height - lrect.size.height)/2;
+        
+        CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+        CGAffineTransform flipVertical = CGAffineTransformMake(1,0,0,-1,0,rect.size.height);
+        CGContextConcatCTM(ctx, flipVertical);
+    
         CGContextSetTextPosition(ctx, point.x , point.y);
         CTLineDraw(line, ctx);
         CFRelease(line);
