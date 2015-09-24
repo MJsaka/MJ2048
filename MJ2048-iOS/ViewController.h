@@ -1,9 +1,9 @@
 //
 //  ViewController.h
-//  MJ2048-iOS
+//  MJ2048
 //
-//  Created by MJsaka on 9/15/15.
-//  Copyright (c) 2015 MJsaka. All rights reserved.
+//  Created by MJsaka on 15/9/24.
+//  Copyright © 2015年 MJsaka. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,4 +11,3 @@
 @interface ViewController : UIViewController
 
 @end
-

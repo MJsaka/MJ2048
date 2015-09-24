@@ -1,14 +1,15 @@
 //
 //  ViewController.m
-//  MJ2048-iOS
+//  MJ2048
 //
-//  Created by MJsaka on 9/15/15.
-//  Copyright (c) 2015 MJsaka. All rights reserved.
+//  Created by MJsaka on 15/9/24.
+//  Copyright © 2015年 MJsaka. All rights reserved.
 //
-#import "AppDelegate.h"
+
 #import "ViewController.h"
-#import "BlockLayer-iOS.h"
+#import "AppDelegate.h"
 #import "GameData.h"
+#import "BlockAttr.h"
 #import "BlockAreaView.h"
 
 @interface ViewController ()
@@ -16,8 +17,7 @@
 @end
 
 @implementation ViewController{
-    BlockLayer *block[4][4];
-//    UILabel *block[4x][4];
+    UILabel *block[4][4];
     moveTableArray *moveTable;
     boolTable *refreshTable;
     boolTable *mergeTable;
@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //     Do any additional setup after loading the view, typically from a nib.
-
+    
     ((AppDelegate*)[[UIApplication sharedApplication] delegate]).gameData = gameData;
     
     animationStatusType* aST = [gameData animationStatus];
@@ -45,15 +45,9 @@
     generateTable = aST->aGenerateTable;
     attr = [[BlockAttribute alloc]init];
     
-    score.text = [NSString stringWithFormat:@"%ld",[gameData currentScore]];
-    power.text = [NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])];
-    power.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    bestTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    best.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    best.text = [NSString stringWithFormat:@"%ld",[gameData highScore]];
+    [self refreshScoreArea];
     
-//    CGRect blockAreaViewFrame = CGRectMake(self.view.bounds.size.width * 0.04, self.view.bounds.size.height * 0.3, self.view.bounds.size.width * 0.92, self.view.bounds.size.width * 0.92);
-    CGRect blockAreaViewFrame = CGRectMake(16, 300, 366, 366);
+    CGRect blockAreaViewFrame = CGRectMake(self.view.bounds.size.width * 0.04, self.view.bounds.size.height * 0.3, self.view.bounds.size.width * 0.92, self.view.bounds.size.width * 0.92);
     blockAreaView = [[BlockAreaView alloc]initWithFrame:blockAreaViewFrame];
     [self.view addSubview:blockAreaView];
     blockAreaView.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0];
@@ -76,26 +70,14 @@
     [blockAreaView addGestureRecognizer:swipeRight];
     
     NSInteger l = ([blockAreaView frame].size.width - 50)/4;
-    //    NSInteger l = 61;
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            block[i][j] = [BlockLayer layer];
-            [[blockAreaView layer] addSublayer:block[i][j]];
-            
-            block[i][j].data = [gameData dataAtRow:i col:j];
-            block[i][j].power = [gameData powerAtRow:i col:j];
-            block[i][j].blockAttr = attr;
-            [block[i][j] setBounds:CGRectMake(0, 0, l, l)];
-            [block[i][j] setAnchorPoint:CGPointMake(0.5, 0.5)];
-            [block[i][j] setPosition:CGPointMake(10 + (l/2) + (10 + l) * i, 10 + (l/2) + (10 + l) * (3 - j))];
-            block[i][j].geometryFlipped = true;
-//            block[i][j] = [[UILabel alloc]initWithFrame:CGRectMake(10 + (10 + l) * i, 10 + (10 + l) * (3 - j), l, l)];
-//            [blockAreaView addSubview:block[i][j]];
-//
-//            block[i][j].text = [NSString stringWithFormat:@"%ld",(long)[gameData dataAtRow:i col:j]];
-//            block[i][j].backgroundColor = [attr colorOfPower:[gameData powerAtRow:i col:j]];
-            
-            [block[i][j] setNeedsDisplay];
+            CGRect frame = CGRectMake(10 + (10 + l) * i, 10 + (10 + l) * (3 - j),l,l);
+            block[i][j] = [[UILabel alloc]initWithFrame:frame];
+            block[i][j].font = [UIFont fontWithName:@"Arial" size:20];
+            block[i][j].textAlignment = NSTextAlignmentCenter;
+            [self refreshBlockForI:i forJ:j];
+            [blockAreaView addSubview:block[i][j]];
         }
     }
 }
@@ -104,19 +86,15 @@
     switch(gesture.direction){
         case UISwipeGestureRecognizerDirectionUp:
             [self moveControl:DIR_UP];
-//            NSLog(@"UP");
             break;
         case UISwipeGestureRecognizerDirectionDown:
             [self moveControl:DIR_DOWN];
-//            NSLog(@"Down");
             break;
         case UISwipeGestureRecognizerDirectionLeft:
             [self moveControl:DIR_LEFT];
-//            NSLog(@"Left");
             break;
         case UISwipeGestureRecognizerDirectionRight:
             [self moveControl:DIR_RIGHT];
-//            NSLog(@"right");
             break;
         default:
             break;
@@ -128,50 +106,60 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
     if (size.height > size.width) {
-        CGRect blockAreaViewFrame = CGRectMake(16, 300, 366, 366);
-//        CGRect blockAreaViewFrame = CGRectMake(size.width * 0.04, size.height * 0.3, size.width * 0.92, size.width * 0.92);
+        CGRect blockAreaViewFrame = CGRectMake(size.width * 0.04, size.height * 0.3, size.width * 0.92, size.width * 0.92);
         blockAreaView.frame = blockAreaViewFrame;
     }else{
-        CGRect blockAreaViewFrame = CGRectMake(360, 16, 366, 366);
-//        CGRect blockAreaViewFrame = CGRectMake(size.width * 0.4, size.height * 0.04, size.height * 0.92, size.height * 0.92);
+        CGRect blockAreaViewFrame = CGRectMake(size.width * 0.4, size.height * 0.04, size.height * 0.92, size.height * 0.92);
         blockAreaView.frame = blockAreaViewFrame;
     }
 }
-
-- (IBAction)newGame{
-    [gameData newGame];
+- (void)refreshBlockForI:(NSInteger)i forJ:(NSInteger)j{
+    if ([gameData powerAtRow:i col:j] != 0) {
+        block[i][j].text = [NSString stringWithFormat:@"%ld",[gameData dataAtRow:i col:j]];
+        block[i][j].backgroundColor = [attr colorOfPower:[gameData powerAtRow:i col:j]];
+        block[i][j].alpha = 1;
+    }else{
+        block[i][j].alpha = 0;
+    }
+}
+- (void)refreshScoreArea{
     power.text = [NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])];
     power.backgroundColor = [attr colorOfPower:[gameData topPower]];
     score.text = [NSString stringWithFormat:@"%ld",[gameData currentScore]];
     bestTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
     best.backgroundColor = [attr colorOfPower:[gameData topPower]];
     best.text = [NSString stringWithFormat:@"%ld",[gameData highScore]];
-    blockAreaView.isDeath = [gameData isDeath];
-    [blockAreaView setNeedsDisplay];
+}
+
+- (IBAction)newGame{
+    [gameData newGame];
+    [self refreshScoreArea];
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-//            [blockAreaView addSubview:block[i][j]];
-//            block[i][j].text = [NSString stringWithFormat:@"%ld",(long)[gameData dataAtRow:i col:j]];
-//            block[i][j].backgroundColor = [attr colorOfPower:[gameData powerAtRow:i col:j]];
-            [[blockAreaView layer] addSublayer:block[i][j]];
-            block[i][j].data = [gameData dataAtRow:i col:j];
-            block[i][j].power = [gameData powerAtRow:i col:j];
-            [block[i][j] setNeedsDisplay];
-            [block[i][j] setHidden:NO];
+            [self refreshBlockForI:i forJ:j];
+            [blockAreaView addSubview:block[i][j]];
         }
     }
-
+    blockAreaView.isDeath = [gameData isDeath];
+    [blockAreaView setNeedsDisplay];
+}
+- (void)gameOver{
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            [block[i][j] removeFromSuperview];
+        }
+    }
+    blockAreaView.isDeath = [gameData isDeath];
+    [blockAreaView setNeedsDisplay];
 }
 - (void)moveControl:(dirEnumType)dir{
+    Boolean merged = NO;
     if([gameData merge:dir]){
+        merged = YES;
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 if ((*refreshTable)[i][j]) {
-//                    block[i][j].text = [NSString stringWithFormat:@"%ld",(long)[gameData dataAtRow:i col:j]];
-//                    block[i][j].backgroundColor = [attr colorOfPower:[gameData powerAtRow:i col:j]];
-                    block[i][j].data = [gameData dataAtRow:i col:j];
-                    block[i][j].power = [gameData powerAtRow:i col:j];
-                    [block[i][j] setNeedsDisplay];
+                    [self refreshBlockForI:i forJ:j];
                     (*refreshTable)[i][j] = false;
                 }
             }
@@ -181,48 +169,28 @@
         [self startMoveAnimation];
         [gameData generate:dir];
         if ([gameData isDeath]) {
-            blockAreaView.isDeath = [gameData isDeath];
-            //隐藏Block
-            for (int i = 0; i < 4; ++i) {
-                for (int j = 0; j < 4; ++j) {
-                    [block[i][j] removeFromSuperlayer];
-//                    [block[i][j] removeFromSuperview];
-                }
-            }
-            [blockAreaView setNeedsDisplay];
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Game Over" message:@"Try again?" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* tryAgainAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){[self newGame];}];
-            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){}];
+            UIAlertAction* tryAgainAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){[self newGame];}];
+            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){[self gameOver];}];
             [alert addAction:cancelAction];
             [alert addAction:tryAgainAction];
             [self presentViewController:alert animated:YES completion:nil];
-
         }
     }
-    power.text = [NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])];
-    power.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    score.text = [NSString stringWithFormat:@"%ld",[gameData currentScore]];
-    bestTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    best.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    best.text = [NSString stringWithFormat:@"%ld",[gameData highScore]];
+    if (merged) {
+        [self refreshScoreArea];
+    }
 }
 
 - (void)startMoveAnimation{
     NSInteger l = ([blockAreaView bounds].size.width - 50)/4;
-//    NSInteger l = 61;
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             NSInteger toI = (*moveTable)[i][j].toI;
             NSInteger toJ = (*moveTable)[i][j].toJ;
             if (toI != -1 || toJ != -1) {
-                CGPoint toPoint = CGPointMake(10 + (l/2) + (10 + l) * toI, 10 + (l/2) + ( 10 + l) * (3 - toJ));
-//                CGRect toRect = CGRectMake(10 + (10 + l) * toI, 10 + ( 10 + l) * (3 - toJ),l,l);
-//                NSLog(@"(%d,%d)-->(%ld,%ld)...Pos:(%f,%f)",i,j,toI,toJ,toPoint.x,toPoint.y);
-                [CATransaction begin];
-                [CATransaction setValue:[NSNumber numberWithFloat:0.3f] forKey: kCATransactionAnimationDuration];
-                [block[i][j] setPosition:toPoint];
-//                [block[i][j] setFrame:toRect];
-                [CATransaction commit];
+                CGRect toRect = CGRectMake(10 + (10 + l) * toI, 10 + ( 10 + l) * (3 - toJ),l,l);
+                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(){block[i][j].frame = toRect;} completion:NULL];
             }
         }
     }
@@ -244,14 +212,14 @@
                 mergeAnimation.fillMode = kCAFillModeBackwards;
                 mergeAnimation.fromValue = [NSNumber numberWithFloat:1.0];
                 mergeAnimation.toValue = [NSNumber numberWithFloat:1.15];
-                [block[i][j] addAnimation:mergeAnimation forKey:@"transform"];
+                [[block[i][j] layer] addAnimation:mergeAnimation forKey:@"transform"];
                 (*mergeTable)[i][j] = false;
             }
             if ((*generateTable)[i][j]) {
-                block[i][j].data = [gameData dataAtRow:i col:j];
-                block[i][j].power = [gameData powerAtRow:i col:j];
-                [block[i][j] setNeedsDisplay];
-                
+                block[i][j].text = [NSString stringWithFormat:@"%ld",(long)[gameData dataAtRow:i col:j]];
+                block[i][j].backgroundColor = [attr colorOfPower:[gameData powerAtRow:i col:j]];
+                block[i][j].alpha = 1;
+
                 CABasicAnimation *generateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
                 generateAnimation.duration = 0.3;
                 generateAnimation.autoreverses = NO;
@@ -261,7 +229,7 @@
                 generateAnimation.fillMode = kCAFillModeBackwards;
                 generateAnimation.fromValue = [NSNumber numberWithFloat:0];
                 generateAnimation.toValue = [NSNumber numberWithFloat:1.0];
-                [block[i][j] addAnimation:generateAnimation forKey:@"transform"];
+                [[block[i][j] layer] addAnimation:generateAnimation forKey:@"transform"];
                 (*generateTable)[i][j] = false;
             }
         }
@@ -271,7 +239,6 @@
 
 - (void)adjustBlock{
     NSInteger l = ([blockAreaView bounds].size.width - 50)/4;
-//    NSInteger l = 61;
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             moveElementType *c = &((*moveTable)[i][j]);
@@ -281,14 +248,10 @@
                 moveElementType *f;
                 do{
                     f = &((*moveTable)[c->fromI][c->fromJ]);
-                    CGPoint fromPoint = CGPointMake(10 + l/2 + (10 + l) * (f->i), 10 + l/2 + (10 + l) * (3 - (f->j)));
-//                    NSLog(@"(%d,%d)<--(%ld,%ld)...Pos:(%f,%f)",i,j,f->fromI,f->fromJ,fromPoint.x,fromPoint.y);
-                    [CATransaction begin];
-                    [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
-                    [block[c->i][c->j] setPosition:fromPoint];
-                    [CATransaction commit];
+                    CGRect fromRect = CGRectMake(10 + (10 + l) * (f->i), 10 + (10 + l) * (3 - (f->j)), l, l);
+                    block[c->i][c->j].frame = fromRect;
                     
-                    BlockLayer* bl = block[c->i][c->j];
+                    UILabel* bl = block[c->i][c->j];
                     block[c->i][c->j] = block[f->i][f->j];
                     block[f->i][f->j] = bl;
                     
@@ -307,6 +270,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

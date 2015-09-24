@@ -196,7 +196,7 @@
     if (_isDeath) {
         return false;
     }
-    Boolean _isMoved = false;
+    Boolean _isMerged = false;
     int redir = 3 - dir;
     //先做好运算
     for (int i = 0; i < 4; ++i) {
@@ -221,7 +221,7 @@
                 [self setNeedRefreshForI:t.posi forJ:t.posj];
                 [self setNeedRefreshForI:n.posi forJ:n.posj];
                 n = [t nodeOnDir:redir];
-                _isMoved = true;
+                _isMerged = true;
                 if (n != nil) {
                     t = [n nodeOnDir:redir];
                 }
@@ -231,7 +231,7 @@
             }
         }while (n != nil && t != nil);
     }//再做移位
-    return _isMoved;
+    return _isMerged;
 }
 - (Boolean)move:(dirEnumType)dir{
     Boolean _isMoved = false;
@@ -300,7 +300,6 @@
 - (animationStatusType*)animationStatus{
     return &animationStatus;
 }
-
 
 - (void)setNeedRefreshForI:(NSInteger)forI forJ:(NSInteger)forJ{
     refreshTable[forI][forJ] = true;

@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		C5732D8A1B91FE13004A10FC /* BlockLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* BlockLayer.m */; };
-		C57E372E1BB4402E00054430 /* ViewController-Label.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E372C1BB43E5800054430 /* ViewController-Label.m */; settings = {ASSET_TAGS = (); }; };
+		C57E372E1BB4402E00054430 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E372C1BB43E5800054430 /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C58517351BA81A6800361CDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517341BA81A6800361CDD /* main.m */; };
 		C58517381BA81A6800361CDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517371BA81A6800361CDD /* AppDelegate.m */; };
 		C585173E1BA81A6800361CDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C585173C1BA81A6800361CDD /* Main.storyboard */; };
 		C58517401BA81A6800361CDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C585173F1BA81A6800361CDD /* Images.xcassets */; };
 		C58517431BA81A6800361CDD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C58517411BA81A6800361CDD /* LaunchScreen.xib */; };
 		C58517571BA81A7900361CDD /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
-		C585175E1BA85ACA00361CDD /* BlockLayer-iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175D1BA85ACA00361CDD /* BlockLayer-iOS.m */; };
+		C585175E1BA85ACA00361CDD /* BlockAttr.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175D1BA85ACA00361CDD /* BlockAttr.m */; };
 		C58517611BA86CCD00361CDD /* BlockAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517601BA86CCD00361CDD /* BlockAreaView.m */; };
 		C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */; };
 		C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEBA1B8DAD5A0068268F /* main.m */; };
@@ -29,22 +29,20 @@
 /* Begin PBXFileReference section */
 		C5732D881B91FE13004A10FC /* BlockLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockLayer.h; sourceTree = "<group>"; };
 		C5732D891B91FE13004A10FC /* BlockLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockLayer.m; sourceTree = "<group>"; };
-		C57E372B1BB43E5800054430 /* ViewController-Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController-Label.h"; sourceTree = "<group>"; };
-		C57E372C1BB43E5800054430 /* ViewController-Label.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController-Label.m"; sourceTree = "<group>"; };
+		C57E372B1BB43E5800054430 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C57E372C1BB43E5800054430 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C58517301BA81A6800361CDD /* MJ2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJ2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58517331BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C58517341BA81A6800361CDD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C58517361BA81A6800361CDD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C58517371BA81A6800361CDD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C58517391BA81A6800361CDD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C585173A1BA81A6800361CDD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C585173D1BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C585173F1BA81A6800361CDD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C58517421BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C585174D1BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJ2048_iOSTests.m; sourceTree = "<group>"; };
-		C585175C1BA85ACA00361CDD /* BlockLayer-iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BlockLayer-iOS.h"; sourceTree = "<group>"; };
-		C585175D1BA85ACA00361CDD /* BlockLayer-iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BlockLayer-iOS.m"; sourceTree = "<group>"; };
+		C585175C1BA85ACA00361CDD /* BlockAttr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAttr.h; sourceTree = "<group>"; };
+		C585175D1BA85ACA00361CDD /* BlockAttr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAttr.m; sourceTree = "<group>"; };
 		C585175F1BA86CCD00361CDD /* BlockAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAreaView.h; sourceTree = "<group>"; };
 		C58517601BA86CCD00361CDD /* BlockAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAreaView.m; sourceTree = "<group>"; };
 		C5BEBEB21B8DAD5A0068268F /* 2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,12 +83,10 @@
 			children = (
 				C58517361BA81A6800361CDD /* AppDelegate.h */,
 				C58517371BA81A6800361CDD /* AppDelegate.m */,
-				C57E372B1BB43E5800054430 /* ViewController-Label.h */,
-				C57E372C1BB43E5800054430 /* ViewController-Label.m */,
-				C58517391BA81A6800361CDD /* ViewController.h */,
-				C585173A1BA81A6800361CDD /* ViewController.m */,
-				C585175C1BA85ACA00361CDD /* BlockLayer-iOS.h */,
-				C585175D1BA85ACA00361CDD /* BlockLayer-iOS.m */,
+				C57E372B1BB43E5800054430 /* ViewController.h */,
+				C57E372C1BB43E5800054430 /* ViewController.m */,
+				C585175C1BA85ACA00361CDD /* BlockAttr.h */,
+				C585175D1BA85ACA00361CDD /* BlockAttr.m */,
 				C585175F1BA86CCD00361CDD /* BlockAreaView.h */,
 				C58517601BA86CCD00361CDD /* BlockAreaView.m */,
 				C585173C1BA81A6800361CDD /* Main.storyboard */,
@@ -276,12 +272,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C585175E1BA85ACA00361CDD /* BlockLayer-iOS.m in Sources */,
+				C585175E1BA85ACA00361CDD /* BlockAttr.m in Sources */,
 				C58517571BA81A7900361CDD /* GameData.m in Sources */,
 				C58517381BA81A6800361CDD /* AppDelegate.m in Sources */,
 				C58517351BA81A6800361CDD /* main.m in Sources */,
 				C58517611BA86CCD00361CDD /* BlockAreaView.m in Sources */,
-				C57E372E1BB4402E00054430 /* ViewController-Label.m in Sources */,
+				C57E372E1BB4402E00054430 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
