@@ -255,11 +255,9 @@ typedef struct blockNode{
         n = sider[redir][i];
     }while (n->data != 0);
     NSInteger j = random() % 4;
-    blockNodeType *t = n->nodeOnDir[dir];
-    while (t != nil && t->data == 0 && j != 0){
-        n = t;
-        t = n->nodeOnDir[dir];
+    while (j > 0 && (n->nodeOnDir[dir])->data == 0){
         --j;
+        n = n->nodeOnDir[dir];
     }
     NSInteger k = random() % 2 + 1;
     n->data = k*2;
