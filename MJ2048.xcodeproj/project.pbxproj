@@ -39,8 +39,6 @@
 		C585173D1BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C585173F1BA81A6800361CDD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C58517421BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		C585174D1BA81A6800361CDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJ2048_iOSTests.m; sourceTree = "<group>"; };
 		C585175C1BA85ACA00361CDD /* BlockAttr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAttr.h; sourceTree = "<group>"; };
 		C585175D1BA85ACA00361CDD /* BlockAttr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAttr.m; sourceTree = "<group>"; };
 		C585175F1BA86CCD00361CDD /* BlockAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAreaView.h; sourceTree = "<group>"; };
@@ -106,29 +104,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C585174B1BA81A6800361CDD /* MJ2048-iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				C585174E1BA81A6800361CDD /* MJ2048_iOSTests.m */,
-				C585174C1BA81A6800361CDD /* Supporting Files */,
-			);
-			path = "MJ2048-iOSTests";
-			sourceTree = "<group>";
-		};
-		C585174C1BA81A6800361CDD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C585174D1BA81A6800361CDD /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		C5BEBEA91B8DAD5A0068268F = {
 			isa = PBXGroup;
 			children = (
 				C5BEBEB41B8DAD5A0068268F /* MJ2048 */,
 				C58517311BA81A6800361CDD /* MJ2048-iOS */,
-				C585174B1BA81A6800361CDD /* MJ2048-iOSTests */,
 				C5BEBEB31B8DAD5A0068268F /* Products */,
 			);
 			sourceTree = "<group>";
