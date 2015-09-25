@@ -80,19 +80,9 @@
     if (isDeath) {
         [[NSColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0] set];
         [NSBezierPath fillRect: gameArea];
-//        NSMutableString *gameOverString = [NSMutableString string];
-//        if (isNewScore) {
-//            [gameOverString appendString:[NSString stringWithFormat:@"NEW SCORE: %ld\n",highScore]];
-//        }
-//        if (isNewPower) {
-//            [gameOverString appendString:[NSString stringWithFormat:@"NEW BLOCK: %.0f",pow(2,topPower)]];
-//        }
-//        if ([gameOverString isEqualTo:@""]) {
-            [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameArea];
-//        }else{
-//            [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameAreaUp];
-//            [self drawStringAtCenter:gameOverString withAttr:attrTitle inArea:gameAreaDown];
-//        }
+
+        [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:gameArea];
+
     }
 }
 

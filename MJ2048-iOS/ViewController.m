@@ -43,6 +43,7 @@
     refreshTable = aST->aRefreshTable;
     mergeTable = aST->aMergeTable;
     generateTable = aST->aGenerateTable;
+    
     attr = [[BlockAttribute alloc]init];
     
     [self refreshScoreArea];
@@ -52,23 +53,23 @@
     [self.view addSubview:blockAreaView];
     blockAreaView.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0];
     blockAreaView.isDeath = [gameData isDeath];
-    
-    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
-    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
-    [blockAreaView addGestureRecognizer:swipeUp];
-    
-    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
-    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-    [blockAreaView addGestureRecognizer:swipeDown];
-    
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [blockAreaView addGestureRecognizer:swipeLeft];
-    
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [blockAreaView addGestureRecognizer:swipeRight];
-    
+    {
+        UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
+        swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+        [blockAreaView addGestureRecognizer:swipeUp];
+        
+        UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
+        swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+        [blockAreaView addGestureRecognizer:swipeDown];
+        
+        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
+        swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+        [blockAreaView addGestureRecognizer:swipeLeft];
+        
+        UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
+        swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+        [blockAreaView addGestureRecognizer:swipeRight];
+    }
     NSInteger l = ([blockAreaView frame].size.width - 50)/4;
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -184,16 +185,18 @@
 
 - (void)startMoveAnimation{
     NSInteger l = ([blockAreaView bounds].size.width - 50)/4;
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            NSInteger toI = (*moveTable)[i][j].toI;
-            NSInteger toJ = (*moveTable)[i][j].toJ;
-            if (toI != -1 || toJ != -1) {
-                CGRect toRect = CGRectMake(10 + (10 + l) * toI, 10 + ( 10 + l) * (3 - toJ),l,l);
-                [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(){block[i][j].frame = toRect;} completion:NULL];
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^(){
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                NSInteger toI = (*moveTable)[i][j].toI;
+                NSInteger toJ = (*moveTable)[i][j].toJ;
+                if (toI != -1 || toJ != -1) {
+                    CGRect toRect = CGRectMake(10 + (10 + l) * toI, 10 + ( 10 + l) * (3 - toJ),l,l);
+                    block[i][j].frame = toRect;
+                }
             }
         }
-    }
+    } completion:NULL];
     [self adjustBlock];
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startMergeAnimation) userInfo:nil repeats:NO];
 }
@@ -216,9 +219,7 @@
                 (*mergeTable)[i][j] = false;
             }
             if ((*generateTable)[i][j]) {
-                block[i][j].text = [NSString stringWithFormat:@"%ld",(long)[gameData dataAtRow:i col:j]];
-                block[i][j].backgroundColor = [attr colorOfPower:[gameData powerAtRow:i col:j]];
-                block[i][j].alpha = 1;
+                [self refreshBlockForI:i forJ:j];
 
                 CABasicAnimation *generateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
                 generateAnimation.duration = 0.3;

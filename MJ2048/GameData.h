@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+//移动方向
 typedef enum moveDir{
     DIR_LEFT = 0,
     DIR_DOWN = 1,
     DIR_UP = 2,
     DIR_RIGHT = 3
 } dirEnumType;
-
+//记录每个格子的移动情况，用来实现动画
 typedef struct moveElement{
     NSInteger fromI;
     NSInteger fromJ;
@@ -23,37 +23,26 @@ typedef struct moveElement{
     NSInteger i;
     NSInteger j;
 }moveElementType;
-
 typedef moveElementType moveTableArray[4][4];
 typedef Boolean boolTable[4][4];
 
 typedef struct animationStatus{
     moveTableArray* aMoveTable;
-    boolTable* aRefreshTable;
-    boolTable* aMergeTable;
-    boolTable* aGenerateTable;
+    boolTable* aRefreshTable;//记录合并了的相关格子，移动前先刷新
+    boolTable* aMergeTable;//记录需要产生合并动画的格子
+    boolTable* aGenerateTable;//记录需要产生生成动画的格子
 }animationStatusType;
-
-@interface Node : NSObject
-
-@property (assign,nonatomic) NSInteger posi;
-@property (assign,nonatomic) NSInteger posj;
-@property (assign,nonatomic) NSInteger data;//格子内的数字
-@property (assign,nonatomic) NSInteger power;//直接记录幂次，以简化输出对应颜色的计算。
-
--(void)setNodeOnDir:(dirEnumType)dir withNode:(Node *)node;
--(Node *)nodeOnDir:(dirEnumType)dir;
-@end
 
 @interface GameData : NSObject
 
-- (NSInteger)currentScore;//记录总分。
-- (NSInteger)highScore;
-- (NSInteger)topPower;
+- (animationStatusType*)animationStatus;
+
+- (NSInteger)currentScore;//总分。
+- (NSInteger)highScore;//历史最高分
+- (NSInteger)topPower;//历史最大格子数值
 
 - (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col;
 - (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col;
-- (animationStatusType*)animationStatus;
 
 
 - (Boolean)merge:(dirEnumType)dir;
