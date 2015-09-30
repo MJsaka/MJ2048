@@ -22,7 +22,7 @@
     boolTable *refreshTable;
     boolTable *mergeTable;
     boolTable *generateTable;
-    BlockAttribute *attr;
+    MacBlockAttribute *attr;
     IBOutlet UILabel *power;
     IBOutlet UILabel *bestTitle;
     IBOutlet UILabel *best;
@@ -44,7 +44,7 @@
     mergeTable = aST->aMergeTable;
     generateTable = aST->aGenerateTable;
     
-    attr = [[BlockAttribute alloc]init];
+    attr = [[MacBlockAttribute alloc]init];
     
     [self refreshScoreArea];
     

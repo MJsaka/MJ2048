@@ -1,5 +1,5 @@
 //
-//  BlockLayer-iOS.m
+//  MacBlockLayer-iOS.m
 //  MJ2048
 //
 //  Created by MJsaka on 9/15/15.
@@ -8,7 +8,7 @@
 
 #import "BlockAttr.h"
 
-@implementation BlockAttribute {
+@implementation MacBlockAttribute {
     UIColor *colorOfPower[21];
 }
 - (id)init{

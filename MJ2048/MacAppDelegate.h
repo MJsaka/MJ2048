@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  MacAppDelegate.h
 //  MJ2048
 //
 //  Created by MJsaka on 8/26/15.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface MacAppDelegate : NSObject <NSApplicationDelegate>
 
 
 @end

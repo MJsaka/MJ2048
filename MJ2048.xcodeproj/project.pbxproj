@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C5732D8A1B91FE13004A10FC /* BlockLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* BlockLayer.m */; };
+		C5732D8A1B91FE13004A10FC /* MacBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* MacBlock.m */; };
 		C57E372E1BB4402E00054430 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E372C1BB43E5800054430 /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C58517351BA81A6800361CDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517341BA81A6800361CDD /* main.m */; };
 		C58517381BA81A6800361CDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517371BA81A6800361CDD /* AppDelegate.m */; };
@@ -17,18 +17,18 @@
 		C58517571BA81A7900361CDD /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
 		C585175E1BA85ACA00361CDD /* BlockAttr.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175D1BA85ACA00361CDD /* BlockAttr.m */; };
 		C58517611BA86CCD00361CDD /* BlockAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517601BA86CCD00361CDD /* BlockAreaView.m */; };
-		C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */; };
+		C5BEBEB91B8DAD5A0068268F /* MacAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEB81B8DAD5A0068268F /* MacAppDelegate.m */; };
 		C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEBA1B8DAD5A0068268F /* main.m */; };
 		C5BEBEBD1B8DAD5A0068268F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */; };
 		C5BEBEC01B8DAD5A0068268F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5BEBEBE1B8DAD5A0068268F /* MainMenu.xib */; };
 		C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
-		C5BEBEDD1B8DADB40068268F /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDC1B8DADB40068268F /* GameView.m */; };
-		C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDE1B8E94650068268F /* InterfaceControl.m */; };
+		C5BEBEDD1B8DADB40068268F /* MacGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDC1B8DADB40068268F /* MacGameView.m */; };
+		C5BEBEDF1B8E94650068268F /* MacInterfaceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDE1B8E94650068268F /* MacInterfaceControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C5732D881B91FE13004A10FC /* BlockLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockLayer.h; sourceTree = "<group>"; };
-		C5732D891B91FE13004A10FC /* BlockLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockLayer.m; sourceTree = "<group>"; };
+		C5732D881B91FE13004A10FC /* MacBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacBlock.h; sourceTree = "<group>"; };
+		C5732D891B91FE13004A10FC /* MacBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacBlock.m; sourceTree = "<group>"; };
 		C57E372B1BB43E5800054430 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C57E372C1BB43E5800054430 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C58517301BA81A6800361CDD /* MJ2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJ2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,17 +45,17 @@
 		C58517601BA86CCD00361CDD /* BlockAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAreaView.m; sourceTree = "<group>"; };
 		C5BEBEB21B8DAD5A0068268F /* 2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5BEBEB61B8DAD5A0068268F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C5BEBEB71B8DAD5A0068268F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C5BEBEB71B8DAD5A0068268F /* MacAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacAppDelegate.h; sourceTree = "<group>"; };
+		C5BEBEB81B8DAD5A0068268F /* MacAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacAppDelegate.m; sourceTree = "<group>"; };
 		C5BEBEBA1B8DAD5A0068268F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C5BEBEBF1B8DAD5A0068268F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		C5BEBED51B8DAD8F0068268F /* InterfaceControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceControl.h; sourceTree = "<group>"; };
+		C5BEBED51B8DAD8F0068268F /* MacInterfaceControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacInterfaceControl.h; sourceTree = "<group>"; };
 		C5BEBED81B8DADA00068268F /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
 		C5BEBED91B8DADA00068268F /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
-		C5BEBEDB1B8DADB40068268F /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
-		C5BEBEDC1B8DADB40068268F /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
-		C5BEBEDE1B8E94650068268F /* InterfaceControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceControl.m; sourceTree = "<group>"; };
+		C5BEBEDB1B8DADB40068268F /* MacGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacGameView.h; sourceTree = "<group>"; };
+		C5BEBEDC1B8DADB40068268F /* MacGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacGameView.m; sourceTree = "<group>"; };
+		C5BEBEDE1B8E94650068268F /* MacInterfaceControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacInterfaceControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,14 +125,14 @@
 		C5BEBEB41B8DAD5A0068268F /* MJ2048 */ = {
 			isa = PBXGroup;
 			children = (
-				C5BEBEB71B8DAD5A0068268F /* AppDelegate.h */,
-				C5BEBEB81B8DAD5A0068268F /* AppDelegate.m */,
-				C5BEBED51B8DAD8F0068268F /* InterfaceControl.h */,
-				C5BEBEDE1B8E94650068268F /* InterfaceControl.m */,
-				C5BEBEDB1B8DADB40068268F /* GameView.h */,
-				C5BEBEDC1B8DADB40068268F /* GameView.m */,
-				C5732D881B91FE13004A10FC /* BlockLayer.h */,
-				C5732D891B91FE13004A10FC /* BlockLayer.m */,
+				C5BEBEB71B8DAD5A0068268F /* MacAppDelegate.h */,
+				C5BEBEB81B8DAD5A0068268F /* MacAppDelegate.m */,
+				C5BEBED51B8DAD8F0068268F /* MacInterfaceControl.h */,
+				C5BEBEDE1B8E94650068268F /* MacInterfaceControl.m */,
+				C5BEBEDB1B8DADB40068268F /* MacGameView.h */,
+				C5BEBEDC1B8DADB40068268F /* MacGameView.m */,
+				C5732D881B91FE13004A10FC /* MacBlock.h */,
+				C5732D891B91FE13004A10FC /* MacBlock.m */,
 				C5BEBED81B8DADA00068268F /* GameData.h */,
 				C5BEBED91B8DADA00068268F /* GameData.m */,
 				C5BEBEBC1B8DAD5A0068268F /* Images.xcassets */,
@@ -265,12 +265,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5732D8A1B91FE13004A10FC /* BlockLayer.m in Sources */,
+				C5732D8A1B91FE13004A10FC /* MacBlock.m in Sources */,
 				C5BEBEBB1B8DAD5A0068268F /* main.m in Sources */,
-				C5BEBEDD1B8DADB40068268F /* GameView.m in Sources */,
-				C5BEBEDF1B8E94650068268F /* InterfaceControl.m in Sources */,
+				C5BEBEDD1B8DADB40068268F /* MacGameView.m in Sources */,
+				C5BEBEDF1B8E94650068268F /* MacInterfaceControl.m in Sources */,
 				C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */,
-				C5BEBEB91B8DAD5A0068268F /* AppDelegate.m in Sources */,
+				C5BEBEB91B8DAD5A0068268F /* MacAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

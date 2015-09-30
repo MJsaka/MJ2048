@@ -1,17 +1,18 @@
     //
-//  InterfaceControl.m
+//  MacInterfaceControl.m
 //  MJ2048
 //
 //  Created by MJsaka on 8/26/15.
 //  Copyright (c) 2015 MJsaka. All rights reserved.
 //
 
-#import "InterfaceControl.h"
-#import "BlockLayer.h"
+#import "MacInterfaceControl.h"
+#import "MacBlock.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation InterfaceControl{
-    BlockLayer *block[4][4];
+@implementation MacInterfaceControl{
+    MacBlockAttribute *attr;
+    MacBlockLayer *block[4][4];
     moveTableArray *moveTable;
     boolTable *refreshTable;
     boolTable *mergeTable;
@@ -21,24 +22,23 @@
 
 - (IBAction)newGame:(id)sender{
     [gameData newGame];
+    [self refreshScoreArea];
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             block[i][j].data = [gameData dataAtRow:i col:j];
             block[i][j].power = [gameData powerAtRow:i col:j];
             [block[i][j] setNeedsDisplay];
-            [[gameView layer] addSublayer:block[i][j]];
+            [[gameAreaView layer] addSublayer:block[i][j]];
             [block[i][j] setHidden:NO];
         }
     }
-    gameView.isDeath = [gameData isDeath];
-    gameView.currentScore = [gameData currentScore];
-    gameView.highScore = [gameData highScore];
-    gameView.topPower = [gameData topPower];
-    [gameView setNeedsDisplay:YES];
+    gameAreaView.isDeath = [gameData isDeath];
+    [gameAreaView setNeedsDisplay:YES];
 }
 
 - (void)keyboardControl:(dirEnumType)dir{
     if([gameData merge:dir]){
+        [self refreshScoreArea];
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 4; ++j) {
                 if ((*refreshTable)[i][j]) {
@@ -53,19 +53,16 @@
     if([gameData move:dir]){
         [self startMoveAnimation];
         [gameData generate:dir];
-        gameView.currentScore = [gameData currentScore];
         if ([gameData isDeath]) {
-            gameView.isDeath = [gameData isDeath];
-            gameView.highScore = [gameData highScore];
-            gameView.topPower = [gameData topPower];
+            gameAreaView.isDeath = [gameData isDeath];
             //隐藏Block
             for (int i = 0; i < 4; ++i) {
                 for (int j = 0; j < 4; ++j) {
                     [block[i][j] removeFromSuperlayer];
                 }
             }
+            [gameAreaView setNeedsDisplay:YES];
         }
-        [gameView setNeedsDisplay:YES];
     }
 }
 
@@ -75,7 +72,7 @@
             NSInteger toI = (*moveTable)[i][j].toI;
             NSInteger toJ = (*moveTable)[i][j].toJ;
             if (toI != -1 || toJ != -1) {
-                CGPoint toPoint = CGPointMake(306 + toI * 138, 94 + toJ * 138);
+                CGPoint toPoint = CGPointMake(55.5 + toI * 103, 55.5 + toJ * 103);
                 [CATransaction begin];
                 [CATransaction setValue:[NSNumber numberWithFloat:0.3f] forKey: kCATransactionAnimationDuration];
                 [block[i][j] setPosition:toPoint];
@@ -136,14 +133,14 @@
                 moveElementType *f;
                 do{
                     f = &((*moveTable)[c->fromI][c->fromJ]);
-                    CGPoint fromPoint = CGPointMake(306 + f->i * 138, 94 + f->j * 138);
+                    CGPoint fromPoint = CGPointMake(55.5 + f->i * 103, 55.5 + f->j * 103);
                     
                     [CATransaction begin];
                     [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
                     [block[c->i][c->j] setPosition:fromPoint];
                     [CATransaction commit];
                     
-                    BlockLayer* bl = block[c->i][c->j];
+                    MacBlockLayer* bl = block[c->i][c->j];
                     block[c->i][c->j] = block[f->i][f->j];
                     block[f->i][f->j] = bl;
                     
@@ -157,17 +154,24 @@
         }
     }
 }
+- (void)refreshScoreArea{
+    [power setStringValue:[NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])]];
+    powerTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    power.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    [score setStringValue: [NSString stringWithFormat:@"%ld",[gameData currentScore]]];
+    
+    bestTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    best.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    [best setStringValue:[NSString stringWithFormat:@"%ld",[gameData highScore]]];
+}
 
 
 - (void)awakeFromNib{
-    gameView.isDeath = [gameData isDeath];
-    gameView.currentScore = [gameData currentScore];
-    gameView.highScore = [gameData highScore];
-    gameView.topPower = [gameData topPower];
-    [gameView setWantsLayer:YES];
-    [gameView setNeedsDisplay:YES];
+    gameAreaView.isDeath = [gameData isDeath];
+    [gameAreaView setWantsLayer:YES];
+    [gameAreaView setNeedsDisplay:YES];
 
-    BlockAttribute *attr = [[BlockAttribute alloc]init];
+    attr = [[MacBlockAttribute alloc]init];
     
     animationStatusType* aST = [gameData animationStatus];
     moveTable = aST->aMoveTable;
@@ -175,17 +179,19 @@
     mergeTable = aST->aMergeTable;
     generateTable = aST->aGenerateTable;
     
+    [self refreshScoreArea];
+    
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
-            block[i][j] = [BlockLayer layer];
-            [[gameView layer] addSublayer:block[i][j]];
+            block[i][j] = [MacBlockLayer layer];
+            [[gameAreaView layer] addSublayer:block[i][j]];
             
             block[i][j].data = [gameData dataAtRow:i col:j];
             block[i][j].power = [gameData powerAtRow:i col:j];
             block[i][j].blockAttr = attr;
             
-            [block[i][j] setBounds:CGRectMake(0, 0, 128, 128)];
-            [block[i][j] setPosition:CGPointMake(306 + i * 138, 94 + j * 138)];
+            [block[i][j] setBounds:CGRectMake(0, 0, 95, 95)];
+            [block[i][j] setPosition:CGPointMake(55.5 + i * 103, 55.5 + j * 103)];
             [block[i][j] setAnchorPoint:CGPointMake(0.5, 0.5)];
             [block[i][j] setNeedsDisplay];
         }

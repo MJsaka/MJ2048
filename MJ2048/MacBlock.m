@@ -1,14 +1,14 @@
 //
-//  BlockLayer.m
+//  MacBlockLayer.m
 //  MJ2048
 //
 //  Created by MJsaka on 8/29/15.
 //  Copyright (c) 2015 MJsaka. All rights reserved.
 //
-#import "BlockLayer.h"
+#import "MacBlock.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation BlockLayer
+@implementation MacBlockLayer
 
 @synthesize blockAttr;
 @synthesize data;
@@ -57,7 +57,7 @@
 @end
 
 
-@implementation BlockAttribute {
+@implementation MacBlockAttribute {
     NSColor *colorOfPower[21];
     NSMutableDictionary *attrContent;
 }

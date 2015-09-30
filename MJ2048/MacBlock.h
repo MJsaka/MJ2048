@@ -1,5 +1,5 @@
 //
-//  BlockLayer.h
+//  MacBlockLayer.h
 //  MJ2048
 //
 //  Created by MJsaka on 8/29/15.
@@ -8,15 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface BlockAttribute : NSObject
+@interface MacBlockAttribute : NSObject
 
 - (NSColor*)colorOfPower:(NSInteger)power;
 - (NSDictionary*)stringAttr;
 @end
 
-@interface BlockLayer : CALayer
+@interface MacBlockLayer : CALayer
 
-@property (strong,nonatomic) BlockAttribute *blockAttr;
+@property (strong,nonatomic) MacBlockAttribute *blockAttr;
 @property (assign,nonatomic) NSInteger data;
 @property (assign,nonatomic) NSInteger power;
 
