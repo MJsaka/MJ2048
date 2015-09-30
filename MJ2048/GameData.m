@@ -84,7 +84,7 @@
 }
 -(void)setBlockNum:(NSInteger)blockNum{
     _blockNum = blockNum;
-    [self init];
+    [self generateNode];
 }
 
 - (id)init{
@@ -101,62 +101,68 @@
         _highScore = 0;
         _topPower = 0;
         
-        NSMutableArray *leftSider = [NSMutableArray arrayWithCapacity:0];
-        NSMutableArray *rightSider = [NSMutableArray arrayWithCapacity:0];
-        NSMutableArray *upSider = [NSMutableArray arrayWithCapacity:0];
-        NSMutableArray *downSider = [NSMutableArray arrayWithCapacity:0];
-        //建立所有结点，并建立左右连接，左右边界
-        blockNodeType *leftNode;
-        blockNodeType *rightNode;
-        for (int j = 0; j < _blockNum ; ++j){
-            leftNode = [[blockNodeType alloc]init];
-            leftNode.posi = 0;
-            leftNode.posj = j;
-            [leftSider addObject:leftNode];
-            for (int i = 1; i < _blockNum; ++i) {
-                rightNode = [[blockNodeType alloc]init];
-                rightNode.posi = i;
-                rightNode.posj = j;
-                [leftNode setNodeOnDir:DIR_RIGHT node:rightNode];
-                [rightNode setNodeOnDir:DIR_LEFT node:leftNode];
-                leftNode = rightNode;
-            }
-            [rightSider addObject:rightNode];
-        }
-        //建立上下连接
-        blockNodeType *downNode;
-        blockNodeType *upNode;
-        for (int j = 1; j < _blockNum; ++j) {
-            downNode = [leftSider objectAtIndex:j-1];
-            upNode = [leftSider objectAtIndex:j];
-            for (int i = 0; i < _blockNum; ++i) {
-                [downNode setNodeOnDir:DIR_UP node:upNode];
-                [upNode setNodeOnDir:DIR_DOWN node:downNode];
-                downNode = [downNode nodeOnDir:DIR_RIGHT];
-                upNode = [upNode nodeOnDir:DIR_RIGHT];
-            }
-        }
-        //建立上下边界
-        downNode = [leftSider objectAtIndex:0];
-        upNode = [leftSider objectAtIndex:_blockNum-1];
-        for (int i = 0; i < _blockNum; ++i) {
-            [downSider addObject:downNode];
-            [upSider addObject:upNode];
-            downNode = [downNode nodeOnDir:DIR_RIGHT];
-            upNode = [upNode nodeOnDir:DIR_RIGHT];
-        }
-        
-        blockSider[DIR_LEFT] = [NSArray arrayWithArray:leftSider];
-        blockSider[DIR_RIGHT] = [NSArray arrayWithArray:rightSider];
-        blockSider[DIR_UP] = [NSArray arrayWithArray:upSider];
-        blockSider[DIR_DOWN] = [NSArray arrayWithArray:downSider];
-        
+        [self generateNode];
         [self readNSUserDefaults];
     }
     if (_isDeath){
         [self newGame];
     }
     return self;
+}
+-(void)generateNode{
+    NSMutableArray *leftSider = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *rightSider = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *upSider = [NSMutableArray arrayWithCapacity:0];
+    NSMutableArray *downSider = [NSMutableArray arrayWithCapacity:0];
+    //建立所有结点，并建立左右连接，左右边界
+    blockNodeType *leftNode;
+    blockNodeType *rightNode;
+    for (int j = 0; j < _blockNum ; ++j){
+        leftNode = [[blockNodeType alloc]init];
+        leftNode.posi = 0;
+        leftNode.posj = j;
+        leftNode.data = pow(2, _blockNum*j);
+        leftNode.power = _blockNum*j;
+        [leftSider addObject:leftNode];
+        for (int i = 1; i < _blockNum; ++i) {
+            rightNode = [[blockNodeType alloc]init];
+            rightNode.posi = i;
+            rightNode.posj = j;
+            rightNode.data = pow(2, _blockNum*j+i);
+            rightNode.power = i+_blockNum*j;
+            [leftNode setNodeOnDir:DIR_RIGHT node:rightNode];
+            [rightNode setNodeOnDir:DIR_LEFT node:leftNode];
+            leftNode = rightNode;
+        }
+        [rightSider addObject:rightNode];
+    }
+    //建立上下连接
+    blockNodeType *downNode;
+    blockNodeType *upNode;
+    for (int j = 1; j < _blockNum; ++j) {
+        downNode = [leftSider objectAtIndex:j-1];
+        upNode = [leftSider objectAtIndex:j];
+        for (int i = 0; i < _blockNum; ++i) {
+            [downNode setNodeOnDir:DIR_UP node:upNode];
+            [upNode setNodeOnDir:DIR_DOWN node:downNode];
+            downNode = [downNode nodeOnDir:DIR_RIGHT];
+            upNode = [upNode nodeOnDir:DIR_RIGHT];
+        }
+    }
+    //建立上下边界
+    downNode = [leftSider objectAtIndex:0];
+    upNode = [leftSider objectAtIndex:_blockNum-1];
+    for (int i = 0; i < _blockNum; ++i) {
+        [downSider addObject:downNode];
+        [upSider addObject:upNode];
+        downNode = [downNode nodeOnDir:DIR_RIGHT];
+        upNode = [upNode nodeOnDir:DIR_RIGHT];
+    }
+    
+    blockSider[DIR_LEFT] = [NSArray arrayWithArray:leftSider];
+    blockSider[DIR_RIGHT] = [NSArray arrayWithArray:rightSider];
+    blockSider[DIR_UP] = [NSArray arrayWithArray:upSider];
+    blockSider[DIR_DOWN] = [NSArray arrayWithArray:downSider];
 }
 
 -(NSInteger)currentScore{

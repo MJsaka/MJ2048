@@ -177,14 +177,14 @@
     }
 }
 - (void)refreshScoreArea{
-    [power setStringValue:[NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])]];
-    powerTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    power.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    [score setStringValue: [NSString stringWithFormat:@"%ld",[gameData currentScore]]];
+    [topPower setStringValue:[NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])]];
+    topPowerTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    topPower.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    [currentScore setStringValue: [NSString stringWithFormat:@"%ld",[gameData currentScore]]];
     
-    bestTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    best.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    [best setStringValue:[NSString stringWithFormat:@"%ld",[gameData highScore]]];
+    bestScoreTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    bestScore.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    [bestScore setStringValue:[NSString stringWithFormat:@"%ld",[gameData highScore]]];
 }
 
 
@@ -192,7 +192,7 @@
     blockNum = [gameData blockNum];
     space = 10 + (5-blockNum)*4;
     width = (630 - (blockNum+1)*space)/blockNum;
-    attr = [[MacBlockAttribute alloc]initWithFontSize:120/blockNum];
+    attr = [[MacBlockAttribute alloc]initWithFontSize:blockNum * 5 * pow(2, 5-blockNum)];
     
     [self refreshScoreArea];
 

@@ -13,12 +13,12 @@
 @interface MacInterfaceControl : NSObject{
     IBOutlet GameData *gameData;
     IBOutlet MacGameAreaView *gameAreaView;
-    IBOutlet NSTextField* bestTitle;
-    IBOutlet NSTextField* best;
-    IBOutlet NSTextField* powerTitle;
-    IBOutlet NSTextField* power;
-    IBOutlet NSTextField* scoreTitle;
-    IBOutlet NSTextField* score;
+    IBOutlet NSTextField* bestScoreTitle;
+    IBOutlet NSTextField* bestScore;
+    IBOutlet NSTextField* topPowerTitle;
+    IBOutlet NSTextField* topPower;
+    IBOutlet NSTextField* currentScoreTitle;
+    IBOutlet NSTextField* currentScore;
 }
 
 - (IBAction)newGame:(id)sender;

@@ -25,14 +25,14 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <customObject id="Qvf-SB-yQx" customClass="MacInterfaceControl">
             <connections>
-                <outlet property="best" destination="bPN-FE-Ah8" id="TxU-K8-3mA"/>
-                <outlet property="bestTitle" destination="5vr-N4-uME" id="n4i-dA-kz9"/>
+                <outlet property="bestScore" destination="bPN-FE-Ah8" id="wZ3-Tn-bnL"/>
+                <outlet property="bestScoreTitle" destination="5vr-N4-uME" id="Tsl-ad-tfE"/>
+                <outlet property="currentScore" destination="GVY-Ts-rU1" id="Z8h-ZC-aTc"/>
+                <outlet property="currentScoreTitle" destination="Xex-fR-NYJ" id="x0r-a2-XaS"/>
                 <outlet property="gameAreaView" destination="UGO-rP-0c0" id="7pj-QV-fdR"/>
                 <outlet property="gameData" destination="3qz-d4-Zdw" id="noc-by-r6T"/>
-                <outlet property="power" destination="RE8-4I-Ugh" id="Z78-xA-FaZ"/>
-                <outlet property="powerTitle" destination="jfp-B9-3M4" id="xJe-fT-4mM"/>
-                <outlet property="score" destination="GVY-Ts-rU1" id="6zi-Zo-WTO"/>
-                <outlet property="scoreTitle" destination="Xex-fR-NYJ" id="rhp-lb-hiU"/>
+                <outlet property="topPower" destination="RE8-4I-Ugh" id="Ekc-Z4-aCL"/>
+                <outlet property="topPowerTitle" destination="jfp-B9-3M4" id="Juh-3z-7rD"/>
             </connections>
         </customObject>
         <customObject id="3qz-d4-Zdw" customClass="GameData"/>
@@ -403,10 +403,10 @@
         </menu>
         <window title="MJ2048" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
-            <rect key="contentRect" x="352" y="135" width="870" height="650"/>
+            <rect key="contentRect" x="352" y="135" width="870.0000125169754" height="650"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="870" height="650"/>
+                <rect key="frame" x="0.0" y="0.0" width="870.0000125169754" height="650"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView canDrawConcurrently="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cZ-V5-Iyk" userLabel="InfoArea" customClass="MacInfoAreaView">
