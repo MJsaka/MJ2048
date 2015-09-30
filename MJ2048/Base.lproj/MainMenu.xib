@@ -14,7 +14,11 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="MacAppDelegate">
             <connections>
-                <outlet property="gameData" destination="SGl-Nc-X0F" id="pKg-nb-PMD"/>
+                <outlet property="gameData" destination="3qz-d4-Zdw" id="x6w-zs-8lI"/>
+                <outlet property="interfaceControl" destination="Qvf-SB-yQx" id="m3K-yw-xfs"/>
+                <outlet property="num" destination="gm9-sa-Re5" id="yIr-eI-f3I"/>
+                <outlet property="preferencePanel" destination="x2B-8W-F8a" id="71g-8g-kPB"/>
+                <outlet property="stepper" destination="LHd-JJ-ZZz" id="9R6-WD-hIu"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -24,14 +28,14 @@
                 <outlet property="best" destination="bPN-FE-Ah8" id="TxU-K8-3mA"/>
                 <outlet property="bestTitle" destination="5vr-N4-uME" id="n4i-dA-kz9"/>
                 <outlet property="gameAreaView" destination="UGO-rP-0c0" id="7pj-QV-fdR"/>
-                <outlet property="gameData" destination="SGl-Nc-X0F" id="UKZ-Fw-DmE"/>
+                <outlet property="gameData" destination="3qz-d4-Zdw" id="noc-by-r6T"/>
                 <outlet property="power" destination="RE8-4I-Ugh" id="Z78-xA-FaZ"/>
                 <outlet property="powerTitle" destination="jfp-B9-3M4" id="xJe-fT-4mM"/>
                 <outlet property="score" destination="GVY-Ts-rU1" id="6zi-Zo-WTO"/>
                 <outlet property="scoreTitle" destination="Xex-fR-NYJ" id="rhp-lb-hiU"/>
             </connections>
         </customObject>
-        <customObject id="SGl-Nc-X0F" customClass="GameData"/>
+        <customObject id="3qz-d4-Zdw" customClass="GameData"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="MJ2048" id="1Xt-HY-uBw">
@@ -45,7 +49,11 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                            <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                <connections>
+                                    <action selector="openWinSheet:" target="Voe-Tx-rLC" id="sNW-le-kkv"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
                             <menuItem title="Hide MJ2048" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
@@ -394,79 +402,79 @@
             </items>
         </menu>
         <window title="MJ2048" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="352" y="135" width="590.00000417232513" height="440"/>
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
+            <rect key="contentRect" x="352" y="135" width="870" height="650"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="590.00000417232513" height="440"/>
+                <rect key="frame" x="0.0" y="0.0" width="870" height="650"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView canDrawConcurrently="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cZ-V5-Iyk" userLabel="InfoArea" customClass="MacInfoAreaView">
-                        <rect key="frame" x="10" y="10" width="140" height="420"/>
+                        <rect key="frame" x="10" y="10" width="210" height="630"/>
                         <subviews>
                             <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jfp-B9-3M4">
-                                <rect key="frame" x="10" y="365" width="120" height="45"/>
+                                <rect key="frame" x="10" y="549" width="190" height="71"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="最大数字" drawsBackground="YES" usesSingleLineMode="YES" id="rsY-de-8Vb">
-                                    <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RE8-4I-Ugh">
-                                <rect key="frame" x="10" y="320" width="120" height="45"/>
+                                <rect key="frame" x="10" y="477" width="190" height="72"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="power" drawsBackground="YES" usesSingleLineMode="YES" id="Qpb-WG-vjr">
-                                    <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5vr-N4-uME">
-                                <rect key="frame" x="10" y="265" width="120" height="45"/>
+                                <rect key="frame" x="10" y="395" width="190" height="72"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="最高分数" drawsBackground="YES" usesSingleLineMode="YES" id="B1C-Vc-pj2">
-                                    <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bPN-FE-Ah8">
-                                <rect key="frame" x="10" y="220" width="120" height="45"/>
+                                <rect key="frame" x="10" y="324" width="190" height="71"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="best" drawsBackground="YES" usesSingleLineMode="YES" id="pdV-gw-7iV">
-                                    <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xex-fR-NYJ">
-                                <rect key="frame" x="10" y="165" width="120" height="45"/>
+                                <rect key="frame" x="10" y="243" width="190" height="71"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="当前分数" drawsBackground="YES" usesSingleLineMode="YES" id="9mt-NJ-gFD">
-                                    <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GVY-Ts-rU1">
-                                <rect key="frame" x="10" y="120" width="120" height="45"/>
+                                <rect key="frame" x="10" y="172" width="190" height="71"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="score" drawsBackground="YES" usesSingleLineMode="YES" id="fsV-gA-2R7">
-                                    <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kG2-fY-HBV">
-                                <rect key="frame" x="10" y="64" width="120" height="47"/>
+                                <rect key="frame" x="10" y="90" width="190" height="73"/>
                                 <buttonCell key="cell" type="smallSquare" title="重新开始" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oQY-mg-YvH">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" size="20" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="26" name=".HelveticaNeueDeskInterface-Regular"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="newGame:" target="Qvf-SB-yQx" id="Wxk-qC-FAz"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KCA-DZ-Qgy">
-                                <rect key="frame" x="10" y="9" width="120" height="47"/>
+                                <rect key="frame" x="10" y="9" width="190" height="73"/>
                                 <buttonCell key="cell" type="smallSquare" title="退出游戏" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GPV-oC-Ycl">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" size="20" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="26" name=".HelveticaNeueDeskInterface-Regular"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="terminate:" target="-1" id="7vc-Va-EuA"/>
@@ -523,11 +531,10 @@
                         </constraints>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="UGO-rP-0c0" userLabel="GameArea" customClass="MacGameAreaView">
-                        <rect key="frame" x="160" y="10" width="420" height="420"/>
+                        <rect key="frame" x="230" y="10" width="630" height="630"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="420" id="ELM-E9-WxS"/>
+                            <constraint firstAttribute="height" constant="630" id="ELM-E9-WxS"/>
                             <constraint firstAttribute="width" secondItem="UGO-rP-0c0" secondAttribute="height" multiplier="1:1" id="MW7-TO-k80"/>
-                            <constraint firstAttribute="width" constant="420" id="i13-DI-BwA"/>
                         </constraints>
                         <connections>
                             <outlet property="interface" destination="Qvf-SB-yQx" id="I71-Gi-n4f"/>
@@ -545,6 +552,70 @@
                 </constraints>
             </view>
             <point key="canvasLocation" x="299" y="-374"/>
+        </window>
+        <window title="Preference" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="x2B-8W-F8a" customClass="NSPanel">
+            <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="139" y="81" width="155" height="105"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="WfU-dV-DFp">
+                <rect key="frame" x="0.0" y="0.0" width="155" height="105"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LHd-JJ-ZZz">
+                        <rect key="frame" x="119" y="58" width="19" height="29"/>
+                        <stepperCell key="cell" continuous="YES" alignment="left" minValue="3" maxValue="6" doubleValue="4" id="guC-Ip-V8M"/>
+                        <connections>
+                            <action selector="stepperValueChanged:" target="Voe-Tx-rLC" id="psJ-0P-7tk"/>
+                        </connections>
+                    </stepper>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vqo-eK-YkS">
+                        <rect key="frame" x="20" y="61" width="65" height="24"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="行列数:" id="0nd-I6-1r6">
+                            <font key="font" size="16" name=".HelveticaNeueDeskInterface-Regular"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gm9-sa-Re5">
+                        <rect key="frame" x="95" y="61" width="22" height="24"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="4" id="fmo-hm-lhg">
+                            <font key="font" size="16" name=".HelveticaNeueDeskInterface-Regular"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7cB-ox-FFv">
+                        <rect key="frame" x="81" y="13" width="60" height="32"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ktQ-sg-tMB">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="okClick:" target="Voe-Tx-rLC" id="g9n-CQ-tgD"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="LHd-JJ-ZZz" secondAttribute="trailing" constant="20" id="69U-ZT-Hmi"/>
+                    <constraint firstItem="LHd-JJ-ZZz" firstAttribute="top" secondItem="WfU-dV-DFp" secondAttribute="top" constant="20" id="781-4l-ZND"/>
+                    <constraint firstItem="Vqo-eK-YkS" firstAttribute="leading" secondItem="WfU-dV-DFp" secondAttribute="leading" constant="20" id="8XN-la-hgQ"/>
+                    <constraint firstItem="LHd-JJ-ZZz" firstAttribute="height" secondItem="Vqo-eK-YkS" secondAttribute="height" id="XHL-ce-sCV"/>
+                    <constraint firstItem="gm9-sa-Re5" firstAttribute="height" secondItem="Vqo-eK-YkS" secondAttribute="height" id="ZEc-5E-XMA"/>
+                    <constraint firstItem="LHd-JJ-ZZz" firstAttribute="leading" secondItem="gm9-sa-Re5" secondAttribute="trailing" constant="5" id="auV-WF-RDg"/>
+                    <constraint firstItem="gm9-sa-Re5" firstAttribute="top" secondItem="WfU-dV-DFp" secondAttribute="top" constant="20" id="c0r-CW-riZ"/>
+                    <constraint firstItem="gm9-sa-Re5" firstAttribute="leading" secondItem="Vqo-eK-YkS" secondAttribute="trailing" constant="10" id="gFI-3r-Zid"/>
+                    <constraint firstItem="LHd-JJ-ZZz" firstAttribute="height" secondItem="Vqo-eK-YkS" secondAttribute="height" id="hNt-Xc-hsi"/>
+                    <constraint firstItem="Vqo-eK-YkS" firstAttribute="top" secondItem="WfU-dV-DFp" secondAttribute="top" constant="20" id="msR-tf-BHD"/>
+                    <constraint firstAttribute="bottom" secondItem="7cB-ox-FFv" secondAttribute="bottom" constant="20" id="nKU-Tg-XSP"/>
+                    <constraint firstItem="7cB-ox-FFv" firstAttribute="top" secondItem="LHd-JJ-ZZz" secondAttribute="bottom" constant="20" id="rHk-7P-tue"/>
+                    <constraint firstAttribute="trailing" secondItem="7cB-ox-FFv" secondAttribute="trailing" constant="20" id="rml-gE-9mj"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="66.5" y="73.5"/>
         </window>
     </objects>
 </document>

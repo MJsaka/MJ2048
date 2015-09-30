@@ -9,13 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface MacBlockAttribute : NSObject
-
+@property (assign,nonatomic) CGFloat fontSize;
 - (NSColor*)colorOfPower:(NSInteger)power;
-- (NSDictionary*)stringAttr;
+- (id)initWithFontSize:(CGFloat)size;
 @end
 
 @interface MacBlockLayer : CALayer
-
 @property (strong,nonatomic) MacBlockAttribute *blockAttr;
 @property (assign,nonatomic) NSInteger data;
 @property (assign,nonatomic) NSInteger power;

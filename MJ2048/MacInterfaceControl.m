@@ -5,7 +5,7 @@
 //  Created by MJsaka on 8/26/15.
 //  Copyright (c) 2015 MJsaka. All rights reserved.
 //
-
+#import "MacAppDelegate.h"
 #import "MacInterfaceControl.h"
 #import "MacBlock.h"
 #import <QuartzCore/QuartzCore.h>
@@ -14,12 +14,26 @@
     MacBlockAttribute *attr;
     NSArray *block;
     NSInteger blockNum;
+    NSInteger space;
+    NSInteger width;
 }
 
+- (void)newBlockNum:(id)sender{
+    for (int i = 0; i < blockNum; ++i) {
+        for (int j = 0; j < blockNum; ++j) {
+            [((MacBlockLayer*)block[i][j]) removeFromSuperlayer];
+        }
+    }
+    [self awakeFromNib];
+    [self newGame:self];
+}
 
 - (IBAction)newGame:(id)sender{
     [gameData newGame];
     [self refreshScoreArea];
+    gameAreaView.isDeath = [gameData isDeath];
+    gameAreaView.blockNum = blockNum;
+    [gameAreaView setNeedsDisplay:YES];
     NSArray *gameDataDownSider = [gameData blockSider:DIR_DOWN];
     for (int i = 0; i < blockNum; ++i) {
         blockNodeType* node = gameDataDownSider[i];
@@ -28,13 +42,9 @@
             ((MacBlockLayer*)block[i][j]).power = node.power;
             [((MacBlockLayer*)block[i][j]) setNeedsDisplay];
             [[gameAreaView layer] addSublayer:((MacBlockLayer*)block[i][j])];
-            [((MacBlockLayer*)block[i][j]) setHidden:NO];
             node = [node nodeOnDir:DIR_UP];
         }
     }
-    gameAreaView.isDeath = [gameData isDeath];
-    gameAreaView.blockNum = blockNum;
-    [gameAreaView setNeedsDisplay:YES];
 }
 
 - (void)keyboardControl:(dirEnumType)dir{
@@ -79,7 +89,7 @@
             NSInteger toI = node.moveToI;
             NSInteger toJ = node.moveToJ;
             if (toI != -1 || toJ != -1) {
-                CGPoint toPoint = CGPointMake(55.5 + toI * 103, 55.5 + toJ * 103);
+                CGPoint toPoint = CGPointMake(space+width/2+toI*(space+width), space+width/2+toJ*(space + width));
                 [CATransaction begin];
                 [CATransaction setValue:[NSNumber numberWithFloat:0.3f] forKey: kCATransactionAnimationDuration];
                 [((MacBlockLayer*)block[i][j]) setPosition:toPoint];
@@ -146,7 +156,7 @@
                 while (f.moveToI == -1) {
                     f = [f nodeOnDir:redir];
                 }
-                CGPoint fromPoint = CGPointMake(55.5 + f.posi * 103, 55.5 + f.posj * 103);
+                CGPoint fromPoint = CGPointMake(space+width/2+f.posi*(space+width), space+width/2+f.posj*(space + width));
                 
                 [CATransaction begin];
                 [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
@@ -180,15 +190,17 @@
 
 - (void)awakeFromNib{
     blockNum = [gameData blockNum];
-    attr = [[MacBlockAttribute alloc]init];
-
+    space = 10 + (5-blockNum)*4;
+    width = (630 - (blockNum+1)*space)/blockNum;
+    attr = [[MacBlockAttribute alloc]initWithFontSize:120/blockNum];
+    
     [self refreshScoreArea];
 
-    gameAreaView.isDeath = [gameData isDeath];
     gameAreaView.blockNum = blockNum;
+    gameAreaView.isDeath = [gameData isDeath];
     [gameAreaView setWantsLayer:YES];
     [gameAreaView setNeedsDisplay:YES];
-
+    
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
     NSArray *gameDataDirSider = [gameData blockSider:DIR_DOWN];
     for (int i = 0; i < blockNum; ++i) {
@@ -202,8 +214,8 @@
             blockLayer.power = node.power;
             blockLayer.blockAttr = attr;
             
-            [blockLayer setBounds:CGRectMake(0, 0, 95, 95)];
-            [blockLayer setPosition:CGPointMake(55.5 + i * 103, 55.5 + j * 103)];
+            [blockLayer setBounds:CGRectMake(0, 0, width, width)];
+            [blockLayer setPosition:CGPointMake(space+width/2+i*(space+width), space+width/2+j*(space + width))];
             [blockLayer setAnchorPoint:CGPointMake(0.5, 0.5)];
             [blockLayer setNeedsDisplay];
             [col addObject:blockLayer];

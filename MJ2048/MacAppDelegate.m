@@ -11,12 +11,15 @@
 
 @interface MacAppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
 @end
 
-@implementation MacAppDelegate{
-    IBOutlet GameData *gameData;
-}
+@implementation MacAppDelegate
+@synthesize window;
+@synthesize preferencePanel;
+@synthesize num;
+@synthesize gameData;
+@synthesize interfaceControl;
+@synthesize stepper;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
@@ -26,5 +29,22 @@
     // Insert code here to tear down your application
     [gameData saveNSUserDefaults];
 }
+- (IBAction)stepperValueChanged:(NSStepper *)sender {
+    [num setDoubleValue:[sender doubleValue]];
+}
+
+- (IBAction)openWinSheet:(id)sender{
+    [stepper setIntegerValue:[gameData blockNum]];
+    [num setIntegerValue:[gameData blockNum]];
+    [NSApp beginSheet:preferencePanel modalForWindow:window modalDelegate:self didEndSelector:NULL contextInfo:nil];
+}
+
+- (IBAction)okClick:(id)sender{
+    [preferencePanel orderOut:nil];
+    [NSApp endSheet:preferencePanel];
+    [gameData setBlockNum:[num integerValue]];
+    [interfaceControl newBlockNum:self];
+}
+
 
 @end

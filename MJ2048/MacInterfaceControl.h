@@ -22,5 +22,6 @@
 }
 
 - (IBAction)newGame:(id)sender;
+- (void)newBlockNum:(id)sender;
 - (void)keyboardControl:(dirEnumType)dir;
 @end

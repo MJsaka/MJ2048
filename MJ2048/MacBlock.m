@@ -24,7 +24,7 @@
         [self setOpacity:1.0];
         
         CFStringRef string = CFStringCreateWithFormat ( kCFAllocatorDefault, nil, CFSTR("%ld") , (long)data );
-        CTFontRef font = CTFontCreateWithName ( CFSTR("SimHei"), 50, NULL);
+        CTFontRef font = CTFontCreateWithName ( CFSTR("SimHei"), blockAttr.fontSize, NULL);
         
         CFStringRef keys[] = { kCTFontAttributeName };
         CFTypeRef values[] = { font };
@@ -59,8 +59,8 @@
 
 @implementation MacBlockAttribute {
     NSColor *colorOfPower[21];
-    NSMutableDictionary *attrContent;
 }
+@synthesize fontSize;
 - (id)init{
     if (self = [super init]) {
         colorOfPower[0] = [NSColor colorWithRed:1.000 green:0.984 blue:0.792 alpha:1.0];
@@ -88,15 +88,15 @@
         colorOfPower[18] =  [NSColor colorWithRed:0.271 green:0.196 blue:0.396 alpha:1.0];
         colorOfPower[19] =  [NSColor colorWithRed:0.425 green:0.249 blue:0.249 alpha:1.0];
         colorOfPower[20] = [NSColor colorWithRed:0.149 green:0.325 blue:0.137 alpha:1.0];
-        attrContent = [NSMutableDictionary dictionary];
-        [attrContent setObject:[NSFont fontWithName:@"SimHei" size:50] forKey:NSFontAttributeName];
     }
+    return self;
+}
+- (id)initWithFontSize:(CGFloat)size{
+    self = [self init];
+    fontSize = size;
     return self;
 }
 - (NSColor*)colorOfPower:(NSInteger)power{
     return colorOfPower[power];
-}
-- (NSDictionary*)stringAttr{
-    return attrContent;
 }
 @end

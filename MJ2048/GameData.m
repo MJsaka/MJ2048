@@ -84,13 +84,16 @@
 }
 -(void)setBlockNum:(NSInteger)blockNum{
     _blockNum = blockNum;
+    [self init];
 }
 
 - (id)init{
     if (self = [super init]) {
-        _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
         if (_blockNum == 0) {
-            _blockNum = 4;
+            _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
+            if (_blockNum == 0) {
+                _blockNum = 4;
+            }
         }
         _isDeath = true;
         _score = 0;
@@ -190,8 +193,8 @@
         }
     }
     
-    NSInteger i = random() % 4;
-    NSInteger j = random() % 4;
+    NSInteger i = random() % _blockNum;
+    NSInteger j = random() % _blockNum;
     NSInteger k = random() % 2 + 1;
     blockNodeType *node = blockSider[DIR_DOWN][i];
     while(j>0) {
@@ -316,10 +319,10 @@
     //有移动，则从移动方向的后方新添一个格子。
     blockNodeType *n;
     do {//找到移动方向最后的一个为0的节点方可添加
-        NSInteger i = random() % 4;
+        NSInteger i = random() % _blockNum;
         n = blockSider[redir][i];
     }while (n.data != 0);
-    NSInteger j = random() % 4;
+    NSInteger j = random() % _blockNum;
     while (j > 0 && [n nodeOnDir:dir].data == 0){
         --j;
         n = [n nodeOnDir:dir];
