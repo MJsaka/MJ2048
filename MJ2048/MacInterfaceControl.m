@@ -177,14 +177,18 @@
     }
 }
 - (void)refreshScoreArea{
-    [topPower setStringValue:[NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])]];
-    topPowerTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    topPower.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    [currentScore setStringValue: [NSString stringWithFormat:@"%ld",[gameData currentScore]]];
+    topPowerTitleView.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    topPowerView.backgroundColor = [attr colorOfPower:[gameData topPower]];
     
-    bestScoreTitle.backgroundColor = [attr colorOfPower:[gameData topPower]];
-    bestScore.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    bestScoreTitleView.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    bestScoreView.backgroundColor = [attr colorOfPower:[gameData topPower]];
+    
+    currentScoreTitleView.backgroundColor = [attr colorOfPower:[gameData currentPower]];
+    currentScoreView.backgroundColor = [attr colorOfPower:[gameData currentPower]];
+    
+    [topPower setStringValue:[NSString stringWithFormat:@"%.0f",pow(2, [gameData topPower])]];
     [bestScore setStringValue:[NSString stringWithFormat:@"%ld",[gameData highScore]]];
+    [currentScore setStringValue: [NSString stringWithFormat:@"%ld",[gameData currentScore]]];
 }
 
 

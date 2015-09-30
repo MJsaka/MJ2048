@@ -97,3 +97,19 @@
 }
 
 @end
+
+@implementation MacInfoAreaLabelView
+
+@synthesize backgroundColor;
+- (void)drawRect:(NSRect)rect
+{
+    [backgroundColor set];
+    NSRectFill([self bounds]);
+}
+- (void)setBackgroundColor:(NSColor*)aColor
+{
+    backgroundColor = [aColor copy];
+    [self setNeedsDisplay:YES];
+}
+
+@end

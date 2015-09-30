@@ -69,6 +69,7 @@
     Boolean _isDeath;
     
     NSInteger _score;
+    NSInteger _currentPower;
     NSInteger _numTotal;
     
     NSInteger _highScore;
@@ -97,6 +98,7 @@
         }
         _isDeath = true;
         _score = 0;
+        _currentPower = 0;
         _numTotal = 0;
         _highScore = 0;
         _topPower = 0;
@@ -174,6 +176,9 @@
 - (NSInteger)topPower{
     return _topPower;
 }
+- (NSInteger)currentPower{
+    return _currentPower;
+}
 - (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col{
     blockNodeType *node = blockSider[DIR_DOWN][row];
     for (int j = 0; j < col; ++j) {
@@ -209,8 +214,10 @@
     }
     node.data = k*2;
     node.power = k;
+
     _numTotal = 1;
     _score = 0;
+    _currentPower = 0;
     _isDeath = false;
 }
 - (Boolean)isDeath{
@@ -267,6 +274,9 @@
                 _numTotal -= 1;
                 if (t.power > _topPower){
                     _topPower = t.power;
+                }
+                if (t.power > _currentPower) {
+                    _currentPower = t.power;
                 }
                 if (_score > _highScore){
                     _highScore = _score;
@@ -367,6 +377,7 @@
     if (!_isDeath) {
         [userDefaults setInteger:1 forKey:@"dataSaved"];
         [userDefaults setInteger:_score forKey:@"score"];
+        [userDefaults setInteger:_currentPower forKey:@"currentPower"];
         [userDefaults setInteger:_numTotal forKey:@"numTotal"];
         [userDefaults setBool:_isDeath forKey:@"isDeath"];
         for (int i = 0; i < _blockNum; ++i) {
@@ -392,6 +403,7 @@
     NSInteger dataSaved = [userDefaults integerForKey:@"dataSaved"];
     if (dataSaved) {
         _score = [userDefaults integerForKey:@"score"];
+        _currentPower = [userDefaults integerForKey:@"currentPower"];
         _numTotal = [userDefaults integerForKey:@"numTotal"];
         _isDeath = [userDefaults boolForKey:@"isDeath"];
         for (int i = 0; i < _blockNum; ++i) {

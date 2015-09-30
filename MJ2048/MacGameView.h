@@ -19,3 +19,10 @@
 @interface MacInfoAreaView : NSView
 
 @end
+
+@interface MacInfoAreaLabelView : NSView
+//{
+//    NSColor *_backgroundColor;
+//}
+@property(copy,nonatomic) NSColor *backgroundColor;
+@end

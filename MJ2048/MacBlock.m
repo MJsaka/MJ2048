@@ -107,7 +107,6 @@
         colorOfPower[33] = [NSColor colorWithRed:0.980 green:0.800 blue:0.200 alpha:1.0];
         colorOfPower[34] = [NSColor colorWithRed:0.949 green:0.608 blue:0.200 alpha:1.0];
         colorOfPower[35] = [NSColor colorWithRed:0.345 green:0.704 blue:0.896 alpha:1.0];
-        colorOfPower[36] = [NSColor colorWithRed:0.922 green:0.396 blue:0.396 alpha:1.0];
     }
     return self;
 }
