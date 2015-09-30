@@ -52,7 +52,7 @@
 		C5BEBEBF1B8DAD5A0068268F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C5BEBED51B8DAD8F0068268F /* MacInterfaceControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacInterfaceControl.h; sourceTree = "<group>"; };
 		C5BEBED81B8DADA00068268F /* GameData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameData.h; sourceTree = "<group>"; };
-		C5BEBED91B8DADA00068268F /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameData.m; sourceTree = "<group>"; };
+		C5BEBED91B8DADA00068268F /* GameData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GameData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C5BEBEDB1B8DADB40068268F /* MacGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacGameView.h; sourceTree = "<group>"; };
 		C5BEBEDC1B8DADB40068268F /* MacGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacGameView.m; sourceTree = "<group>"; };
 		C5BEBEDE1B8E94650068268F /* MacInterfaceControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacInterfaceControl.m; sourceTree = "<group>"; };

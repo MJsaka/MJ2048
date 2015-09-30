@@ -395,16 +395,16 @@
         </menu>
         <window title="MJ2048" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="352" y="135" width="590" height="440"/>
+            <rect key="contentRect" x="352" y="135" width="590.00000417232513" height="440"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="590" height="440"/>
+                <rect key="frame" x="0.0" y="0.0" width="590.00000417232513" height="440"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView canDrawConcurrently="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cZ-V5-Iyk" userLabel="InfoArea" customClass="MacInfoAreaView">
                         <rect key="frame" x="10" y="10" width="140" height="420"/>
                         <subviews>
-                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jfp-B9-3M4">
+                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jfp-B9-3M4">
                                 <rect key="frame" x="10" y="365" width="120" height="45"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="最大数字" drawsBackground="YES" usesSingleLineMode="YES" id="rsY-de-8Vb">
                                     <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -412,7 +412,7 @@
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RE8-4I-Ugh">
+                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RE8-4I-Ugh">
                                 <rect key="frame" x="10" y="320" width="120" height="45"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="power" drawsBackground="YES" usesSingleLineMode="YES" id="Qpb-WG-vjr">
                                     <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -420,7 +420,7 @@
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5vr-N4-uME">
+                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5vr-N4-uME">
                                 <rect key="frame" x="10" y="265" width="120" height="45"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="最高分数" drawsBackground="YES" usesSingleLineMode="YES" id="B1C-Vc-pj2">
                                     <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -428,7 +428,7 @@
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bPN-FE-Ah8">
+                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bPN-FE-Ah8">
                                 <rect key="frame" x="10" y="220" width="120" height="45"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="best" drawsBackground="YES" usesSingleLineMode="YES" id="pdV-gw-7iV">
                                     <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -436,7 +436,7 @@
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xex-fR-NYJ">
+                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xex-fR-NYJ">
                                 <rect key="frame" x="10" y="165" width="120" height="45"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="当前分数" drawsBackground="YES" usesSingleLineMode="YES" id="9mt-NJ-gFD">
                                     <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>
@@ -444,7 +444,7 @@
                                     <color key="backgroundColor" red="0.20189773720000001" green="0.62017487540000005" blue="0.3235825645" alpha="1" colorSpace="calibratedRGB"/>
                                 </textFieldCell>
                             </textField>
-                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GVY-Ts-rU1">
+                            <textField canDrawConcurrently="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GVY-Ts-rU1">
                                 <rect key="frame" x="10" y="120" width="120" height="45"/>
                                 <textFieldCell key="cell" enabled="NO" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="score" drawsBackground="YES" usesSingleLineMode="YES" id="fsV-gA-2R7">
                                     <font key="font" size="24" name=".HelveticaNeueDeskInterface-Regular"/>

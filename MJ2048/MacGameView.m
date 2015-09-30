@@ -12,6 +12,7 @@
 
 @synthesize attrGameOver;
 @synthesize isDeath;
+@synthesize blockNum;
 
 - (void)drawStringAtCenter:(NSString*)string withAttr:(NSDictionary*)attr inArea:(NSRect)rect{
     NSSize size = [string sizeWithAttributes:attr];
@@ -30,8 +31,8 @@
     if (isDeath) {
         [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:bounds];
     } else {
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < blockNum; ++i) {
+            for (int j = 0; j < blockNum; ++j) {
                 NSRect rect = NSMakeRect( 8 + i * 103, 8+ j * 103, 95, 95);
                 [[NSColor colorWithRed:1.000 green:0.984 blue:0.792 alpha:1.0] set];
                 [NSBezierPath fillRect: rect];

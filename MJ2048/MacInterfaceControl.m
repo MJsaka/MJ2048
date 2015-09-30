@@ -12,53 +12,58 @@
 
 @implementation MacInterfaceControl{
     MacBlockAttribute *attr;
-    MacBlockLayer *block[4][4];
-    moveTableArray *moveTable;
-    boolTable *refreshTable;
-    boolTable *mergeTable;
-    boolTable *generateTable;
+    NSArray *block;
+    NSInteger blockNum;
 }
 
 
 - (IBAction)newGame:(id)sender{
     [gameData newGame];
     [self refreshScoreArea];
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            block[i][j].data = [gameData dataAtRow:i col:j];
-            block[i][j].power = [gameData powerAtRow:i col:j];
-            [block[i][j] setNeedsDisplay];
-            [[gameAreaView layer] addSublayer:block[i][j]];
-            [block[i][j] setHidden:NO];
+    NSArray *gameDataDownSider = [gameData blockSider:DIR_DOWN];
+    for (int i = 0; i < blockNum; ++i) {
+        blockNodeType* node = gameDataDownSider[i];
+        for (int j = 0; j < blockNum; ++j) {
+            ((MacBlockLayer*)block[i][j]).data = node.data;
+            ((MacBlockLayer*)block[i][j]).power = node.power;
+            [((MacBlockLayer*)block[i][j]) setNeedsDisplay];
+            [[gameAreaView layer] addSublayer:((MacBlockLayer*)block[i][j])];
+            [((MacBlockLayer*)block[i][j]) setHidden:NO];
+            node = [node nodeOnDir:DIR_UP];
         }
     }
     gameAreaView.isDeath = [gameData isDeath];
+    gameAreaView.blockNum = blockNum;
     [gameAreaView setNeedsDisplay:YES];
 }
 
 - (void)keyboardControl:(dirEnumType)dir{
     if([gameData merge:dir]){
         [self refreshScoreArea];
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                if ((*refreshTable)[i][j]) {
-                    block[i][j].data = [gameData dataAtRow:i col:j];
-                    block[i][j].power = [gameData powerAtRow:i col:j];
-                    (*refreshTable)[i][j] = false;
-                    [block[i][j] setNeedsDisplay];
+        NSArray *gameDataDownSider = [gameData blockSider:DIR_DOWN];
+        for (int i = 0; i < blockNum; ++i) {
+            blockNodeType* node = gameDataDownSider[i];
+            for (int j = 0; j < blockNum; ++j) {
+                if (node.refresh) {
+                    ((MacBlockLayer*)block[i][j]).data = node.data;
+                    ((MacBlockLayer*)block[i][j]).power = node.power;
+                    node.refresh = false;
+                    [((MacBlockLayer*)block[i][j]) setNeedsDisplay];
                 }
+                node = [node nodeOnDir:DIR_UP];
             }
         }
     }
     if([gameData move:dir]){
         [self startMoveAnimation];
+        [self adjustBlock:dir];
         [gameData generate:dir];
         if ([gameData isDeath]) {
             gameAreaView.isDeath = [gameData isDeath];
             //隐藏Block
-            for (int i = 0; i < 4; ++i) {
-                for (int j = 0; j < 4; ++j) {
-                    [block[i][j] removeFromSuperlayer];
+            for (int i = 0; i < blockNum; ++i) {
+                for (int j = 0; j < blockNum; ++j) {
+                    [((MacBlockLayer*)block[i][j]) removeFromSuperlayer];
                 }
             }
             [gameAreaView setNeedsDisplay:YES];
@@ -67,28 +72,31 @@
 }
 
 - (void)startMoveAnimation{
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            NSInteger toI = (*moveTable)[i][j].toI;
-            NSInteger toJ = (*moveTable)[i][j].toJ;
+    NSArray *gameDataDownSider = [gameData blockSider:DIR_DOWN];
+    for (int i = 0; i < blockNum; ++i) {
+        blockNodeType* node = gameDataDownSider[i];
+        for (int j = 0; j < blockNum; ++j) {
+            NSInteger toI = node.moveToI;
+            NSInteger toJ = node.moveToJ;
             if (toI != -1 || toJ != -1) {
                 CGPoint toPoint = CGPointMake(55.5 + toI * 103, 55.5 + toJ * 103);
                 [CATransaction begin];
                 [CATransaction setValue:[NSNumber numberWithFloat:0.3f] forKey: kCATransactionAnimationDuration];
-                [block[i][j] setPosition:toPoint];
+                [((MacBlockLayer*)block[i][j]) setPosition:toPoint];
                 [CATransaction commit];
             }
+            node = [node nodeOnDir:DIR_UP];
         }
     }
-    [self adjustBlock];
     [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startMergeAnimation) userInfo:nil repeats:NO];
 }
 
 - (void)startMergeAnimation{
-    
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            if ((*mergeTable)[i][j]) {
+    NSArray *gameDataDownSider = [gameData blockSider:DIR_DOWN];
+    for (int i = 0; i < blockNum; ++i) {
+        blockNodeType* node = gameDataDownSider[i];
+        for (int j = 0; j < blockNum; ++j) {
+            if (node.merge) {
                 CABasicAnimation *mergeAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
                 mergeAnimation.duration = 0.3;
                 mergeAnimation.autoreverses = NO;
@@ -98,13 +106,13 @@
                 mergeAnimation.fillMode = kCAFillModeBackwards;
                 mergeAnimation.fromValue = [NSNumber numberWithFloat:1.0];
                 mergeAnimation.toValue = [NSNumber numberWithFloat:1.15];
-                [block[i][j] addAnimation:mergeAnimation forKey:@"transform"];
-                (*mergeTable)[i][j] = false;
+                [((MacBlockLayer*)block[i][j]) addAnimation:mergeAnimation forKey:@"transform"];
+                node.merge = false;
             }
-            if ((*generateTable)[i][j]) {
-                block[i][j].data = [gameData dataAtRow:i col:j];
-                block[i][j].power = [gameData powerAtRow:i col:j];
-                [block[i][j] setNeedsDisplay];
+            if (node.generate) {
+                ((MacBlockLayer*)block[i][j]).data = node.data;
+                ((MacBlockLayer*)block[i][j]).power = node.power;
+                [((MacBlockLayer*)block[i][j]) setNeedsDisplay];
                 
                 CABasicAnimation *generateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
                 generateAnimation.duration = 0.3;
@@ -115,42 +123,46 @@
                 generateAnimation.fillMode = kCAFillModeBackwards;
                 generateAnimation.fromValue = [NSNumber numberWithFloat:0];
                 generateAnimation.toValue = [NSNumber numberWithFloat:1.0];
-                [block[i][j] addAnimation:generateAnimation forKey:@"transform"];
-                (*generateTable)[i][j] = false;
+                [((MacBlockLayer*)block[i][j]) addAnimation:generateAnimation forKey:@"transform"];
+                node.generate = false;
             }
+            node = [node nodeOnDir:DIR_UP];
         }
     }
 }
 
 
-- (void)adjustBlock{
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            moveElementType *c = &((*moveTable)[i][j]);
-            if (c->toI == -1 && c->fromI != -1) {
+- (void)adjustBlock:(dirEnumType)dir{
+    dirEnumType redir = 3 - dir;
+    NSArray *gameDataDirSider = [gameData blockSider:dir];
+    for (int i = 0; i < blockNum; ++i) {
+        blockNodeType* node = gameDataDirSider[i];
+        for (int j = 0; j < blockNum; ++j) {
+            if (node.moveToI == -1 && node.moveFromI != -1) {
                 //找到没有出，只有进的block
                 //f指向当前block的进入block，c指向当前block
-                moveElementType *f;
-                do{
-                    f = &((*moveTable)[c->fromI][c->fromJ]);
-                    CGPoint fromPoint = CGPointMake(55.5 + f->i * 103, 55.5 + f->j * 103);
-                    
-                    [CATransaction begin];
-                    [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
-                    [block[c->i][c->j] setPosition:fromPoint];
-                    [CATransaction commit];
-                    
-                    MacBlockLayer* bl = block[c->i][c->j];
-                    block[c->i][c->j] = block[f->i][f->j];
-                    block[f->i][f->j] = bl;
-                    
-                    c->fromI = -1;
-                    c->fromJ = -1;
-                    f->toI = -1;
-                    f->toJ = -1;
-                    c = f;
-                }while (c->fromI != -1);
+                blockNodeType *c = node;
+                blockNodeType *f = [node nodeOnDir:redir];
+                while (f.moveToI == -1) {
+                    f = [f nodeOnDir:redir];
+                }
+                CGPoint fromPoint = CGPointMake(55.5 + f.posi * 103, 55.5 + f.posj * 103);
+                
+                [CATransaction begin];
+                [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
+                [block[c.posi][c.posj] setPosition:fromPoint];
+                [CATransaction commit];
+                
+                MacBlockLayer* bl = block[c.posi][c.posj];
+                block[c.posi][c.posj] = block[f.posi][f.posj];
+                block[f.posi][f.posj] = bl;
+                
+                c.moveFromI = -1;
+                c.moveFromJ = -1;
+                f.moveToI = -1;
+                f.moveToJ = -1;
             }
+            node = [node nodeOnDir:redir];
         }
     }
 }
@@ -167,34 +179,38 @@
 
 
 - (void)awakeFromNib{
+    blockNum = [gameData blockNum];
+    attr = [[MacBlockAttribute alloc]init];
+
+    [self refreshScoreArea];
+
     gameAreaView.isDeath = [gameData isDeath];
+    gameAreaView.blockNum = blockNum;
     [gameAreaView setWantsLayer:YES];
     [gameAreaView setNeedsDisplay:YES];
 
-    attr = [[MacBlockAttribute alloc]init];
-    
-    animationStatusType* aST = [gameData animationStatus];
-    moveTable = aST->aMoveTable;
-    refreshTable = aST->aRefreshTable;
-    mergeTable = aST->aMergeTable;
-    generateTable = aST->aGenerateTable;
-    
-    [self refreshScoreArea];
-    
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            block[i][j] = [MacBlockLayer layer];
-            [[gameAreaView layer] addSublayer:block[i][j]];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
+    NSArray *gameDataDirSider = [gameData blockSider:DIR_DOWN];
+    for (int i = 0; i < blockNum; ++i) {
+        NSMutableArray *col = [NSMutableArray arrayWithCapacity:0];
+        blockNodeType *node = gameDataDirSider[i];
+        for (int j = 0; j < blockNum; ++j) {
+            MacBlockLayer *blockLayer = [MacBlockLayer layer];
+            [[gameAreaView layer] addSublayer:blockLayer];
             
-            block[i][j].data = [gameData dataAtRow:i col:j];
-            block[i][j].power = [gameData powerAtRow:i col:j];
-            block[i][j].blockAttr = attr;
+            blockLayer.data = node.data;
+            blockLayer.power = node.power;
+            blockLayer.blockAttr = attr;
             
-            [block[i][j] setBounds:CGRectMake(0, 0, 95, 95)];
-            [block[i][j] setPosition:CGPointMake(55.5 + i * 103, 55.5 + j * 103)];
-            [block[i][j] setAnchorPoint:CGPointMake(0.5, 0.5)];
-            [block[i][j] setNeedsDisplay];
+            [blockLayer setBounds:CGRectMake(0, 0, 95, 95)];
+            [blockLayer setPosition:CGPointMake(55.5 + i * 103, 55.5 + j * 103)];
+            [blockLayer setAnchorPoint:CGPointMake(0.5, 0.5)];
+            [blockLayer setNeedsDisplay];
+            [col addObject:blockLayer];
+            node = [node nodeOnDir:DIR_UP];
         }
+        [array addObject:col];
     }
+    block = [NSArray arrayWithArray:array];
 }
 @end

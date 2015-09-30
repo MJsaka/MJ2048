@@ -12,6 +12,7 @@
 }
 @property (strong,nonatomic) NSMutableDictionary *attrGameOver;
 @property (assign,nonatomic) Boolean isDeath;
+@property (assign,nonatomic) NSInteger blockNum;
 
 @end
 

@@ -17,10 +17,10 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    if (gameOverLabel == nil) {
-        gameOverLabel = [[UILabel alloc] initWithFrame:rect];
-    }
     if(isDeath){
+        if (gameOverLabel == nil) {
+            gameOverLabel = [[UILabel alloc] initWithFrame:rect];
+        }
         gameOverLabel.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0];
         gameOverLabel.textAlignment = NSTextAlignmentCenter;
         gameOverLabel.text = @"GAME OVER";

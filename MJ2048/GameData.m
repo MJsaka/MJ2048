@@ -7,24 +7,65 @@
 //
 
 #import "GameData.h"
-//每个格子的数据结构
-typedef struct blockNode{
-    struct blockNode *nodeOnDir[4];
-    NSInteger posi;
-    NSInteger posj;
-    NSInteger data;//格子内的数字
-    NSInteger power;//直接记录幂次，以简化输出对应颜色的计算。
-}blockNodeType;
+
+@implementation blockNodeType
+@synthesize posi;
+@synthesize posj;
+@synthesize power;
+@synthesize data;
+
+@synthesize moveFromI;
+@synthesize moveFromJ;
+@synthesize moveToI;
+@synthesize moveToJ;
+
+@synthesize refresh;
+@synthesize merge;
+@synthesize generate;
+
+-(void)setNodeOnDir:(dirEnumType)dir node:(blockNodeType*)node{
+    nodeOnDir[dir] = node;
+}
+-(blockNodeType*)nodeOnDir:(dirEnumType)dir{
+    return nodeOnDir[dir];
+}
+-(id)init{
+    if (self = [super init]) {
+        for (int i = 0; i < 4; ++i) {
+            nodeOnDir[i] = nil;
+        }
+        data = 0;
+        power = 0;
+        posi = -1;
+        posj = -1;
+        moveFromI = -1;
+        moveFromJ = -1;
+        moveToI = -1;
+        moveToJ = -1;
+        merge = false;
+        generate = false;
+        refresh = false;
+    }
+    return self;
+}
+-(void)resetNodeStatus{
+    data = 0;
+    power = 0;
+    moveFromI = -1;
+    moveFromJ = -1;
+    moveToI = -1;
+    moveToJ = -1;
+    merge = false;
+    generate = false;
+    refresh = false;
+}
+
+@end
+
 
 @implementation GameData{
-    blockNodeType *sider[4][4];
-    blockNodeType inner[4][4];
-    moveTableArray moveTable;
-    boolTable refreshTable;
-    boolTable mergeTable;
-    boolTable generateTable;
-    animationStatusType animationStatus;
-    
+    NSArray *blockSider[4];
+    NSInteger _blockNum;
     Boolean _isDeath;
     
     NSInteger _score;
@@ -34,63 +75,79 @@ typedef struct blockNode{
     NSInteger _topPower;
 }
 
+-(NSArray*)blockSider:(dirEnumType)dir{
+    return blockSider[dir];
+}
+
+-(NSInteger)blockNum{
+    return _blockNum;
+}
+-(void)setBlockNum:(NSInteger)blockNum{
+    _blockNum = blockNum;
+}
+
 - (id)init{
     if (self = [super init]) {
+        _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
+        if (_blockNum == 0) {
+            _blockNum = 4;
+        }
         _isDeath = true;
         _score = 0;
         _numTotal = 0;
         _highScore = 0;
         _topPower = 0;
         
-        animationStatus.aRefreshTable = &refreshTable;
-        animationStatus.aMergeTable = &mergeTable;
-        animationStatus.aGenerateTable = &generateTable;
-        animationStatus.aMoveTable = &moveTable;
+        NSMutableArray *leftSider = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *rightSider = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *upSider = [NSMutableArray arrayWithCapacity:0];
+        NSMutableArray *downSider = [NSMutableArray arrayWithCapacity:0];
+        //建立所有结点，并建立左右连接，左右边界
+        blockNodeType *leftNode;
+        blockNodeType *rightNode;
+        for (int j = 0; j < _blockNum ; ++j){
+            leftNode = [[blockNodeType alloc]init];
+            leftNode.posi = 0;
+            leftNode.posj = j;
+            [leftSider addObject:leftNode];
+            for (int i = 1; i < _blockNum; ++i) {
+                rightNode = [[blockNodeType alloc]init];
+                rightNode.posi = i;
+                rightNode.posj = j;
+                [leftNode setNodeOnDir:DIR_RIGHT node:rightNode];
+                [rightNode setNodeOnDir:DIR_LEFT node:leftNode];
+                leftNode = rightNode;
+            }
+            [rightSider addObject:rightNode];
+        }
+        //建立上下连接
+        blockNodeType *downNode;
+        blockNodeType *upNode;
+        for (int j = 1; j < _blockNum; ++j) {
+            downNode = [leftSider objectAtIndex:j-1];
+            upNode = [leftSider objectAtIndex:j];
+            for (int i = 0; i < _blockNum; ++i) {
+                [downNode setNodeOnDir:DIR_UP node:upNode];
+                [upNode setNodeOnDir:DIR_DOWN node:downNode];
+                downNode = [downNode nodeOnDir:DIR_RIGHT];
+                upNode = [upNode nodeOnDir:DIR_RIGHT];
+            }
+        }
+        //建立上下边界
+        downNode = [leftSider objectAtIndex:0];
+        upNode = [leftSider objectAtIndex:_blockNum-1];
+        for (int i = 0; i < _blockNum; ++i) {
+            [downSider addObject:downNode];
+            [upSider addObject:upNode];
+            downNode = [downNode nodeOnDir:DIR_RIGHT];
+            upNode = [upNode nodeOnDir:DIR_RIGHT];
+        }
         
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                for (int k = 0; k < 4; ++k) {
-                    inner[i][j].nodeOnDir[k] = nil;
-                }
-                inner[i][j].data = 0;
-                inner[i][j].power = 0;
-                inner[i][j].posi = i;
-                inner[i][j].posj = j;
-                
-                moveTable[i][j].fromI = -1;
-                moveTable[i][j].fromJ = -1;
-                moveTable[i][j].toI = -1;
-                moveTable[i][j].toJ = -1;
-                moveTable[i][j].i = i;
-                moveTable[i][j].j = j;
-                mergeTable[i][j] = false;
-                generateTable[i][j] = false;
-                refreshTable[i][j] = false;
-            }
-        }//创建inner节点
-        for (int i = 0; i < 4; ++i) {//横向
-            for (int j = 0; j < 4; ++j) {//纵向
-                if (i != 0) {//left
-                    inner[i][j].nodeOnDir[DIR_LEFT] = &inner[i-1][j];
-                }
-                if (i != 3) {//right
-                    inner[i][j].nodeOnDir[DIR_RIGHT] = &inner[i+1][j];
-                }
-                if (j != 3) {//up
-                    inner[i][j].nodeOnDir[DIR_UP] = &inner[i][j+1];
-                }
-                if (j != 0) {//down
-                    inner[i][j].nodeOnDir[DIR_DOWN] = &inner[i][j-1];
-                }
-            }
-        }//建立inner各节点之间的链接
-        for (int k = 0; k < 4; ++k) {
-            sider[DIR_LEFT][k] = &inner[0][k];
-            sider[DIR_RIGHT][k] = &inner[3][k];
-            sider[DIR_UP][k] = &inner[k][3];
-            sider[DIR_DOWN][k] = &inner[k][0];
-        }//建立sider链接
-        //读取存档
+        blockSider[DIR_LEFT] = [NSArray arrayWithArray:leftSider];
+        blockSider[DIR_RIGHT] = [NSArray arrayWithArray:rightSider];
+        blockSider[DIR_UP] = [NSArray arrayWithArray:upSider];
+        blockSider[DIR_DOWN] = [NSArray arrayWithArray:downSider];
+        
         [self readNSUserDefaults];
     }
     if (_isDeath){
@@ -98,12 +155,7 @@ typedef struct blockNode{
     }
     return self;
 }
-- (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col{
-    return inner[row][col].data;
-}
-- (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col{
-    return inner[row][col].power;
-}
+
 -(NSInteger)currentScore{
     return _score;
 }
@@ -113,28 +165,41 @@ typedef struct blockNode{
 - (NSInteger)topPower{
     return _topPower;
 }
+- (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col{
+    blockNodeType *node = blockSider[DIR_DOWN][row];
+    for (int j = 0; j < col; ++j) {
+        node = [node nodeOnDir:DIR_UP];
+    }
+    return node.data;
+}
+- (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col{
+    blockNodeType *node = blockSider[DIR_DOWN][row];
+    for (int j = 0; j < col; ++j) {
+        node = [node nodeOnDir:DIR_UP];
+    }
+    return node.power;
+}
 
 
 - (void)newGame{
-    for (int i = 0; i < 4; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            inner[i][j].data = 0;
-            inner[i][j].power = 0;
-            
-            moveTable[i][j].fromI = -1;
-            moveTable[i][j].fromJ = -1;
-            moveTable[i][j].toI = -1;
-            moveTable[i][j].toJ = -1;
-            mergeTable[i][j] = false;
-            generateTable[i][j] = false;
-            refreshTable[i][j] = false;
+    for (int i = 0; i < _blockNum; ++i) {
+        blockNodeType *node = blockSider[DIR_DOWN][i];
+        for (int j = 0; j < _blockNum; ++j) {
+            [node resetNodeStatus];
+            node = [node nodeOnDir:DIR_UP];
         }
     }
+    
     NSInteger i = random() % 4;
     NSInteger j = random() % 4;
     NSInteger k = random() % 2 + 1;
-    inner[i][j].data = k*2;
-    inner[i][j].power = k;
+    blockNodeType *node = blockSider[DIR_DOWN][i];
+    while(j>0) {
+        node = [node nodeOnDir:DIR_UP];
+        --j;
+    }
+    node.data = k*2;
+    node.power = k;
     _numTotal = 1;
     _score = 0;
     _isDeath = false;
@@ -143,18 +208,18 @@ typedef struct blockNode{
     if (_isDeath) {
         return _isDeath;
     }
-    if (_numTotal == 16){//检查游戏是否结束
+    if (_numTotal == _blockNum*_blockNum){//检查游戏是否结束
         for (int dir = 0; dir <=1 ; ++dir) {//从左到右，从下到上各遍历一次
             int redir = 3 - dir;
-            for (int i = 0; i < 4; ++i) {
-                blockNodeType *n = sider[dir][i];
-                blockNodeType *t = n->nodeOnDir[redir];
+            for (int i = 0; i < _blockNum; ++i) {
+                blockNodeType *n = blockSider[dir][i];
+                blockNodeType *t = [n nodeOnDir:redir];
                 do {
-                    if (n->data == t->data) {
+                    if (n.data == t.data) {
                         return _isDeath;
                     }else{
                         n = t;
-                        t = n->nodeOnDir[redir];
+                        t = [n nodeOnDir:redir];
                     }
                 } while (t != nil);
             }
@@ -173,42 +238,42 @@ typedef struct blockNode{
     Boolean _isMerged = false;
     int redir = 3 - dir;
     //先做好运算
-    for (int i = 0; i < 4; ++i) {
-        blockNodeType *n = sider[dir][i];
-        blockNodeType *t = n->nodeOnDir[redir];
+    for (int i = 0; i < _blockNum; ++i) {
+        blockNodeType *n = blockSider[dir][i];
+        blockNodeType *t = [n nodeOnDir:redir];
         do{
-            while (t != nil && n->data == 0) {
+            while (t != nil && n.data == 0) {
                 n = t;
-                t = n->nodeOnDir[redir];
+                t = [n nodeOnDir:redir];
             }//找到第一个不为0的格子
-            while (t != nil && t->data == 0){
-                t = t->nodeOnDir[redir];
+            while (t != nil && t.data == 0){
+                t = [t nodeOnDir:redir];
             }//找到下一个不为0的格子
-            if (t != nil && n->data == t->data) {
-                t->data *= 2;
-                t->power += 1;
-                n->data = 0;
-                n->power = 0;
-                _score += t->data;
+            if (t != nil && n.data == t.data) {
+                t.data *= 2;
+                t.power += 1;
+                n.data = 0;
+                n.power = 0;
+                _score += t.data;
                 _numTotal -= 1;
-                if (t->power > _topPower){
-                    _topPower = t->power;
+                if (t.power > _topPower){
+                    _topPower = t.power;
                 }
                 if (_score > _highScore){
                     _highScore = _score;
                 }
                 _isMerged = true;
-                mergeTable[t->posi][t->posj] = true;
-                refreshTable[t->posi][t->posj] = true;
-                refreshTable[n->posi][n->posj] = true;
+                t.merge = true;
+                t.refresh = true;
+                n.refresh = true;
                 
-                n = t->nodeOnDir[redir];
+                n = [t nodeOnDir:redir];
                 if (n != nil) {
-                    t = n->nodeOnDir[redir];
+                    t = [n nodeOnDir:redir];
                 }
             }else if(t != nil) {
                 n = t;
-                t = n->nodeOnDir[redir];
+                t = [n nodeOnDir:redir];
             }
         }while (n != nil && t != nil);
     }//再做移位
@@ -220,26 +285,26 @@ typedef struct blockNode{
     }
     Boolean _isMoved = false;
     int redir = 3 - dir;
-    for (int i = 0; i < 4; ++i) {
-        blockNodeType *n = sider[dir][i];
-        blockNodeType *t = n->nodeOnDir[redir];
+    for (int i = 0; i < _blockNum; ++i) {
+        blockNodeType *n = blockSider[dir][i];
+        blockNodeType *t = [n nodeOnDir:redir];
         do{
-            while (t != nil && n->data != 0) {
+            while (t != nil && n.data != 0) {
                 n = t;
-                t = n->nodeOnDir[redir];
+                t = [n nodeOnDir:redir];
             }//找到第一个为0的格子
-            while (t != nil && t->data == 0) {
-                t = t->nodeOnDir[redir];
+            while (t != nil && t.data == 0) {
+                t = [t nodeOnDir:redir];
             }//找到下一个不为0的格子
             if (t != nil) {
-                n->data = t->data;
-                n->power = t->power;
-                t->data = 0;
-                t->power = 0;
-                [self addMoveAnimationFromI:t->posi fromJ:t->posj toI:n->posi toJ:n->posj];
+                n.data = t.data;
+                n.power = t.power;
+                t.data = 0;
+                t.power = 0;
+                [self addMoveAnimationFromNode:t toNode:n];
                 //n下一个必为0，n到t之间皆为0，t直接指向t的下一个
-                n = n->nodeOnDir[redir];
-                t = t->nodeOnDir[redir];
+                n = [n nodeOnDir:redir];
+                t = [t nodeOnDir:redir];
                 _isMoved = true;
             }
         }while (n != nil && t != nil);
@@ -252,54 +317,57 @@ typedef struct blockNode{
     blockNodeType *n;
     do {//找到移动方向最后的一个为0的节点方可添加
         NSInteger i = random() % 4;
-        n = sider[redir][i];
-    }while (n->data != 0);
+        n = blockSider[redir][i];
+    }while (n.data != 0);
     NSInteger j = random() % 4;
-    while (j > 0 && (n->nodeOnDir[dir])->data == 0){
+    while (j > 0 && [n nodeOnDir:dir].data == 0){
         --j;
-        n = n->nodeOnDir[dir];
+        n = [n nodeOnDir:dir];
     }
     NSInteger k = random() % 2 + 1;
-    n->data = k*2;
-    n->power = k;
+    n.data = k*2;
+    n.power = k;
     _numTotal += 1;
-    generateTable[n->posi][n->posj] = true;
+    n.generate = true;
 }
 
-- (void)addMoveAnimationFromI:(NSInteger)fromI fromJ:(NSInteger)fromJ toI:(NSInteger)toI toJ:(NSInteger)toJ{
-    moveTable[fromI][fromJ].toI = toI;
-    moveTable[fromI][fromJ].toJ = toJ;
-    moveTable[toI][toJ].fromI = fromI;
-    moveTable[toI][toJ].fromJ = fromJ;
-    if (mergeTable[fromI][fromJ]) {
-        mergeTable[toI][toJ] = true;
-        mergeTable[fromI][fromJ] = false;
+- (void)addMoveAnimationFromNode:(blockNodeType*)fromNode toNode:(blockNodeType*)toNode{
+    fromNode.moveToI = toNode.posi;
+    fromNode.moveToJ = toNode.posj;
+    toNode.moveFromI = fromNode.posi;
+    toNode.moveFromJ = fromNode.posj;
+    
+    if (fromNode.merge) {
+        toNode.merge = true;
+        fromNode.merge = false;
     }
-    if (generateTable[fromI][fromJ]) {
-        generateTable[toI][toJ] = true;
-        generateTable[fromI][fromJ] = false;
+    if (fromNode.generate) {
+        toNode.generate = true;
+        fromNode.generate = false;
     }
 }
-- (animationStatusType*)animationStatus{
-    return &animationStatus;
-}
+
 
 -(void)saveNSUserDefaults
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:_highScore forKey:@"highScore"];
     [userDefaults setInteger:_topPower forKey:@"topPower"];
+    [userDefaults setInteger:_blockNum forKey:@"blockNum"];
+
     if (!_isDeath) {
         [userDefaults setInteger:1 forKey:@"dataSaved"];
         [userDefaults setInteger:_score forKey:@"score"];
         [userDefaults setInteger:_numTotal forKey:@"numTotal"];
         [userDefaults setBool:_isDeath forKey:@"isDeath"];
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < _blockNum; ++i) {
+            blockNodeType *node = blockSider[DIR_DOWN][i];
+            for (int j = 0; j < _blockNum; ++j) {
                 NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
                 NSString *powerString = [NSString stringWithFormat:@"p%d%d",i,j];
-                [userDefaults setInteger:inner[i][j].data forKey:dataString];
-                [userDefaults setInteger:inner[i][j].power forKey:powerString];
+                [userDefaults setInteger:node.data forKey:dataString];
+                [userDefaults setInteger:node.power forKey:powerString];
+                node = [node nodeOnDir:DIR_UP];
             }
         }
     }else {
@@ -317,12 +385,14 @@ typedef struct blockNode{
         _score = [userDefaults integerForKey:@"score"];
         _numTotal = [userDefaults integerForKey:@"numTotal"];
         _isDeath = [userDefaults boolForKey:@"isDeath"];
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
+        for (int i = 0; i < _blockNum; ++i) {
+            blockNodeType *node = blockSider[DIR_DOWN][i];
+            for (int j = 0; j < _blockNum; ++j) {
                 NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
                 NSString *powerString = [NSString stringWithFormat:@"p%d%d",i,j];
-                inner[i][j].data = [userDefaults integerForKey:dataString];
-                inner[i][j].power = [userDefaults integerForKey:powerString];
+                node.data = [userDefaults integerForKey:dataString];
+                node.power = [userDefaults integerForKey:powerString];
+                node = [node nodeOnDir:DIR_UP];
             }
         }
     }    
