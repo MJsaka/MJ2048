@@ -81,7 +81,7 @@
 
 -(void)awakeFromNib{
     attrGameOver = [NSMutableDictionary dictionary];
-    [attrGameOver setObject:[NSFont fontWithName:@"SimHei" size:80] forKey:NSFontAttributeName];
+    [attrGameOver setObject:[NSFont fontWithName:@"PingFang SC Regular" size:80] forKey:NSFontAttributeName];
     [attrGameOver setObject:[NSColor colorWithRed:0.149 green:0.325 blue:0.137 alpha:1.0] forKey:NSForegroundColorAttributeName];
     
 }

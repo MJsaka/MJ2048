@@ -24,7 +24,7 @@
         [self setOpacity:1.0];
         
         CFStringRef string = CFStringCreateWithFormat ( kCFAllocatorDefault, nil, CFSTR("%ld") , (long)data );
-        CTFontRef font = CTFontCreateWithName ( CFSTR("SimHei"), blockAttr.fontSize, NULL);
+        CTFontRef font = CTFontCreateWithName ( CFSTR("PingFang SC Regular"), blockAttr.fontSize, NULL);
         
         CFStringRef keys[] = { kCTFontAttributeName };
         CFTypeRef values[] = { font };

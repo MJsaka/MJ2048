@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -407,7 +407,7 @@
         </menu>
         <window title="MJ2048" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
-            <rect key="contentRect" x="352" y="135" width="870.0000062584877" height="650"/>
+            <rect key="contentRect" x="352" y="135" width="870" height="650"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="870" height="650"/>
@@ -418,9 +418,10 @@
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kG2-fY-HBV">
                                 <rect key="frame" x="10" y="82" width="190" height="65"/>
+                                <animations/>
                                 <buttonCell key="cell" type="smallSquare" title="重新开始" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oQY-mg-YvH">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" size="26" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="28" name="PingFangSC-Regular"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="newGame:" target="Qvf-SB-yQx" id="Wxk-qC-FAz"/>
@@ -428,9 +429,10 @@
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KCA-DZ-Qgy">
                                 <rect key="frame" x="10" y="9" width="190" height="65"/>
+                                <animations/>
                                 <buttonCell key="cell" type="smallSquare" title="退出游戏" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GPV-oC-Ycl">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" size="26" name=".HelveticaNeueDeskInterface-Regular"/>
+                                    <font key="font" size="26" name="PingFangSC-Regular"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="terminate:" target="-1" id="7vc-Va-EuA"/>
@@ -440,9 +442,10 @@
                                 <rect key="frame" x="10" y="546" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CUe-pr-nP5">
-                                        <rect key="frame" x="37" y="20" width="116" height="34"/>
+                                        <rect key="frame" x="37" y="13" width="116" height="49"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="最大格子" id="og7-5F-vsC">
-                                            <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            <font key="font" size="28" name="PingFangSC-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -452,14 +455,16 @@
                                     <constraint firstItem="CUe-pr-nP5" firstAttribute="centerX" secondItem="N92-e9-SnL" secondAttribute="centerX" id="Ogv-gV-KGQ"/>
                                     <constraint firstItem="CUe-pr-nP5" firstAttribute="centerY" secondItem="N92-e9-SnL" secondAttribute="centerY" id="iVE-VC-7Wo"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="ME1-OF-Zkn" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="472" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhd-Ng-PgO">
-                                        <rect key="frame" x="32" y="20" width="125" height="34"/>
+                                        <rect key="frame" x="30" y="13" width="129" height="49"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="topPower" id="qzE-53-BZG">
-                                            <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            <font key="font" size="28" name="PingFangSC-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -469,14 +474,16 @@
                                     <constraint firstItem="fhd-Ng-PgO" firstAttribute="centerX" secondItem="ME1-OF-Zkn" secondAttribute="centerX" id="XaI-ei-JBz"/>
                                     <constraint firstItem="fhd-Ng-PgO" firstAttribute="centerY" secondItem="ME1-OF-Zkn" secondAttribute="centerY" id="i8A-e0-BdG"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Bfk-jj-6nk" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="388" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZMZ-fE-cyr">
-                                        <rect key="frame" x="37" y="20" width="116" height="34"/>
+                                        <rect key="frame" x="37" y="13" width="116" height="49"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="最高分数" id="llP-Ba-rZH">
-                                            <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            <font key="font" size="28" name="PingFangSC-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -486,14 +493,16 @@
                                     <constraint firstItem="ZMZ-fE-cyr" firstAttribute="centerY" secondItem="Bfk-jj-6nk" secondAttribute="centerY" id="gT2-8K-QeL"/>
                                     <constraint firstItem="ZMZ-fE-cyr" firstAttribute="centerX" secondItem="Bfk-jj-6nk" secondAttribute="centerX" id="wZp-yz-L1e"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="NVn-Ee-KBJ" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="314" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fXR-mN-uZN">
-                                        <rect key="frame" x="29" y="20" width="131" height="34"/>
+                                        <rect key="frame" x="27" y="13" width="136" height="49"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="bestScore" id="Wg2-Vh-4bO">
-                                            <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            <font key="font" size="28" name="PingFangSC-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -503,14 +512,16 @@
                                     <constraint firstItem="fXR-mN-uZN" firstAttribute="centerX" secondItem="NVn-Ee-KBJ" secondAttribute="centerX" id="ODK-Cb-h4Y"/>
                                     <constraint firstItem="fXR-mN-uZN" firstAttribute="centerY" secondItem="NVn-Ee-KBJ" secondAttribute="centerY" id="ZqT-2Q-8Lz"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="d5r-Bv-4Xo" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="156" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PXw-gg-S1I">
-                                        <rect key="frame" x="13" y="20" width="164" height="34"/>
+                                        <rect key="frame" x="9" y="13" width="172" height="49"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="currentScore" id="VlF-ac-giQ">
-                                            <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            <font key="font" size="28" name="PingFangSC-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -520,14 +531,16 @@
                                     <constraint firstItem="PXw-gg-S1I" firstAttribute="centerY" secondItem="d5r-Bv-4Xo" secondAttribute="centerY" id="2je-FO-rF0"/>
                                     <constraint firstItem="PXw-gg-S1I" firstAttribute="centerX" secondItem="d5r-Bv-4Xo" secondAttribute="centerX" id="jxJ-ho-ANr"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="DEd-Ce-Sze" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="230" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i0d-wa-NqN">
-                                        <rect key="frame" x="37" y="20" width="116" height="34"/>
+                                        <rect key="frame" x="37" y="13" width="116" height="49"/>
+                                        <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="当前分数" id="O3n-f0-dLb">
-                                            <font key="font" size="28" name=".HelveticaNeueDeskInterface-Regular"/>
+                                            <font key="font" size="28" name="PingFangSC-Regular"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -537,6 +550,7 @@
                                     <constraint firstItem="i0d-wa-NqN" firstAttribute="centerX" secondItem="DEd-Ce-Sze" secondAttribute="centerX" id="dIU-Mj-2ZO"/>
                                     <constraint firstItem="i0d-wa-NqN" firstAttribute="centerY" secondItem="DEd-Ce-Sze" secondAttribute="centerY" id="oaL-US-MNp"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                         </subviews>
                         <constraints>
@@ -574,6 +588,7 @@
                             <constraint firstItem="Bfk-jj-6nk" firstAttribute="top" secondItem="ME1-OF-Zkn" secondAttribute="bottom" constant="10" id="tVG-Sz-wEy"/>
                             <constraint firstItem="d5r-Bv-4Xo" firstAttribute="leading" secondItem="2cZ-V5-Iyk" secondAttribute="leading" constant="10" id="wom-ei-iid"/>
                         </constraints>
+                        <animations/>
                     </customView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="UGO-rP-0c0" userLabel="GameArea" customClass="MacGameAreaView">
                         <rect key="frame" x="230" y="10" width="630" height="630"/>
@@ -581,6 +596,7 @@
                             <constraint firstAttribute="height" constant="630" id="ELM-E9-WxS"/>
                             <constraint firstAttribute="width" secondItem="UGO-rP-0c0" secondAttribute="height" multiplier="1:1" id="MW7-TO-k80"/>
                         </constraints>
+                        <animations/>
                         <connections>
                             <outlet property="interface" destination="Qvf-SB-yQx" id="I71-Gi-n4f"/>
                         </connections>
@@ -595,6 +611,7 @@
                     <constraint firstItem="UGO-rP-0c0" firstAttribute="leading" secondItem="2cZ-V5-Iyk" secondAttribute="trailing" constant="10" id="ean-XL-wkg"/>
                     <constraint firstAttribute="bottom" secondItem="2cZ-V5-Iyk" secondAttribute="bottom" constant="10" id="go6-nM-qSu"/>
                 </constraints>
+                <animations/>
             </view>
             <point key="canvasLocation" x="298.5" y="-374"/>
         </window>
@@ -609,6 +626,7 @@
                 <subviews>
                     <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LHd-JJ-ZZz">
                         <rect key="frame" x="119" y="58" width="19" height="29"/>
+                        <animations/>
                         <stepperCell key="cell" continuous="YES" alignment="left" minValue="3" maxValue="6" doubleValue="4" id="guC-Ip-V8M"/>
                         <connections>
                             <action selector="stepperValueChanged:" target="Voe-Tx-rLC" id="psJ-0P-7tk"/>
@@ -616,6 +634,7 @@
                     </stepper>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vqo-eK-YkS">
                         <rect key="frame" x="20" y="61" width="65" height="24"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="行列数:" id="0nd-I6-1r6">
                             <font key="font" size="16" name=".HelveticaNeueDeskInterface-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -624,6 +643,7 @@
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gm9-sa-Re5">
                         <rect key="frame" x="95" y="61" width="22" height="24"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" title="4" id="fmo-hm-lhg">
                             <font key="font" size="16" name=".HelveticaNeueDeskInterface-Regular"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -631,7 +651,8 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7cB-ox-FFv">
-                        <rect key="frame" x="81" y="13" width="60" height="32"/>
+                        <rect key="frame" x="82" y="13" width="59" height="32"/>
+                        <animations/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ktQ-sg-tMB">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -659,6 +680,7 @@ DQ
                     <constraint firstItem="7cB-ox-FFv" firstAttribute="top" secondItem="LHd-JJ-ZZz" secondAttribute="bottom" constant="20" id="rHk-7P-tue"/>
                     <constraint firstAttribute="trailing" secondItem="7cB-ox-FFv" secondAttribute="trailing" constant="20" id="rml-gE-9mj"/>
                 </constraints>
+                <animations/>
             </view>
             <point key="canvasLocation" x="66.5" y="73.5"/>
         </window>
