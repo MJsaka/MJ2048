@@ -12,6 +12,9 @@
     UILabel* gameOverLabel;
 }
 @synthesize isDeath;
+@synthesize margin;
+@synthesize width;
+@synthesize blockNum;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -27,10 +30,9 @@
         gameOverLabel.font = [UIFont boldSystemFontOfSize:40];
         [self addSubview:gameOverLabel];
     }else{
-        NSInteger l = (rect.size.width - 50)/4;
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 4; ++j) {
-                CGRect brect = CGRectMake(10 + i * (l+10), 10 + j * (l+10), l, l);
+        for (int i = 0; i < blockNum; ++i) {
+            for (int j = 0; j < blockNum; ++j) {
+                CGRect brect = CGRectMake(margin + (margin + width) * i, margin + (width + margin) * (blockNum-1 - j),width,width);
                 CGContextSetRGBFillColor(UIGraphicsGetCurrentContext(), 1.000, 0.984 ,0.792, 1.0);
                 UIRectFill(brect);
             }

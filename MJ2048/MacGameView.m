@@ -31,11 +31,11 @@
     if (isDeath) {
         [self drawStringAtCenter:@"GAME OVER" withAttr:attrGameOver inArea:bounds];
     } else {
-        NSInteger space = 10 + (5-blockNum)*4;
-        NSInteger width = (630 - (blockNum+1)*space)/blockNum;
+        NSInteger margin = 10 + (5-blockNum)*4;
+        NSInteger width = (630 - (blockNum+1)*margin)/blockNum;
         for (int i = 0; i < blockNum; ++i) {
             for (int j = 0; j < blockNum; ++j) {
-                NSRect rect = NSMakeRect(space + i * (space + width), space+ j * (space + width), width, width);
+                NSRect rect = NSMakeRect(margin + i * (margin + width), margin+ j * (margin + width), width, width);
                 [[NSColor colorWithRed:1.000 green:0.984 blue:0.792 alpha:1.0] set];
                 [NSBezierPath fillRect: rect];
             }

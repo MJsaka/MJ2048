@@ -14,7 +14,7 @@
     MacBlockAttribute *attr;
     NSArray *block;
     NSInteger blockNum;
-    NSInteger space;
+    NSInteger margin;
     NSInteger width;
 }
 
@@ -89,7 +89,7 @@
             NSInteger toI = node.moveToI;
             NSInteger toJ = node.moveToJ;
             if (toI != -1 || toJ != -1) {
-                CGPoint toPoint = CGPointMake(space+width/2+toI*(space+width), space+width/2+toJ*(space + width));
+                CGPoint toPoint = CGPointMake(margin+width/2+toI*(margin+width), margin+width/2+toJ*(margin + width));
                 [CATransaction begin];
                 [CATransaction setValue:[NSNumber numberWithFloat:0.3f] forKey: kCATransactionAnimationDuration];
                 [((MacBlockLayer*)block[i][j]) setPosition:toPoint];
@@ -156,7 +156,7 @@
                 while (f.moveToI == -1) {
                     f = [f nodeOnDir:redir];
                 }
-                CGPoint fromPoint = CGPointMake(space+width/2+f.posi*(space+width), space+width/2+f.posj*(space + width));
+                CGPoint fromPoint = CGPointMake(margin+width/2+f.posi*(margin+width), margin+width/2+f.posj*(margin + width));
                 
                 [CATransaction begin];
                 [CATransaction setValue:[NSNumber numberWithBool:YES] forKey: kCATransactionDisableActions];
@@ -194,8 +194,8 @@
 
 - (void)awakeFromNib{
     blockNum = [gameData blockNum];
-    space = 10 + (5-blockNum)*4;
-    width = (630 - (blockNum+1)*space)/blockNum;
+    margin = 10 + (5-blockNum)*4;
+    width = (630 - (blockNum+1)*margin)/blockNum;
     attr = [[MacBlockAttribute alloc]initWithFontSize:blockNum * 5 * pow(2, 5-blockNum)];
     
     [self refreshScoreArea];
@@ -219,7 +219,7 @@
             blockLayer.blockAttr = attr;
             
             [blockLayer setBounds:CGRectMake(0, 0, width, width)];
-            [blockLayer setPosition:CGPointMake(space+width/2+i*(space+width), space+width/2+j*(space + width))];
+            [blockLayer setPosition:CGPointMake(margin+width/2+i*(margin+width), margin+width/2+j*(margin + width))];
             [blockLayer setAnchorPoint:CGPointMake(0.5, 0.5)];
             [blockLayer setNeedsDisplay];
             [col addObject:blockLayer];

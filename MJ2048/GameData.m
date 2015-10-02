@@ -84,15 +84,17 @@
     return _blockNum;
 }
 -(void)setBlockNum:(NSInteger)blockNum{
-    _blockNum = blockNum;
-    [self generateNode];
+    if (_blockNum != blockNum){
+        _blockNum = blockNum;
+        [self generateNode];
+    }
 }
 
 - (id)init{
     if (self = [super init]) {
         if (_blockNum == 0) {
             _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
-            if (_blockNum == 0) {
+            if (_blockNum < 3) {
                 _blockNum = 4;
             }
         }
@@ -179,21 +181,6 @@
 - (NSInteger)currentPower{
     return _currentPower;
 }
-- (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col{
-    blockNodeType *node = blockSider[DIR_DOWN][row];
-    for (int j = 0; j < col; ++j) {
-        node = [node nodeOnDir:DIR_UP];
-    }
-    return node.data;
-}
-- (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col{
-    blockNodeType *node = blockSider[DIR_DOWN][row];
-    for (int j = 0; j < col; ++j) {
-        node = [node nodeOnDir:DIR_UP];
-    }
-    return node.power;
-}
-
 
 - (void)newGame{
     for (int i = 0; i < _blockNum; ++i) {

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MenuViewController.h"
+#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    gameData = [[GameData alloc]init];
     return YES;
 }
 
