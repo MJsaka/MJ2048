@@ -12,6 +12,7 @@
 #import "BlockAttr.h"
 #import "BlockAreaView.h"
 
+
 @interface MainViewController : UIViewController
 @property (assign,nonatomic) NSInteger blockNum;
 @property (assign,nonatomic) NSInteger margin;

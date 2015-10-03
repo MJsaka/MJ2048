@@ -16,10 +16,60 @@
 
 @implementation AppDelegate
 @synthesize gameData;
+@synthesize audioPlayer;
+@synthesize soundPlayer;
+@synthesize soundLevel;
+@synthesize musicLevel;
+
+- (void)playMusic{
+    NSError *error = nil;
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"music" ofType:@"m4a"]] error:&error];
+    audioPlayer.delegate = self;
+    audioPlayer.volume = musicLevel;
+    audioPlayer.numberOfLoops = -1;
+    if(error) {
+        NSLog(@"%@",[error description]);
+    }
+    [audioPlayer play];
+}
+
+- (void)stopMusic{
+    [audioPlayer stop];
+}
+
+- (void)playSound{
+    NSError *error = nil;
+    soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sound" ofType:@"m4a"]] error:&error];
+    soundPlayer.delegate = self;
+    soundPlayer.volume = soundLevel;
+    soundPlayer.numberOfLoops = 0;
+    if(error) {
+        NSLog(@"%@",[error description]);
+    }
+    [soundPlayer play];
+}
+
+- (void)stopSound{
+    [soundPlayer stop];
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    NSLog(@"播放完成。");
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSLog(@"播放错误发生: %@", [error localizedDescription]);
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     gameData = [[GameData alloc]init];
+    musicLevel = [[NSUserDefaults standardUserDefaults] doubleForKey:@"musicLevel"];
+    soundLevel = [[NSUserDefaults standardUserDefaults] doubleForKey:@"musicLevel"];
+    if (musicLevel > 0) {
+        [self playMusic];
+    }
+
     return YES;
 }
 
@@ -44,6 +94,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [gameData saveNSUserDefaults];
+    [[NSUserDefaults standardUserDefaults] setDouble:musicLevel forKey:@"musicLevel"];
+    [[NSUserDefaults standardUserDefaults] setDouble:soundLevel forKey:@"soundLevel"];
 }
 
 @end

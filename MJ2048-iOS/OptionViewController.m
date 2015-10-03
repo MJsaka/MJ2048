@@ -7,8 +7,7 @@
 //
 
 #import "OptionViewController.h"
-#import "GameData.h"
-#import "AppDelegate.h"
+
 
 @interface OptionViewController ()
 @property (assign,nonatomic) NSInteger newBlockNum;
@@ -17,21 +16,27 @@
 @implementation OptionViewController
 
 @synthesize currentBlockNum;
-@synthesize currentMusic;
-@synthesize currentSound;
+@synthesize musicLevel;
+@synthesize soundLevel;
 @synthesize soundSlider;
 @synthesize musicSlider;
 @synthesize blockNumSlider;
 @synthesize mainViewController;
+@synthesize appDelegate;
 @synthesize gameData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    gameData = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).gameData;
+    appDelegate = ((AppDelegate*)[[UIApplication sharedApplication] delegate]);
+    gameData = appDelegate.gameData;
     // Do any additional setup after loading the view.
-    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-    currentSound = [userdefaults doubleForKey:@"currentSound"];
-    currentMusic = [userdefaults doubleForKey:@"currentMusic"];
+    soundLevel = appDelegate.soundLevel;
+    soundSlider.value = soundLevel;
+    musicLevel = appDelegate.musicLevel;
+    musicSlider.value = musicLevel;
+    if (!appDelegate.audioPlayer.playing) {
+        [appDelegate playMusic];
+    }
     currentBlockNum = [gameData blockNum];
     _newBlockNum = currentBlockNum;
     blockNumSlider.value = 0.2*(currentBlockNum-3);
@@ -42,21 +47,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)soundSliderValueChanged:(id)sender{
+    appDelegate.soundLevel = soundSlider.value;
+
+}
+
+- (IBAction)musicSliderValueChanged:(id)sender{
+    appDelegate.audioPlayer.volume = musicSlider.value;
+}
+
 - (IBAction)blockNumSliderValueChanged:(id)sender{
     _newBlockNum =  (int)((blockNumSlider.value + 0.1)/0.2) + 3;
     blockNumSlider.value = 0.2*(_newBlockNum-3);
 }
 
 - (IBAction)okClick:(id)sender{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (currentSound != soundSlider.value) {
-        [userDefaults setFloat:soundSlider.value forKey:@"currentSound"];
+    if (soundLevel != soundSlider.value) {
+        appDelegate.soundLevel = soundSlider.value;
     }
-    if (currentMusic != musicSlider.value) {
-        [userDefaults setFloat:musicSlider.value forKey:@"currentMusic"];
+    if (musicLevel != musicSlider.value) {
+        appDelegate.musicLevel = musicSlider.value;
+        if (musicSlider.value == 0) {
+            [appDelegate stopMusic];
+        }
     }
     if (_newBlockNum != currentBlockNum) {
-        [userDefaults setInteger:_newBlockNum forKey:@"blockNum"];
         [gameData setBlockNum:_newBlockNum];
         [mainViewController viewDidLoad];
     }

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
+#import "GameData.h"
+#import "AppDelegate.h"
 
 @interface OptionViewController : UIViewController
 
-@property (assign,nonatomic) double currentSound;
-@property (assign,nonatomic) double currentMusic;
+@property (assign,nonatomic) double soundLevel;
+@property (assign,nonatomic) double musicLevel;
 @property (assign,nonatomic) NSInteger currentBlockNum;
 
 @property (weak) IBOutlet UISlider* soundSlider;
@@ -21,5 +23,6 @@
 
 @property (weak) GameData* gameData;
 
+@property (weak,nonatomic) AppDelegate* appDelegate;
 @property (weak,nonatomic) MainViewController* mainViewController;
 @end

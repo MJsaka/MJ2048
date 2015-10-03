@@ -28,7 +28,6 @@
 @synthesize scoreTitle;
 @synthesize gameData;
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"setting"]) {
         ((MenuViewController*)segue.destinationViewController).mainViewController = self;
@@ -37,6 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     gameData = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).gameData;
     attr = [[MacBlockAttribute alloc]init];
     
@@ -287,6 +287,7 @@
         }
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -25,7 +25,6 @@
         }
     }
     [self awakeFromNib];
-    [self newGame:self];
 }
 
 - (IBAction)newGame:(id)sender{

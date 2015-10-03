@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C517E3801BBE289600DF853F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C517E37F1BBE289600DF853F /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		C54A270D1BBFAE9400CA4876 /* music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A270C1BBFAE9400CA4876 /* music.m4a */; settings = {ASSET_TAGS = (); }; };
 		C5732D8A1B91FE13004A10FC /* MacBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* MacBlock.m */; };
 		C57E372E1BB4402E00054430 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E372C1BB43E5800054430 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C58517351BA81A6800361CDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517341BA81A6800361CDD /* main.m */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		C517E37F1BBE289600DF853F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C54A270C1BBFAE9400CA4876 /* music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music.m4a; sourceTree = "<group>"; };
 		C5732D881B91FE13004A10FC /* MacBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacBlock.h; sourceTree = "<group>"; };
 		C5732D891B91FE13004A10FC /* MacBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacBlock.m; sourceTree = "<group>"; };
 		C57E372B1BB43E5800054430 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		C58517321BA81A6800361CDD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C54A270C1BBFAE9400CA4876 /* music.m4a */,
 				C58517331BA81A6800361CDD /* Info.plist */,
 				C58517341BA81A6800361CDD /* main.m */,
 			);
@@ -243,6 +246,7 @@
 			files = (
 				C517E3801BBE289600DF853F /* Main.storyboard in Resources */,
 				C58517431BA81A6800361CDD /* LaunchScreen.xib in Resources */,
+				C54A270D1BBFAE9400CA4876 /* music.m4a in Resources */,
 				C58517401BA81A6800361CDD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

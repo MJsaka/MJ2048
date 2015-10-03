@@ -8,12 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "GameData.h"
+#include <AVFoundation/AVFoundation.h>
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong,nonatomic) GameData* gameData;
 
+@property (strong,nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong,nonatomic) AVAudioPlayer *soundPlayer;
+
+@property (assign,nonatomic) double musicLevel;
+@property (assign,nonatomic) double soundLevel;
+
+- (void)playMusic;
+- (void)stopMusic;
+- (void)playSound;
+- (void)stopSound;
 @end
 
