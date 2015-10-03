@@ -49,7 +49,7 @@
 
 - (IBAction)soundSliderValueChanged:(id)sender{
     appDelegate.soundLevel = soundSlider.value;
-
+    [appDelegate playSound];
 }
 
 - (IBAction)musicSliderValueChanged:(id)sender{
@@ -73,6 +73,7 @@
     }
     if (_newBlockNum != currentBlockNum) {
         [gameData setBlockNum:_newBlockNum];
+        [appDelegate playMusic];
         [mainViewController viewDidLoad];
     }
     [self.navigationController popToRootViewControllerAnimated:YES];

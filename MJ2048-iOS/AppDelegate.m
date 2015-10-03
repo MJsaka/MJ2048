@@ -23,13 +23,10 @@
 
 - (void)playMusic{
     NSError *error = nil;
-    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"music" ofType:@"m4a"]] error:&error];
-    audioPlayer.delegate = self;
+    NSString *musicPath = [NSString stringWithFormat:@"music%ld",[gameData blockNum]];
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:musicPath ofType:@"m4a"]] error:&error];
     audioPlayer.volume = musicLevel;
     audioPlayer.numberOfLoops = -1;
-    if(error) {
-        NSLog(@"%@",[error description]);
-    }
     [audioPlayer play];
 }
 
@@ -38,38 +35,28 @@
 }
 
 - (void)playSound{
-    NSError *error = nil;
-    soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sound" ofType:@"m4a"]] error:&error];
-    soundPlayer.delegate = self;
-    soundPlayer.volume = soundLevel;
-    soundPlayer.numberOfLoops = 0;
-    if(error) {
-        NSLog(@"%@",[error description]);
+    if (soundLevel != 0) {
+        NSError *error = nil;
+        soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"sound" ofType:@"m4a"]] error:&error];
+        soundPlayer.volume = soundLevel;
+        soundPlayer.numberOfLoops = 0;
+        [soundPlayer play];
     }
-    [soundPlayer play];
 }
 
 - (void)stopSound{
     [soundPlayer stop];
 }
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    NSLog(@"播放完成。");
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    NSLog(@"播放错误发生: %@", [error localizedDescription]);
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     gameData = [[GameData alloc]init];
     musicLevel = [[NSUserDefaults standardUserDefaults] doubleForKey:@"musicLevel"];
-    soundLevel = [[NSUserDefaults standardUserDefaults] doubleForKey:@"musicLevel"];
+    soundLevel = [[NSUserDefaults standardUserDefaults] doubleForKey:@"soundLevel"];
+    
     if (musicLevel > 0) {
         [self playMusic];
     }
-
     return YES;
 }
 

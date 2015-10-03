@@ -27,6 +27,8 @@
 @property (weak,nonatomic) IBOutlet UILabel *best;
 @property (weak,nonatomic) IBOutlet UILabel *scoreTitle;
 @property (weak,nonatomic) IBOutlet UILabel *score;
+
+@property (weak,nonatomic) AppDelegate *appDelegate;
 @property (weak,nonatomic) GameData *gameData;
 
 -(void)newGame;

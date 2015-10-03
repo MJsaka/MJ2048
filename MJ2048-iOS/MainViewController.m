@@ -27,6 +27,7 @@
 @synthesize score;
 @synthesize scoreTitle;
 @synthesize gameData;
+@synthesize appDelegate;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"setting"]) {
@@ -36,8 +37,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    gameData = ((AppDelegate*)[[UIApplication sharedApplication] delegate]).gameData;
+    appDelegate = ((AppDelegate*)[[UIApplication sharedApplication] delegate]);
+    gameData = appDelegate.gameData;
     attr = [[MacBlockAttribute alloc]init];
     
     CGRect blockAreaViewFrame = CGRectMake(self.view.bounds.size.width * 0.04, self.view.bounds.size.height * 0.3, self.view.bounds.size.width * 0.92, self.view.bounds.size.width * 0.92);
@@ -185,6 +186,7 @@
         }
     }
     if([gameData move:dir]){
+        [appDelegate playSound];
         [self startMoveAnimation];
         [self adjustBlock:dir];
         [gameData generate:dir];
