@@ -18,7 +18,6 @@
 @synthesize blockNum;
 @synthesize margin;
 @synthesize width;
-@synthesize isNewGame;
 @synthesize attr;
 @synthesize blockAreaView;
 @synthesize block;
@@ -87,15 +86,11 @@
         [array addObject:col];
     }
     block = [NSArray arrayWithArray:array];
-    if (isNewGame) {
-        [self newGame];
-    }else{
-        for (int i = 0; i < blockNum; ++i) {
-            for (int j = 0; j < blockNum; ++j) {
-                [self refreshBlockForI:i forJ:j];
-            }
+    [self refreshScoreArea];
+    for (int i = 0; i < blockNum; ++i) {
+        for (int j = 0; j < blockNum; ++j) {
+            [self refreshBlockForI:i forJ:j];
         }
-        [self refreshScoreArea];
     }
 }
 

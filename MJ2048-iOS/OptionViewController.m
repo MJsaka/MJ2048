@@ -58,7 +58,6 @@
     if (_newBlockNum != currentBlockNum) {
         [userDefaults setInteger:_newBlockNum forKey:@"blockNum"];
         [gameData setBlockNum:_newBlockNum];
-        mainViewController.isNewGame = true;
         [mainViewController viewDidLoad];
     }
     [self.navigationController popToRootViewControllerAnimated:YES];

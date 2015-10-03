@@ -85,31 +85,36 @@
 }
 -(void)setBlockNum:(NSInteger)blockNum{
     if (_blockNum != blockNum){
+        [self saveNSUserDefaults];
         _blockNum = blockNum;
-        [self generateNode];
+        [self initial];
+    }
+}
+
+- (void)initial{
+    if (_blockNum < 3 || _blockNum > 6) {
+        _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
+        if (_blockNum < 3 || _blockNum > 6) {
+            _blockNum = 4;
+        }
+    }
+    _isDeath = true;
+    _score = 0;
+    _currentPower = 0;
+    _numTotal = 0;
+    _highScore = 0;
+    _topPower = 0;
+    
+    [self generateNode];
+    [self readNSUserDefaults];
+    if (_isDeath){
+        [self newGame];
     }
 }
 
 - (id)init{
     if (self = [super init]) {
-        if (_blockNum == 0) {
-            _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
-            if (_blockNum < 3) {
-                _blockNum = 4;
-            }
-        }
-        _isDeath = true;
-        _score = 0;
-        _currentPower = 0;
-        _numTotal = 0;
-        _highScore = 0;
-        _topPower = 0;
-        
-        [self generateNode];
-        [self readNSUserDefaults];
-    }
-    if (_isDeath){
-        [self newGame];
+        [self initial];
     }
     return self;
 }
@@ -357,49 +362,60 @@
 -(void)saveNSUserDefaults
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setInteger:_highScore forKey:@"highScore"];
-    [userDefaults setInteger:_topPower forKey:@"topPower"];
     [userDefaults setInteger:_blockNum forKey:@"blockNum"];
 
+    NSMutableDictionary* currentData = [NSMutableDictionary dictionary];
     if (!_isDeath) {
-        [userDefaults setInteger:1 forKey:@"dataSaved"];
-        [userDefaults setInteger:_score forKey:@"score"];
-        [userDefaults setInteger:_currentPower forKey:@"currentPower"];
-        [userDefaults setInteger:_numTotal forKey:@"numTotal"];
-        [userDefaults setBool:_isDeath forKey:@"isDeath"];
+        [currentData setValue:[NSNumber numberWithBool:1] forKey:@"dataSaved"];
+        [currentData setValue:[NSNumber numberWithInteger:_highScore] forKey:@"highScore"];
+        
+        [currentData setValue:[NSNumber numberWithInteger:_topPower] forKey:@"topPower"];
+        
+        [currentData setValue:[NSNumber numberWithInteger:_score] forKey:@"score"];
+        [currentData setValue:[NSNumber numberWithInteger:_currentPower] forKey:@"currentPower"];
+        [currentData setValue:[NSNumber numberWithInteger:_numTotal] forKey:@"numTotal"];
+        [currentData setValue:[NSNumber numberWithBool:_isDeath] forKey:@"isDeath"];
         for (int i = 0; i < _blockNum; ++i) {
             blockNodeType *node = blockSider[DIR_DOWN][i];
             for (int j = 0; j < _blockNum; ++j) {
                 NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
                 NSString *powerString = [NSString stringWithFormat:@"p%d%d",i,j];
-                [userDefaults setInteger:node.data forKey:dataString];
-                [userDefaults setInteger:node.power forKey:powerString];
+                [currentData setValue:[NSNumber numberWithInteger:node.data] forKey:dataString];
+                [currentData setValue:[NSNumber numberWithInteger:node.power] forKey:powerString];
                 node = [node nodeOnDir:DIR_UP];
             }
         }
-    }else {
-        [userDefaults setInteger:0 forKey:@"dataSaved"];
+    }else{
+        [currentData setValue:[NSNumber numberWithBool:0] forKey:@"dataSaved"];
     }
+    
+    NSString *blockDataString = [NSString stringWithFormat:@"blockData%ld",_blockNum];
+    [userDefaults setPersistentDomain:currentData forName:blockDataString];
     [userDefaults synchronize];
 }
 -(void)readNSUserDefaults
 {
+//    NSLog(@"%@",NSHomeDirectory());
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    _highScore = [userDefaults integerForKey:@"highScore"];
-    _topPower = [userDefaults integerForKey:@"topPower"];
-    NSInteger dataSaved = [userDefaults integerForKey:@"dataSaved"];
+    NSString *blockDataString = [NSString stringWithFormat:@"blockData%ld",_blockNum];
+    NSDictionary* currentData = [userDefaults persistentDomainForName:blockDataString];
+    NSInteger dataSaved = [[currentData valueForKey:@"dataSaved"] boolValue];
+
     if (dataSaved) {
-        _score = [userDefaults integerForKey:@"score"];
-        _currentPower = [userDefaults integerForKey:@"currentPower"];
-        _numTotal = [userDefaults integerForKey:@"numTotal"];
-        _isDeath = [userDefaults boolForKey:@"isDeath"];
+        _highScore = [[currentData valueForKey:@"highScore"] integerValue];
+        _topPower = [[currentData valueForKey:@"topPower"] integerValue];
+        
+        _score = [[currentData valueForKey:@"score"] integerValue];
+        _currentPower = [[currentData valueForKey:@"currentPower"] integerValue];
+        _numTotal = [[currentData valueForKey:@"numTotal"] integerValue];
+        _isDeath = [[currentData valueForKey:@"isDeath"] boolValue];
         for (int i = 0; i < _blockNum; ++i) {
             blockNodeType *node = blockSider[DIR_DOWN][i];
             for (int j = 0; j < _blockNum; ++j) {
                 NSString *dataString = [NSString stringWithFormat:@"d%d%d",i,j];
                 NSString *powerString = [NSString stringWithFormat:@"p%d%d",i,j];
-                node.data = [userDefaults integerForKey:dataString];
-                node.power = [userDefaults integerForKey:powerString];
+                node.data = [[currentData valueForKey:dataString] integerValue];
+                node.power = [[currentData valueForKey:powerString] integerValue];
                 node = [node nodeOnDir:DIR_UP];
             }
         }

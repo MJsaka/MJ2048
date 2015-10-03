@@ -27,7 +27,7 @@
 }
 
 - (IBAction)newGame:(id)sender{
-    mainViewController.isNewGame = YES;
+    [mainViewController newGame];
     [mainViewController viewDidLoad];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -41,6 +41,7 @@
         ((OptionViewController*)segue.destinationViewController).mainViewController = self.mainViewController;
     }
 }
+
 
 /*
 #pragma mark - Navigation
