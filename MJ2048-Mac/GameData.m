@@ -98,7 +98,7 @@
             _blockNum = 4;
         }
     }
-    _isDeath = false;
+    _isDeath = true;
     _score = 0;
     _currentPower = 0;
     _numTotal = 0;
@@ -106,7 +106,7 @@
     _topPower = 0;
     
     [self generateNode];
-//    [self readNSUserDefaults];
+    [self readNSUserDefaults];
     if (_isDeath){
         [self newGame];
     }

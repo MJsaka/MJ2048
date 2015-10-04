@@ -132,7 +132,7 @@
 		C5BEBEA91B8DAD5A0068268F = {
 			isa = PBXGroup;
 			children = (
-				C5BEBEB41B8DAD5A0068268F /* MJ2048 */,
+				C5BEBEB41B8DAD5A0068268F /* MJ2048-Mac */,
 				C58517311BA81A6800361CDD /* MJ2048-iOS */,
 				C5BEBEB31B8DAD5A0068268F /* Products */,
 			);
@@ -147,7 +147,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C5BEBEB41B8DAD5A0068268F /* MJ2048 */ = {
+		C5BEBEB41B8DAD5A0068268F /* MJ2048-Mac */ = {
 			isa = PBXGroup;
 			children = (
 				C5BEBEB71B8DAD5A0068268F /* MacAppDelegate.h */,
@@ -164,7 +164,7 @@
 				C5BEBEBE1B8DAD5A0068268F /* MainMenu.xib */,
 				C5BEBEB51B8DAD5A0068268F /* Supporting Files */,
 			);
-			path = MJ2048;
+			path = "MJ2048-Mac";
 			sourceTree = "<group>";
 		};
 		C5BEBEB51B8DAD5A0068268F /* Supporting Files */ = {
