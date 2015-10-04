@@ -79,8 +79,8 @@
         for (int j = 0; j < blockNum; ++j) {
             CGRect frame = CGRectMake(margin + (margin + width) * i, margin + (width + margin) * (blockNum-1 - j),width,width);
             UILabel *aLabel = [[UILabel alloc]initWithFrame:frame];
-            aLabel.font = [UIFont fontWithName:@"Arial" size:20];
             aLabel.textAlignment = NSTextAlignmentCenter;
+            aLabel.adjustsFontSizeToFitWidth = YES;
             [blockAreaView addSubview:aLabel];
             [col addObject:aLabel];
         }

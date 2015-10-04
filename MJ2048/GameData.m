@@ -98,7 +98,7 @@
             _blockNum = 4;
         }
     }
-    _isDeath = true;
+    _isDeath = false;
     _score = 0;
     _currentPower = 0;
     _numTotal = 0;
@@ -106,7 +106,7 @@
     _topPower = 0;
     
     [self generateNode];
-    [self readNSUserDefaults];
+//    [self readNSUserDefaults];
     if (_isDeath){
         [self newGame];
     }
@@ -365,11 +365,12 @@
     [userDefaults setInteger:_blockNum forKey:@"blockNum"];
 
     NSMutableDictionary* currentData = [NSMutableDictionary dictionary];
+    
+    [currentData setValue:[NSNumber numberWithInteger:_highScore] forKey:@"highScore"];
+    
+    [currentData setValue:[NSNumber numberWithInteger:_topPower] forKey:@"topPower"];
     if (!_isDeath) {
         [currentData setValue:[NSNumber numberWithBool:1] forKey:@"dataSaved"];
-        [currentData setValue:[NSNumber numberWithInteger:_highScore] forKey:@"highScore"];
-        
-        [currentData setValue:[NSNumber numberWithInteger:_topPower] forKey:@"topPower"];
         
         [currentData setValue:[NSNumber numberWithInteger:_score] forKey:@"score"];
         [currentData setValue:[NSNumber numberWithInteger:_currentPower] forKey:@"currentPower"];
@@ -399,11 +400,12 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *blockDataString = [NSString stringWithFormat:@"blockData%ld",_blockNum];
     NSDictionary* currentData = [userDefaults persistentDomainForName:blockDataString];
+    
+    _highScore = [[currentData valueForKey:@"highScore"] integerValue];
+    _topPower = [[currentData valueForKey:@"topPower"] integerValue];
+    
     NSInteger dataSaved = [[currentData valueForKey:@"dataSaved"] boolValue];
-
     if (dataSaved) {
-        _highScore = [[currentData valueForKey:@"highScore"] integerValue];
-        _topPower = [[currentData valueForKey:@"topPower"] integerValue];
         
         _score = [[currentData valueForKey:@"score"] integerValue];
         _currentPower = [[currentData valueForKey:@"currentPower"] integerValue];

@@ -9,7 +9,7 @@
 #import "BlockAttr.h"
 
 @implementation MacBlockAttribute {
-    UIColor *colorOfPower[21];
+    UIColor *colorOfPower[36];
 }
 - (id)init{
     if (self = [super init]) {
@@ -38,6 +38,25 @@
         colorOfPower[18] =  [UIColor colorWithRed:0.271 green:0.196 blue:0.396 alpha:1.0];
         colorOfPower[19] =  [UIColor colorWithRed:0.425 green:0.249 blue:0.249 alpha:1.0];
         colorOfPower[20] = [UIColor colorWithRed:0.149 green:0.325 blue:0.137 alpha:1.0];
+        
+        colorOfPower[21] = [UIColor colorWithRed:0.973 green:0.800 blue:0.584 alpha:1.0];
+        colorOfPower[22] = [UIColor colorWithRed:0.965 green:0.800 blue:0.800 alpha:1.0];
+        colorOfPower[23] = [UIColor colorWithRed:0.980 green:0.800 blue:0.200 alpha:1.0];
+        colorOfPower[24] = [UIColor colorWithRed:0.949 green:0.608 blue:0.200 alpha:1.0];
+        
+        colorOfPower[25] = [UIColor colorWithRed:0.345 green:0.704 blue:0.896 alpha:1.0];
+        colorOfPower[26] = [UIColor colorWithRed:0.922 green:0.396 blue:0.396 alpha:1.0];
+        colorOfPower[27] = [UIColor colorWithRed:0.894 green:0.402 blue:0.157 alpha:1.0];
+        colorOfPower[28] = [UIColor colorWithRed:0.878 green:0.263 blue:0.506 alpha:1.0];
+        
+        colorOfPower[29] = [UIColor colorWithRed:0.808 green:0.596 blue:0.716 alpha:1.0];
+        colorOfPower[30] = [UIColor colorWithRed:1.000 green:0.984 blue:0.792 alpha:1.0];
+        colorOfPower[31] = [UIColor colorWithRed:0.973 green:0.800 blue:0.584 alpha:1.0];
+        colorOfPower[32] = [UIColor colorWithRed:0.965 green:0.800 blue:0.800 alpha:1.0];
+        
+        colorOfPower[33] = [UIColor colorWithRed:0.980 green:0.800 blue:0.200 alpha:1.0];
+        colorOfPower[34] = [UIColor colorWithRed:0.949 green:0.608 blue:0.200 alpha:1.0];
+        colorOfPower[35] = [UIColor colorWithRed:0.345 green:0.704 blue:0.896 alpha:1.0];
     }
     return self;
 }
