@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 MJsaka. All rights reserved.
 //
 
+#include <AVFoundation/AVFoundation.h>
+
 #import <UIKit/UIKit.h>
 #import "GameData.h"
-#include <AVFoundation/AVFoundation.h>
+#import "WXApi.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

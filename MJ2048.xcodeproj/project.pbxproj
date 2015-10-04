@@ -13,6 +13,11 @@
 		C54A27231BC037DA00CA4876 /* music4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A271F1BC037DA00CA4876 /* music4.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27241BC037DA00CA4876 /* music5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A27201BC037DA00CA4876 /* music5.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27251BC037DA00CA4876 /* music6.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A27211BC037DA00CA4876 /* music6.m4a */; settings = {ASSET_TAGS = (); }; };
+		C54A272B1BC0FA5A00CA4876 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27271BC0FA5A00CA4876 /* libWeChatSDK.a */; settings = {ASSET_TAGS = (); }; };
+		C54A272F1BC1017A00CA4876 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A272E1BC1017A00CA4876 /* SystemConfiguration.framework */; };
+		C54A27311BC101C200CA4876 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27301BC101C200CA4876 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
+		C54A27351BC101D900CA4876 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27341BC101D900CA4876 /* libz.tbd */; };
+		C54A27381BC1080600CA4876 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27371BC1080600CA4876 /* CoreTelephony.framework */; };
 		C5732D8A1B91FE13004A10FC /* MacBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = C5732D891B91FE13004A10FC /* MacBlock.m */; };
 		C57E372E1BB4402E00054430 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C57E372C1BB43E5800054430 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C58517351BA81A6800361CDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517341BA81A6800361CDD /* main.m */; };
@@ -31,6 +36,7 @@
 		C5BEBEDA1B8DADA00068268F /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
 		C5BEBEDD1B8DADB40068268F /* MacGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDC1B8DADB40068268F /* MacGameView.m */; };
 		C5BEBEDF1B8E94650068268F /* MacInterfaceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBEDE1B8E94650068268F /* MacInterfaceControl.m */; };
+		C5F545901BC1290A007C0091 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27321BC101D000CA4876 /* libc++.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +46,14 @@
 		C54A271F1BC037DA00CA4876 /* music4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music4.m4a; sourceTree = "<group>"; };
 		C54A27201BC037DA00CA4876 /* music5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music5.m4a; sourceTree = "<group>"; };
 		C54A27211BC037DA00CA4876 /* music6.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music6.m4a; sourceTree = "<group>"; };
+		C54A27271BC0FA5A00CA4876 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = WeiXinApi/libWeChatSDK.a; sourceTree = "<group>"; };
+		C54A27291BC0FA5A00CA4876 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = WeiXinApi/WXApi.h; sourceTree = "<group>"; };
+		C54A272A1BC0FA5A00CA4876 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = WeiXinApi/WXApiObject.h; sourceTree = "<group>"; };
+		C54A272E1BC1017A00CA4876 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		C54A27301BC101C200CA4876 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		C54A27321BC101D000CA4876 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		C54A27341BC101D900CA4876 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		C54A27371BC1080600CA4876 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		C5732D881B91FE13004A10FC /* MacBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacBlock.h; sourceTree = "<group>"; };
 		C5732D891B91FE13004A10FC /* MacBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MacBlock.m; sourceTree = "<group>"; };
 		C57E372B1BB43E5800054430 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -79,6 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5F545901BC1290A007C0091 /* libc++.tbd in Frameworks */,
+				C54A27351BC101D900CA4876 /* libz.tbd in Frameworks */,
+				C54A27311BC101C200CA4876 /* libsqlite3.tbd in Frameworks */,
+				C54A272B1BC0FA5A00CA4876 /* libWeChatSDK.a in Frameworks */,
+				C54A272F1BC1017A00CA4876 /* SystemConfiguration.framework in Frameworks */,
+				C54A27381BC1080600CA4876 /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +112,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C54A27261BC0FA3200CA4876 /* WeiXinApi */ = {
+			isa = PBXGroup;
+			children = (
+				C54A27271BC0FA5A00CA4876 /* libWeChatSDK.a */,
+				C54A27291BC0FA5A00CA4876 /* WXApi.h */,
+				C54A272A1BC0FA5A00CA4876 /* WXApiObject.h */,
+			);
+			name = WeiXinApi;
+			sourceTree = "<group>";
+		};
+		C54A27361BC1021E00CA4876 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C54A272E1BC1017A00CA4876 /* SystemConfiguration.framework */,
+				C54A27371BC1080600CA4876 /* CoreTelephony.framework */,
+				C54A27341BC101D900CA4876 /* libz.tbd */,
+				C54A27321BC101D000CA4876 /* libc++.tbd */,
+				C54A27301BC101C200CA4876 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C58517311BA81A6800361CDD /* MJ2048-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +176,8 @@
 			children = (
 				C5BEBEB41B8DAD5A0068268F /* MJ2048-Mac */,
 				C58517311BA81A6800361CDD /* MJ2048-iOS */,
+				C54A27261BC0FA3200CA4876 /* WeiXinApi */,
+				C54A27361BC1021E00CA4876 /* Frameworks */,
 				C5BEBEB31B8DAD5A0068268F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -344,6 +388,11 @@
 				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/WeiXinApi",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = MJsaka.MJ2048;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -360,6 +409,11 @@
 				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/WeiXinApi",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = MJsaka.MJ2048;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

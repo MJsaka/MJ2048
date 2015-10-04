@@ -14,6 +14,7 @@
 
 
 @interface MainViewController : UIViewController
+
 @property (assign,nonatomic) NSInteger blockNum;
 @property (assign,nonatomic) NSInteger margin;
 @property (assign,nonatomic) NSInteger width;

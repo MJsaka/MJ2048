@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "OptionViewController.h"
+
 @interface MenuViewController ()
 
 @end
@@ -41,7 +42,6 @@
         ((OptionViewController*)segue.destinationViewController).mainViewController = self.mainViewController;
     }
 }
-
 
 /*
 #pragma mark - Navigation
