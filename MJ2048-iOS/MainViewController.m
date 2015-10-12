@@ -97,6 +97,9 @@
 }
 
 - (void)changeBlockNum:(NSInteger)newBlockNum{
+    if ([gameData isDeath]) {
+        [self removeGameOverSubView];
+    }
     [gameData changeBlockNum:newBlockNum];
     [self removeOldBlock];
     [self makeBlockNum];
@@ -192,50 +195,67 @@
     blockAreaView.width = width;
     blockAreaView.blockNum = blockNum;
     [blockAreaView setNeedsDisplay];
+}
 
-    if ([gameData isDeath]) {
-        if (gameOverLabel == nil) {
-            CGRect gameOverLabelFrame = CGRectMake(0, 0, blockAreaView.bounds.size.width, blockAreaView.bounds.size.height*0.75);
-            gameOverLabel = [[UILabel alloc] initWithFrame:gameOverLabelFrame];
-            gameOverLabel.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:0.8];
-            gameOverLabel.textAlignment = NSTextAlignmentCenter;
-            gameOverLabel.font = [UIFont boldSystemFontOfSize:40];
-            gameOverLabel.text = @"GAME OVER";
-        }
-        if (retryButton == nil) {
-            CGRect retryButtonFrame = CGRectMake(0, blockAreaView.bounds.size.height*0.75, blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.25);
-            retryButton = [[UIButton alloc] initWithFrame:retryButtonFrame];
-            [retryButton setTitle:@"Retry" forState:UIControlStateNormal];
-            retryButton.backgroundColor = [UIColor colorWithRed:0 green:1.0 blue:0.25 alpha:0.8];
-            [retryButton addTarget:self action:@selector(newGame) forControlEvents:UIControlEventTouchUpInside];
-        }
-        if (shareToWeiXinButton == nil) {
-            CGRect shareToWeiXinButtonFrame = CGRectMake(blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.75, blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.25);
-            shareToWeiXinButton = [[UIButton alloc] initWithFrame:shareToWeiXinButtonFrame];
-            [shareToWeiXinButton setTitle:@"Share" forState:UIControlStateNormal];
-            shareToWeiXinButton.backgroundColor = [UIColor colorWithRed:0 green:0.5 blue:1.0 alpha:0.8];
-            [shareToWeiXinButton addTarget:self action:@selector(shareToWeiXin) forControlEvents:UIControlEventTouchUpInside];
-        }
-        [blockAreaView addSubview:gameOverLabel];
-        [blockAreaView addSubview:retryButton];
-        [blockAreaView addSubview:shareToWeiXinButton];
-    }else{
-        [gameOverLabel removeFromSuperview];
-        [retryButton removeFromSuperview];
-        [shareToWeiXinButton removeFromSuperview];
+- (void)gameOver{
+    if (gameOverLabel == nil) {
+        CGRect gameOverLabelFrame = CGRectMake(0, 0, blockAreaView.bounds.size.width, blockAreaView.bounds.size.height*0.75);
+        gameOverLabel = [[UILabel alloc] initWithFrame:gameOverLabelFrame];
+        gameOverLabel.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:0.8];
+        gameOverLabel.textAlignment = NSTextAlignmentCenter;
+        gameOverLabel.font = [UIFont boldSystemFontOfSize:40];
+        gameOverLabel.text = @"GAME OVER";
     }
+    if (retryButton == nil) {
+        CGRect retryButtonFrame = CGRectMake(0, blockAreaView.bounds.size.height*0.75, blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.25);
+        retryButton = [[UIButton alloc] initWithFrame:retryButtonFrame];
+        [retryButton setTitle:@"Retry" forState:UIControlStateNormal];
+        retryButton.backgroundColor = [UIColor colorWithRed:0 green:1.0 blue:0.25 alpha:0.8];
+        [retryButton addTarget:self action:@selector(newGame) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (shareToWeiXinButton == nil) {
+        CGRect shareToWeiXinButtonFrame = CGRectMake(blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.75, blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.25);
+        shareToWeiXinButton = [[UIButton alloc] initWithFrame:shareToWeiXinButtonFrame];
+        [shareToWeiXinButton setTitle:@"Share" forState:UIControlStateNormal];
+        shareToWeiXinButton.backgroundColor = [UIColor colorWithRed:0 green:0.5 blue:1.0 alpha:0.8];
+        [shareToWeiXinButton addTarget:self action:@selector(shareToWeiXin) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [blockAreaView addSubview:gameOverLabel];
+    [blockAreaView addSubview:retryButton];
+    [blockAreaView addSubview:shareToWeiXinButton];
+}
+
+- (void)removeGameOverSubView{
+    [gameOverLabel removeFromSuperview];
+    [retryButton removeFromSuperview];
+    [shareToWeiXinButton removeFromSuperview];
 }
 
 - (void)shareToWeiXin{
+    UIImage *thumbImage = [UIImage imageNamed:@"icon.png"];
+    WXWebpageObject *wxWebPageObj = [WXWebpageObject object];
+    wxWebPageObj.webpageUrl = @"https://github.com/mjsaka/mj2048";
+    
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = [NSString stringWithFormat:@"我在2048游戏中获得%ld分，快来围观!",[gameData currentScore]];
+    message.mediaObject = wxWebPageObj;
+    message.messageExt = nil;
+    message.messageAction = nil;
+    message.mediaTagName = @"MJ2048";
+    message.description = @"MJ2048";
+    [message setThumbImage:thumbImage];
+    
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.text = [NSString stringWithFormat:@"我在MJ2048小游戏中获得了%ld分，快来试试吧!",[gameData currentScore]];
+    req.message = message;
     req.scene = WXSceneTimeline;
-//    req.scene = WXSceneSession;
-    req.bText = YES;
+    req.bText = NO;
     [WXApi sendReq:req];
 }
 
 - (void)newGame{
+    if ([gameData isDeath]) {
+        [self removeGameOverSubView];
+    }
     [gameData newGame];
     [self refreshScoreArea];
     for (int i = 0; i < blockNum; ++i) {
@@ -267,7 +287,7 @@
         [self adjustBlock:dir];
         [gameData generate:dir];
         if ([gameData isDeath]) {
-            [self refreshBlockView];
+            [self gameOver];
         }
     }
 }

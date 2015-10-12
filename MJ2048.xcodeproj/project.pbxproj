@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C517E3801BBE289600DF853F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C517E37F1BBE289600DF853F /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		C52402E31BCB743400FB0436 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27271BC0FA5A00CA4876 /* libWeChatSDK.a */; settings = {ASSET_TAGS = (); }; };
+		C52402E51BCB94B000FB0436 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C52402E41BCB94B000FB0436 /* icon.png */; settings = {ASSET_TAGS = (); }; };
 		C54A27111BC01D8F00CA4876 /* sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A27101BC01D8F00CA4876 /* sound.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27221BC037DA00CA4876 /* music3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A271E1BC037DA00CA4876 /* music3.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27231BC037DA00CA4876 /* music4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A271F1BC037DA00CA4876 /* music4.m4a */; settings = {ASSET_TAGS = (); }; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		C517E37F1BBE289600DF853F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C52402E41BCB94B000FB0436 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		C54A27101BC01D8F00CA4876 /* sound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.m4a; sourceTree = "<group>"; };
 		C54A271E1BC037DA00CA4876 /* music3.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music3.m4a; sourceTree = "<group>"; };
 		C54A271F1BC037DA00CA4876 /* music4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = music4.m4a; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		C58517321BA81A6800361CDD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C52402E41BCB94B000FB0436 /* icon.png */,
 				C54A27101BC01D8F00CA4876 /* sound.m4a */,
 				C54A271E1BC037DA00CA4876 /* music3.m4a */,
 				C54A271F1BC037DA00CA4876 /* music4.m4a */,
@@ -303,6 +306,7 @@
 				C54A27231BC037DA00CA4876 /* music4.m4a in Resources */,
 				C54A27221BC037DA00CA4876 /* music3.m4a in Resources */,
 				C58517401BA81A6800361CDD /* Images.xcassets in Resources */,
+				C52402E51BCB94B000FB0436 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
