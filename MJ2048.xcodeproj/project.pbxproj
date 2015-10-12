@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		C517E3801BBE289600DF853F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C517E37F1BBE289600DF853F /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		C52402E31BCB743400FB0436 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27271BC0FA5A00CA4876 /* libWeChatSDK.a */; settings = {ASSET_TAGS = (); }; };
 		C54A27111BC01D8F00CA4876 /* sound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A27101BC01D8F00CA4876 /* sound.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27221BC037DA00CA4876 /* music3.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A271E1BC037DA00CA4876 /* music3.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27231BC037DA00CA4876 /* music4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A271F1BC037DA00CA4876 /* music4.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27241BC037DA00CA4876 /* music5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A27201BC037DA00CA4876 /* music5.m4a */; settings = {ASSET_TAGS = (); }; };
 		C54A27251BC037DA00CA4876 /* music6.m4a in Resources */ = {isa = PBXBuildFile; fileRef = C54A27211BC037DA00CA4876 /* music6.m4a */; settings = {ASSET_TAGS = (); }; };
-		C54A272B1BC0FA5A00CA4876 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27271BC0FA5A00CA4876 /* libWeChatSDK.a */; settings = {ASSET_TAGS = (); }; };
 		C54A272F1BC1017A00CA4876 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A272E1BC1017A00CA4876 /* SystemConfiguration.framework */; };
 		C54A27311BC101C200CA4876 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27301BC101C200CA4876 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
 		C54A27351BC101D900CA4876 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C54A27341BC101D900CA4876 /* libz.tbd */; };
@@ -25,7 +25,6 @@
 		C58517401BA81A6800361CDD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C585173F1BA81A6800361CDD /* Images.xcassets */; };
 		C58517431BA81A6800361CDD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C58517411BA81A6800361CDD /* LaunchScreen.xib */; };
 		C58517571BA81A7900361CDD /* GameData.m in Sources */ = {isa = PBXBuildFile; fileRef = C5BEBED91B8DADA00068268F /* GameData.m */; };
-		C585175E1BA85ACA00361CDD /* BlockAttr.m in Sources */ = {isa = PBXBuildFile; fileRef = C585175D1BA85ACA00361CDD /* BlockAttr.m */; };
 		C58517611BA86CCD00361CDD /* BlockAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = C58517601BA86CCD00361CDD /* BlockAreaView.m */; };
 		C595E73B1BBE3B2200F369D0 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C595E73A1BBE3B2200F369D0 /* MenuViewController.m */; settings = {ASSET_TAGS = (); }; };
 		C595E73E1BBE7E1700F369D0 /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C595E73D1BBE7E1700F369D0 /* OptionViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -65,8 +64,6 @@
 		C58517371BA81A6800361CDD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C585173F1BA81A6800361CDD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C58517421BA81A6800361CDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		C585175C1BA85ACA00361CDD /* BlockAttr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAttr.h; sourceTree = "<group>"; };
-		C585175D1BA85ACA00361CDD /* BlockAttr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAttr.m; sourceTree = "<group>"; };
 		C585175F1BA86CCD00361CDD /* BlockAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAreaView.h; sourceTree = "<group>"; };
 		C58517601BA86CCD00361CDD /* BlockAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAreaView.m; sourceTree = "<group>"; };
 		C595E7391BBE3B2200F369D0 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -95,8 +92,8 @@
 			files = (
 				C5F545901BC1290A007C0091 /* libc++.tbd in Frameworks */,
 				C54A27351BC101D900CA4876 /* libz.tbd in Frameworks */,
+				C52402E31BCB743400FB0436 /* libWeChatSDK.a in Frameworks */,
 				C54A27311BC101C200CA4876 /* libsqlite3.tbd in Frameworks */,
-				C54A272B1BC0FA5A00CA4876 /* libWeChatSDK.a in Frameworks */,
 				C54A272F1BC1017A00CA4876 /* SystemConfiguration.framework in Frameworks */,
 				C54A27381BC1080600CA4876 /* CoreTelephony.framework in Frameworks */,
 			);
@@ -145,8 +142,6 @@
 				C595E73D1BBE7E1700F369D0 /* OptionViewController.m */,
 				C57E372B1BB43E5800054430 /* MainViewController.h */,
 				C57E372C1BB43E5800054430 /* MainViewController.m */,
-				C585175C1BA85ACA00361CDD /* BlockAttr.h */,
-				C585175D1BA85ACA00361CDD /* BlockAttr.m */,
 				C585175F1BA86CCD00361CDD /* BlockAreaView.h */,
 				C58517601BA86CCD00361CDD /* BlockAreaView.m */,
 				C517E37F1BBE289600DF853F /* Main.storyboard */,
@@ -327,7 +322,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C585175E1BA85ACA00361CDD /* BlockAttr.m in Sources */,
 				C595E73E1BBE7E1700F369D0 /* OptionViewController.m in Sources */,
 				C58517571BA81A7900361CDD /* GameData.m in Sources */,
 				C58517381BA81A6800361CDD /* AppDelegate.m in Sources */,
@@ -377,16 +371,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -404,10 +398,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: mjsaka@qq.com (S93HCE34ZC)";
 				INFOPLIST_FILE = "MJ2048-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

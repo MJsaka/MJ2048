@@ -21,8 +21,6 @@
 @property (weak) IBOutlet UISlider* musicSlider;
 @property (weak) IBOutlet UISlider* blockNumSlider;
 
-@property (weak) GameData* gameData;
-
 @property (weak,nonatomic) AppDelegate* appDelegate;
 @property (weak,nonatomic) MainViewController* mainViewController;
 @end

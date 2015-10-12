@@ -18,17 +18,17 @@
 @synthesize currentBlockNum;
 @synthesize musicLevel;
 @synthesize soundLevel;
+
 @synthesize soundSlider;
 @synthesize musicSlider;
 @synthesize blockNumSlider;
+
 @synthesize mainViewController;
 @synthesize appDelegate;
-@synthesize gameData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     appDelegate = ((AppDelegate*)[[UIApplication sharedApplication] delegate]);
-    gameData = appDelegate.gameData;
     // Do any additional setup after loading the view.
     soundLevel = appDelegate.soundLevel;
     soundSlider.value = soundLevel;
@@ -37,7 +37,7 @@
     if (!appDelegate.audioPlayer.playing) {
         [appDelegate playMusic];
     }
-    currentBlockNum = [gameData blockNum];
+    currentBlockNum = [appDelegate.gameData blockNum];
     _newBlockNum = currentBlockNum;
     blockNumSlider.value = 0.2*(currentBlockNum-3);
 }
@@ -72,9 +72,10 @@
         }
     }
     if (_newBlockNum != currentBlockNum) {
-        [gameData setBlockNum:_newBlockNum];
-        [appDelegate playMusic];
-        [mainViewController viewDidLoad];
+        if (musicSlider.value != 0) {
+            [appDelegate playMusic];
+        }
+        [mainViewController changeBlockNum:_newBlockNum];
     }
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

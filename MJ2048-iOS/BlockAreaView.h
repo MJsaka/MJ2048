@@ -10,7 +10,6 @@
 
 @interface BlockAreaView : UIView
 
-@property (assign,nonatomic) Boolean isDeath;
 @property (assign,nonatomic) NSInteger margin;
 @property (assign,nonatomic) NSInteger width;
 @property (assign,nonatomic) NSInteger blockNum;

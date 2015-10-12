@@ -58,7 +58,7 @@
         [self playMusic];
     }
     
-    [WXApi registerApp:@"wxd930ea5d5a258f4f"];
+    [WXApi registerApp:@"wxf63b445d14364979"];
     return YES;
 }
 

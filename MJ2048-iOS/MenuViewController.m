@@ -29,7 +29,6 @@
 
 - (IBAction)newGame:(id)sender{
     [mainViewController newGame];
-    [mainViewController viewDidLoad];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

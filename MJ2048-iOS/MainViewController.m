@@ -17,15 +17,22 @@
 @synthesize blockNum;
 @synthesize margin;
 @synthesize width;
-@synthesize attr;
+
 @synthesize blockAreaView;
 @synthesize block;
+
 @synthesize power;
 @synthesize best;
 @synthesize bestTitle;
 @synthesize score;
 @synthesize scoreTitle;
+
+@synthesize gameOverLabel;
+@synthesize shareToWeiXinButton;
+@synthesize retryButton;
+
 @synthesize gameData;
+@synthesize attr;
 @synthesize appDelegate;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -34,25 +41,12 @@
     }
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    appDelegate = ((AppDelegate*)[[UIApplication sharedApplication] delegate]);
-    gameData = appDelegate.gameData;
-    attr = [[MacBlockAttribute alloc]init];
-    
+- (void)makeBlockView{
     CGRect blockAreaViewFrame = CGRectMake(self.view.bounds.size.width * 0.04, self.view.bounds.size.height * 0.3, self.view.bounds.size.width * 0.92, self.view.bounds.size.width * 0.92);
     blockAreaView = [[BlockAreaView alloc]initWithFrame:blockAreaViewFrame];
-    [self.view addSubview:blockAreaView];
     blockAreaView.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:1.0];
-    blockAreaView.isDeath = [gameData isDeath];
-    
-    blockNum = [gameData blockNum];
-    margin = 8 + (5 - blockNum)*4;
-    width = (blockAreaView.frame.size.width -(blockNum + 1)*margin)/blockNum;
-    
-    blockAreaView.margin = margin;
-    blockAreaView.width = width;
-    blockAreaView.blockNum = blockNum;
+    [self.view addSubview:blockAreaView];
+
     
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
     swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
@@ -69,9 +63,9 @@
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(onSwiped:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [blockAreaView addGestureRecognizer:swipeRight];
-    
-    [blockAreaView setNeedsDisplay];
+}
 
+- (void)makeBlock{
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:0];
     for (int i = 0; i < blockNum; ++i) {
         NSMutableArray *col = [NSMutableArray arrayWithCapacity:0];
@@ -86,7 +80,49 @@
         [array addObject:col];
     }
     block = [NSArray arrayWithArray:array];
+}
+
+- (void)removeOldBlock{
+    for (int i = 0; i < blockNum; ++i) {
+        for (int j = 0; j < blockNum; ++j) {
+            [(UILabel*)block[i][j] removeFromSuperview];
+        }
+    }
+}
+
+- (void)makeBlockNum{
+    blockNum = [gameData blockNum];
+    margin = 8 + (5 - blockNum)*4;
+    width = (blockAreaView.frame.size.width -(blockNum + 1)*margin)/blockNum;
+}
+
+- (void)changeBlockNum:(NSInteger)newBlockNum{
+    [gameData changeBlockNum:newBlockNum];
+    [self removeOldBlock];
+    [self makeBlockNum];
+    [self makeBlock];
+    
     [self refreshScoreArea];
+    [self refreshBlockView];
+    for (int i = 0; i < blockNum; ++i) {
+        for (int j = 0; j < blockNum; ++j) {
+            [self refreshBlockForI:i forJ:j];
+        }
+    }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    appDelegate = ((AppDelegate*)[[UIApplication sharedApplication] delegate]);
+    attr = [[BlockAttributeIOS alloc]init];
+    gameData = appDelegate.gameData;
+
+    [self makeBlockView];
+    [self makeBlockNum];
+    [self makeBlock];
+
+    [self refreshScoreArea];
+    [self refreshBlockView];
     for (int i = 0; i < blockNum; ++i) {
         for (int j = 0; j < blockNum; ++j) {
             [self refreshBlockForI:i forJ:j];
@@ -125,6 +161,8 @@
         blockAreaView.frame = blockAreaViewFrame;
     }
 }
+
+
 - (void)refreshBlockForI:(NSInteger)forI forJ:(NSInteger)forJ{
     NSArray *gameDataDownSider = [gameData blockSider:DIR_DOWN];
     blockNodeType* node = gameDataDownSider[forI];
@@ -149,26 +187,65 @@
     best.text = [NSString stringWithFormat:@"%ld",[gameData highScore]];
 }
 
+-(void)refreshBlockView{
+    blockAreaView.margin = margin;
+    blockAreaView.width = width;
+    blockAreaView.blockNum = blockNum;
+    [blockAreaView setNeedsDisplay];
+
+    if ([gameData isDeath]) {
+        if (gameOverLabel == nil) {
+            CGRect gameOverLabelFrame = CGRectMake(0, 0, blockAreaView.bounds.size.width, blockAreaView.bounds.size.height*0.75);
+            gameOverLabel = [[UILabel alloc] initWithFrame:gameOverLabelFrame];
+            gameOverLabel.backgroundColor = [UIColor colorWithRed:0.824 green:0.824 blue:0.824 alpha:0.8];
+            gameOverLabel.textAlignment = NSTextAlignmentCenter;
+            gameOverLabel.font = [UIFont boldSystemFontOfSize:40];
+            gameOverLabel.text = @"GAME OVER";
+        }
+        if (retryButton == nil) {
+            CGRect retryButtonFrame = CGRectMake(0, blockAreaView.bounds.size.height*0.75, blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.25);
+            retryButton = [[UIButton alloc] initWithFrame:retryButtonFrame];
+            [retryButton setTitle:@"Retry" forState:UIControlStateNormal];
+            retryButton.backgroundColor = [UIColor colorWithRed:0 green:1.0 blue:0.25 alpha:0.8];
+            [retryButton addTarget:self action:@selector(newGame) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (shareToWeiXinButton == nil) {
+            CGRect shareToWeiXinButtonFrame = CGRectMake(blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.75, blockAreaView.bounds.size.width*0.5, blockAreaView.bounds.size.height*0.25);
+            shareToWeiXinButton = [[UIButton alloc] initWithFrame:shareToWeiXinButtonFrame];
+            [shareToWeiXinButton setTitle:@"Share" forState:UIControlStateNormal];
+            shareToWeiXinButton.backgroundColor = [UIColor colorWithRed:0 green:0.5 blue:1.0 alpha:0.8];
+            [shareToWeiXinButton addTarget:self action:@selector(shareToWeiXin) forControlEvents:UIControlEventTouchUpInside];
+        }
+        [blockAreaView addSubview:gameOverLabel];
+        [blockAreaView addSubview:retryButton];
+        [blockAreaView addSubview:shareToWeiXinButton];
+    }else{
+        [gameOverLabel removeFromSuperview];
+        [retryButton removeFromSuperview];
+        [shareToWeiXinButton removeFromSuperview];
+    }
+}
+
+- (void)shareToWeiXin{
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.text = [NSString stringWithFormat:@"我在MJ2048小游戏中获得了%ld分，快来试试吧!",[gameData currentScore]];
+    req.scene = WXSceneTimeline;
+//    req.scene = WXSceneSession;
+    req.bText = YES;
+    [WXApi sendReq:req];
+}
+
 - (void)newGame{
     [gameData newGame];
     [self refreshScoreArea];
     for (int i = 0; i < blockNum; ++i) {
         for (int j = 0; j < blockNum; ++j) {
             [self refreshBlockForI:i forJ:j];
-            [blockAreaView addSubview:block[i][j]];
         }
     }
-    blockAreaView.isDeath = [gameData isDeath];
+    [self refreshBlockView];
 }
-- (void)gameOver{
-    for (int i = 0; i < blockNum; ++i) {
-        for (int j = 0; j < blockNum; ++j) {
-            [block[i][j] removeFromSuperview];
-        }
-    }
-    blockAreaView.isDeath = [gameData isDeath];
-    [blockAreaView setNeedsDisplay];
-}
+
 - (void)moveControl:(dirEnumType)dir{
     if([gameData merge:dir]){
         [self refreshScoreArea];
@@ -190,12 +267,7 @@
         [self adjustBlock:dir];
         [gameData generate:dir];
         if ([gameData isDeath]) {
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Game Over" message:@"Try again?" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* tryAgainAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){[self newGame];}];
-            UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction* action){[self gameOver];}];
-            [alert addAction:cancelAction];
-            [alert addAction:tryAgainAction];
-            [self presentViewController:alert animated:YES completion:nil];
+            [self refreshBlockView];
         }
     }
 }
@@ -293,6 +365,64 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+@end
+
+@implementation BlockAttributeIOS {
+    UIColor *colorOfPower[36];
+}
+- (id)init{
+    if (self = [super init]) {
+        colorOfPower[0] = [UIColor colorWithRed:1.000 green:0.984 blue:0.792 alpha:1.0];
+        colorOfPower[1] = [UIColor colorWithRed:0.973 green:0.800 blue:0.584 alpha:1.0];
+        colorOfPower[2] = [UIColor colorWithRed:0.965 green:0.800 blue:0.800 alpha:1.0];
+        colorOfPower[3] = [UIColor colorWithRed:0.980 green:0.800 blue:0.200 alpha:1.0];
+        colorOfPower[4] = [UIColor colorWithRed:0.949 green:0.608 blue:0.200 alpha:1.0];
+        
+        colorOfPower[5] = [UIColor colorWithRed:0.345 green:0.704 blue:0.896 alpha:1.0];
+        colorOfPower[6] = [UIColor colorWithRed:0.922 green:0.396 blue:0.396 alpha:1.0];
+        colorOfPower[7] = [UIColor colorWithRed:0.894 green:0.402 blue:0.157 alpha:1.0];
+        colorOfPower[8] = [UIColor colorWithRed:0.878 green:0.263 blue:0.506 alpha:1.0];
+        
+        colorOfPower[9] = [UIColor colorWithRed:0.808 green:0.596 blue:0.716 alpha:1.0];
+        colorOfPower[10] = [UIColor colorWithRed:0.682 green:0.153 blue:0.353 alpha:1.0];
+        colorOfPower[11] = [UIColor colorWithRed:0.541 green:0.676 blue:0.153 alpha:1.0];
+        colorOfPower[12] = [UIColor colorWithRed:0.696 green:0.408 blue:0.180 alpha:1.0];
+        
+        colorOfPower[13] = [UIColor colorWithRed:0.608 green:0.400 blue:0.804 alpha:1.0];
+        colorOfPower[14] = [UIColor colorWithRed:0.308 green:0.604 blue:0.396 alpha:1.0];
+        colorOfPower[15] = [UIColor colorWithRed:0.490 green:0.222 blue:0.490 alpha:1.0];
+        colorOfPower[16] = [UIColor colorWithRed:0.404 green:0.404 blue:0.704 alpha:1.0];
+        
+        colorOfPower[17] = [UIColor colorWithRed:0.182 green:0.233 blue:0.473 alpha:1.0];
+        colorOfPower[18] =  [UIColor colorWithRed:0.271 green:0.196 blue:0.396 alpha:1.0];
+        colorOfPower[19] =  [UIColor colorWithRed:0.425 green:0.249 blue:0.249 alpha:1.0];
+        colorOfPower[20] = [UIColor colorWithRed:0.149 green:0.325 blue:0.137 alpha:1.0];
+        
+        colorOfPower[21] = [UIColor colorWithRed:0.973 green:0.800 blue:0.584 alpha:1.0];
+        colorOfPower[22] = [UIColor colorWithRed:0.965 green:0.800 blue:0.800 alpha:1.0];
+        colorOfPower[23] = [UIColor colorWithRed:0.980 green:0.800 blue:0.200 alpha:1.0];
+        colorOfPower[24] = [UIColor colorWithRed:0.949 green:0.608 blue:0.200 alpha:1.0];
+        
+        colorOfPower[25] = [UIColor colorWithRed:0.345 green:0.704 blue:0.896 alpha:1.0];
+        colorOfPower[26] = [UIColor colorWithRed:0.922 green:0.396 blue:0.396 alpha:1.0];
+        colorOfPower[27] = [UIColor colorWithRed:0.894 green:0.402 blue:0.157 alpha:1.0];
+        colorOfPower[28] = [UIColor colorWithRed:0.878 green:0.263 blue:0.506 alpha:1.0];
+        
+        colorOfPower[29] = [UIColor colorWithRed:0.808 green:0.596 blue:0.716 alpha:1.0];
+        colorOfPower[30] = [UIColor colorWithRed:1.000 green:0.984 blue:0.792 alpha:1.0];
+        colorOfPower[31] = [UIColor colorWithRed:0.973 green:0.800 blue:0.584 alpha:1.0];
+        colorOfPower[32] = [UIColor colorWithRed:0.965 green:0.800 blue:0.800 alpha:1.0];
+        
+        colorOfPower[33] = [UIColor colorWithRed:0.980 green:0.800 blue:0.200 alpha:1.0];
+        colorOfPower[34] = [UIColor colorWithRed:0.949 green:0.608 blue:0.200 alpha:1.0];
+        colorOfPower[35] = [UIColor colorWithRed:0.345 green:0.704 blue:0.896 alpha:1.0];
+    }
+    return self;
+}
+- (UIColor*)colorOfPower:(NSInteger)power{
+    return colorOfPower[power];
 }
 
 @end
