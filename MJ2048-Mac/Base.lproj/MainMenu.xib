@@ -416,7 +416,7 @@
                     <customView canDrawConcurrently="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cZ-V5-Iyk" userLabel="InfoArea" customClass="MacInfoAreaView">
                         <rect key="frame" x="10" y="10" width="210" height="630"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kG2-fY-HBV">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kG2-fY-HBV">
                                 <rect key="frame" x="10" y="82" width="190" height="65"/>
                                 <animations/>
                                 <buttonCell key="cell" type="smallSquare" title="重新开始" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oQY-mg-YvH">
@@ -427,7 +427,7 @@
                                     <action selector="newGame:" target="Qvf-SB-yQx" id="Wxk-qC-FAz"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KCA-DZ-Qgy">
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KCA-DZ-Qgy">
                                 <rect key="frame" x="10" y="9" width="190" height="65"/>
                                 <animations/>
                                 <buttonCell key="cell" type="smallSquare" title="退出游戏" bezelStyle="smallSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GPV-oC-Ycl">
@@ -438,7 +438,7 @@
                                     <action selector="terminate:" target="-1" id="7vc-Va-EuA"/>
                                 </connections>
                             </button>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="N92-e9-SnL" customClass="MacInfoAreaLabelView">
+                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N92-e9-SnL" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="546" width="190" height="74"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CUe-pr-nP5">
@@ -457,10 +457,10 @@
                                 </constraints>
                                 <animations/>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ME1-OF-Zkn" customClass="MacInfoAreaLabelView">
+                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ME1-OF-Zkn" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="472" width="190" height="74"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhd-Ng-PgO">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhd-Ng-PgO">
                                         <rect key="frame" x="30" y="13" width="129" height="49"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="topPower" id="qzE-53-BZG">
@@ -479,7 +479,7 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="Bfk-jj-6nk" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="388" width="190" height="74"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZMZ-fE-cyr">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZMZ-fE-cyr">
                                         <rect key="frame" x="37" y="13" width="116" height="49"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="最高分数" id="llP-Ba-rZH">
@@ -498,7 +498,7 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="NVn-Ee-KBJ" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="314" width="190" height="74"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fXR-mN-uZN">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fXR-mN-uZN">
                                         <rect key="frame" x="27" y="13" width="136" height="49"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="bestScore" id="Wg2-Vh-4bO">
@@ -514,10 +514,10 @@
                                 </constraints>
                                 <animations/>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="d5r-Bv-4Xo" customClass="MacInfoAreaLabelView">
+                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d5r-Bv-4Xo" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="156" width="190" height="74"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PXw-gg-S1I">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXw-gg-S1I">
                                         <rect key="frame" x="9" y="13" width="172" height="49"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="currentScore" id="VlF-ac-giQ">
@@ -533,10 +533,10 @@
                                 </constraints>
                                 <animations/>
                             </customView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="DEd-Ce-Sze" customClass="MacInfoAreaLabelView">
+                            <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DEd-Ce-Sze" customClass="MacInfoAreaLabelView">
                                 <rect key="frame" x="10" y="230" width="190" height="74"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i0d-wa-NqN">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i0d-wa-NqN">
                                         <rect key="frame" x="37" y="13" width="116" height="49"/>
                                         <animations/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="当前分数" id="O3n-f0-dLb">

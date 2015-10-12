@@ -45,7 +45,8 @@ typedef enum moveDir{
 - (NSInteger)topPower;//历史最大格子数值
 - (NSInteger)currentPower;
 - (NSInteger)blockNum;
-- (void)setBlockNum:(NSInteger)blockNum;
+
+- (void)changeBlockNum:(NSInteger)blockNum;
 
 //- (NSInteger)dataAtRow:(NSInteger)row col:(NSInteger)col;
 //- (NSInteger)powerAtRow:(NSInteger)row col:(NSInteger)col;

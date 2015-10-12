@@ -42,7 +42,7 @@
 - (IBAction)okClick:(id)sender{
     [preferencePanel orderOut:nil];
     [NSApp endSheet:preferencePanel];
-    [gameData setBlockNum:[num integerValue]];
+    [gameData changeBlockNum:[num integerValue]];
     [interfaceControl newBlockNum:self];
 }
 

@@ -68,7 +68,7 @@
     NSInteger _blockNum;
     Boolean _isDeath;
     
-    NSInteger _score;
+    NSInteger _currentScore;
     NSInteger _currentPower;
     NSInteger _numTotal;
     
@@ -83,15 +83,15 @@
 -(NSInteger)blockNum{
     return _blockNum;
 }
--(void)setBlockNum:(NSInteger)blockNum{
+-(void)changeBlockNum:(NSInteger)blockNum{
     if (_blockNum != blockNum){
         [self saveNSUserDefaults];
         _blockNum = blockNum;
-        [self initial];
+        [self makeData];
     }
 }
 
-- (void)initial{
+- (void)makeData{
     if (_blockNum < 3 || _blockNum > 6) {
         _blockNum = [[NSUserDefaults standardUserDefaults] integerForKey:@"blockNum"];
         if (_blockNum < 3 || _blockNum > 6) {
@@ -99,7 +99,7 @@
         }
     }
     _isDeath = true;
-    _score = 0;
+    _currentScore = 0;
     _currentPower = 0;
     _numTotal = 0;
     _highScore = 0;
@@ -114,7 +114,7 @@
 
 - (id)init{
     if (self = [super init]) {
-        [self initial];
+        [self makeData];
     }
     return self;
 }
@@ -175,7 +175,7 @@
 }
 
 -(NSInteger)currentScore{
-    return _score;
+    return _currentScore;
 }
 -(NSInteger)highScore{
     return _highScore;
@@ -208,7 +208,7 @@
     node.power = k;
 
     _numTotal = 1;
-    _score = 0;
+    _currentScore = 0;
     _currentPower = 0;
     _isDeath = false;
 }
@@ -262,7 +262,7 @@
                 t.power += 1;
                 n.data = 0;
                 n.power = 0;
-                _score += t.data;
+                _currentScore += t.data;
                 _numTotal -= 1;
                 if (t.power > _topPower){
                     _topPower = t.power;
@@ -270,8 +270,8 @@
                 if (t.power > _currentPower) {
                     _currentPower = t.power;
                 }
-                if (_score > _highScore){
-                    _highScore = _score;
+                if (_currentScore > _highScore){
+                    _highScore = _currentScore;
                 }
                 _isMerged = true;
                 t.merge = true;
@@ -370,9 +370,9 @@
     
     [currentData setValue:[NSNumber numberWithInteger:_topPower] forKey:@"topPower"];
     if (!_isDeath) {
-        [currentData setValue:[NSNumber numberWithBool:1] forKey:@"dataSaved"];
+        [currentData setValue:[NSNumber numberWithBool:true] forKey:@"dataSaved"];
         
-        [currentData setValue:[NSNumber numberWithInteger:_score] forKey:@"score"];
+        [currentData setValue:[NSNumber numberWithInteger:_currentScore] forKey:@"currentScore"];
         [currentData setValue:[NSNumber numberWithInteger:_currentPower] forKey:@"currentPower"];
         [currentData setValue:[NSNumber numberWithInteger:_numTotal] forKey:@"numTotal"];
         [currentData setValue:[NSNumber numberWithBool:_isDeath] forKey:@"isDeath"];
@@ -387,7 +387,7 @@
             }
         }
     }else{
-        [currentData setValue:[NSNumber numberWithBool:0] forKey:@"dataSaved"];
+        [currentData setValue:[NSNumber numberWithBool:false] forKey:@"dataSaved"];
     }
     
     NSString *blockDataString = [NSString stringWithFormat:@"blockData%ld",_blockNum];
@@ -407,7 +407,7 @@
     NSInteger dataSaved = [[currentData valueForKey:@"dataSaved"] boolValue];
     if (dataSaved) {
         
-        _score = [[currentData valueForKey:@"score"] integerValue];
+        _currentScore = [[currentData valueForKey:@"currentScore"] integerValue];
         _currentPower = [[currentData valueForKey:@"currentPower"] integerValue];
         _numTotal = [[currentData valueForKey:@"numTotal"] integerValue];
         _isDeath = [[currentData valueForKey:@"isDeath"] boolValue];
